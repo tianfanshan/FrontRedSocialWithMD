@@ -15,7 +15,7 @@ const Register = () => {
     }
     const onSubmit = (e) => {
       e.preventDefault()
-      console.log('formData'.formData)
+      console.log('formData',formData)
     } 
   return (
     <form onSubmit={onSubmit}>
