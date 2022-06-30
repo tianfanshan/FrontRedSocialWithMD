@@ -19,7 +19,6 @@ const Login = () => {
     }
     const onSubmit = (e) => {
         e.preventDefault()
-        console.log(formData)
         dispatch(login(formData))
     }
     return (

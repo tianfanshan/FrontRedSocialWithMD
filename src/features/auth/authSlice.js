@@ -23,7 +23,6 @@ export const authSlice = createSlice({
 })
 
 export const register = createAsyncThunk('auth/register',async (user) => {
-    console.log(user)
     try {
         return await authService.register(user)
     } catch (error) {
@@ -32,7 +31,6 @@ export const register = createAsyncThunk('auth/register',async (user) => {
 })
 
 export const login = createAsyncThunk('auth/register',async(user) =>{
-    console.log(user)
     try {
         return await authService.login(user)
     } catch (error) {
