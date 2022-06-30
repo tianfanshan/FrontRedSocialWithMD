@@ -7,20 +7,6 @@ const initialState = {
     user:null ? user:null
 }
 
-export const authSlice = createSlice({
-    name:'auth',
-    initialState,
-    reducer:{},
-    extraReducers:(builder)=>{
-        builder
-        .addCase(login.fulfilled,(state,action)=>{
-            state.user = action.payload
-        })
-        .addCase(logout.fulfilled,(state)=>{
-            state.user=null
-        })
-    }
-})
 
 export const register = createAsyncThunk('auth/register',async (user) => {
     try {
@@ -43,6 +29,21 @@ export const logout = createAsyncThunk('auth/logout',async()=>{
         return await authService.logout()
     } catch (error) {
         console.error(error)
+    }
+})
+
+export const authSlice = createSlice({
+    name:'auth',
+    initialState,
+    reducer:{},
+    extraReducers:(builder)=>{
+        builder
+        .addCase(login.fulfilled,(state,action)=>{
+            state.user = action.payload
+        })
+        .addCase(logout.fulfilled,(state)=>{
+            state.user=null
+        })
     }
 })
 
