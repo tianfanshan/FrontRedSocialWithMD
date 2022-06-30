@@ -30,8 +30,8 @@ const Register = () => {
       })
     } else {
       notification.success({
-        message:'Welcome',
-        description:'Happy hacking!'
+        message: 'Welcome',
+        description: 'Happy hacking!'
       })
       return dispatch(register(formData))
     }
