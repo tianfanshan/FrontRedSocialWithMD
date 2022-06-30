@@ -14,6 +14,14 @@ export const getAllPost = createAsyncThunk("posts/getAllPosts", async () => {
   }
 });
 
+export const like = createAsyncThunk('posts/like',async(_id) => {
+  try {
+    return await postsService.like(_id)
+  } catch (error) {
+    console.error(error)
+  }
+})
+
 export const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -29,6 +37,14 @@ export const postsSlice = createSlice({
     builder.addCase(getAllPost.pending, (state) => {
       state.isLoading = true;
     });
+    builder.addCase(like.fulfilled,(state,action)=>{
+      const posts = state.posts.map((p)=>{
+        if(p._id === action.payload._id){
+          p = action.payload
+        }
+        return p
+      })
+    })
   },
 });
 

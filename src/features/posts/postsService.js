@@ -7,8 +7,18 @@ const getAllPost = async () => {
     return res.data
 }
 
+const like = async (_id) => {
+    const user = JSON.parse(localStorage.getItem('user'))
+    const res = await axios.put(API_URL + '/posts//likesUp/' + _id,{},{
+        headers:{
+            authorization:user?.token
+        }
+    })
+}
+
 const postsService = {
-    getAllPost
+    getAllPost,
+    like
 }
 
 export default postsService
