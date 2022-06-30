@@ -8,10 +8,10 @@ const Register = () => {
     name: '',
     email: '',
     password: '',
-    password2:'',
+    password2: '',
     age: ''
   })
-  const { name, email, password,password2,age } = formData
+  const { name, email, password, password2, age } = formData
 
   const dispatch = useDispatch()
 
@@ -23,13 +23,17 @@ const Register = () => {
   }
   const onSubmit = (e) => {
     e.preventDefault()
-    if(password !== password2){
+    if (password !== password2) {
       return notification.error({
-        message:'Error',
-        description:'Passwords do not match'
+        message: 'Error',
+        description: 'Passwords do not match'
       })
-    }else{
-      dispatch(register(formData))
+    } else {
+      notification.success({
+        message:'Welcome',
+        description:'Happy hacking!'
+      })
+      return dispatch(register(formData))
     }
   }
   return (
