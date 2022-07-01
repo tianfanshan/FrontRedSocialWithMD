@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
-import { useDispatch,useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../features/auth/authSlice'
 import { notification } from 'antd'
 import { useNavigate } from 'react-router'
 
 const Login = () => {
 
-    const { user } = useSelector((state)=>state.auth)
+    const { user } = useSelector((state) => state.auth)
+    console.log(user)
 
     const navigate = useNavigate()
 
@@ -26,12 +27,11 @@ const Login = () => {
     }
     const onSubmit = (e) => {
         e.preventDefault()
-        // if(){
-
-        // }else{
-            dispatch(login(formData))
-            // navigate('/')
-        // }
+        console.log(formData)
+        dispatch(login(formData))
+        setTimeout(() => {
+            navigate('/profile')
+        }, 3000)
     }
     return (
         <form onSubmit={onSubmit}>
