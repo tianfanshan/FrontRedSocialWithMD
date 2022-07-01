@@ -10,25 +10,30 @@ const Register = () => {
   const navigate = useNavigate()
 
   const { user, message } = useSelector((state) => state.auth)
-  console.log(user)
-  console.log(message)
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    password2: '',
-    age: ''
-  })
-  const { name, email, password, password2, age } = formData
+  console.log('user',user)
+  console.log('message',message)
+
+  // const [formData, setFormData] = useState({
+  //   name: '',
+  //   email: '',
+  //   password: '',
+  //   password2: '',
+  //   age: ''
+  // })
+
+  // const { name, email, password, password2, age } = formData
+
+  // console.log(password)
 
   const dispatch = useDispatch()
 
-  const onChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value
-    }))
-  }
+  // const onChange = (e) => {
+  //   setFormData((prevState) => ({
+  //     ...prevState,
+  //     [e.target.name]: e.target.value
+  //   }))
+  // }
+
   // const onSubmit = (e) => {
   //   e.preventDefault()
   //   if (password !== password2) {
@@ -49,13 +54,16 @@ const Register = () => {
   //   }
   // }
 
-  const onFinish = () => {
-    if (password !== password2) {
-      return notification.error({
-        message: 'Error',
-        description: 'Passwords do not match'
-      })
-    } else {
+  const onFinish = (formData) => {
+    console.log(formData)
+    // console.log('password',password)
+    // console.log('password',password2)
+    // if (password !== password2) {
+      // return notification.error({
+      //   message: 'Error',
+      //   description: 'Passwords do not match'
+      // })
+    // } else {
       dispatch(register(formData))
       console.log(formData)
       notification.success({
@@ -65,7 +73,7 @@ const Register = () => {
       setTimeout(() => {
         navigate('/login')
       }, 3000)
-    }
+    // }
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -91,8 +99,8 @@ const Register = () => {
       <Form.Item
         label="Username"
         name="name"
-        value={name} 
-        onChange={onChange}
+        // value={name} 
+        // onChange={onChange}
         rules={[
           {
             required: true,
@@ -116,16 +124,16 @@ const Register = () => {
             message: 'Please input your E-mail!',
           },
         ]}
-        value={email} 
-        onChange={onChange}
+        // value={email} 
+        // onChange={onChange}
       >
         <Input />
       </Form.Item>
 
       <Form.Item label="InputNumber" 
       name='age'
-      value={age} 
-      onChange={onChange}
+      // value={age} 
+      // onChange={onChange}
       >
         <InputNumber />
         </Form.Item>
@@ -133,8 +141,8 @@ const Register = () => {
       <Form.Item
         label="Password"
         name="password"
-        value={password} 
-        onChange={onChange}
+        // value={password} 
+        // onChange={onChange}
         rules={[
           {
             required: true,
@@ -146,10 +154,33 @@ const Register = () => {
       </Form.Item>
 
       <Form.Item
+        name="confirm"
+        label="Confirm Password"
+        dependencies={['password']}
+        hasFeedback
+        rules={[
+          {
+            required: true,
+            message: 'Please confirm your password!',
+          },
+          ({ getFieldValue }) => ({
+            validator(_, value) {
+              if (!value || getFieldValue('password') === value) {
+                return Promise.resolve();
+              }
+
+              return Promise.reject(new Error('The two passwords that you entered do not match!'));
+            },
+          }),
+        ]}
+      >
+        <Input.Password />
+      </Form.Item>
+      {/* <Form.Item
         label="Password"
         name="password2"
-        value={password2} 
-        onChange={onChange}
+        // value={password2} 
+        // onChange={onChange}
         rules={[
           {
             required: true,
@@ -158,7 +189,7 @@ const Register = () => {
         ]}
       >
         <Input.Password />
-      </Form.Item>
+      </Form.Item> */}
 
       <Form.Item
         wrapperCol={{
