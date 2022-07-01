@@ -37,6 +37,7 @@ const Register = () => {
       })
     } else {
       dispatch(register(formData))
+      console.log(formData)
       notification.success({
         message: message,
         description: 'Happy hacking!'

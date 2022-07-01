@@ -11,6 +11,7 @@ const initialState = {
 };
 
 export const register = createAsyncThunk("auth/register", async (user) => {
+  console.log(user)
   try {
     return await authService.register(user);
   } catch (error) {
@@ -19,6 +20,7 @@ export const register = createAsyncThunk("auth/register", async (user) => {
 });
 
 export const login = createAsyncThunk("auth/login", async (user) => {
+  console.log(user)
   try {
     return await authService.login(user);
   } catch (error) {
@@ -40,18 +42,17 @@ export const authSlice = createSlice({
   reducer: {},
   extraReducers: (builder) => {
     builder
-      .addCase(login.fulfilled, register.fulfilled,(state, action) => {
-        state.user = action.payload;
+      .addCase(register.fulfilled, (state, action) => {
+        state.user = action.payload
         state.isSuccess = true;
         state.message = action.payload.message;
       })
+      .addCase(login.fulfilled, (state, action) => {
+        state.user = action.payload;
+      })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
-      })
-      // .addCase(register.fulfilled, (state, action) => {
-      //   state.isSuccess = true;
-      //   state.message = action.payload.message;
-      // });
+      });
   },
 });
 
