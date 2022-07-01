@@ -6,10 +6,12 @@ import { HeartOutlined, HeartFilled } from '@ant-design/icons'
 const Post = () => {
   const { posts } = useSelector((state) => state.posts)
   const { user } = useSelector((state) => state.auth)
+  console.log(user)
 
   const dispatch = useDispatch()
 
   const post = posts.map(pos => {
+    console.log(pos)
     const isAlreadyLiked = pos.likes?.includes(user?.user._id)
     return (
       <div key={pos._id}>

@@ -6,7 +6,8 @@ import { useNavigate } from 'react-router'
 
 const Login = () => {
 
-    const { user } = useSelector((state) => state.auth)
+    const { user,message } = useSelector((state) => state.auth)
+    console.log(message)
     console.log(user)
 
     const navigate = useNavigate()
@@ -29,8 +30,12 @@ const Login = () => {
         e.preventDefault()
         console.log(formData)
         dispatch(login(formData))
+        notification.success({
+            message: message,
+            description: 'Happy hacking!'
+          })
         setTimeout(() => {
-            navigate('/profile')
+            navigate('/')
         }, 3000)
     }
     return (
