@@ -30,7 +30,7 @@ const Login = () => {
         console.log(formData)
         dispatch(login(formData))
         setTimeout(() => {
-            navigate('/')
+            navigate('/profile')
         }, 3000)
     }
     return (
