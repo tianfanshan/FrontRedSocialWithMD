@@ -1,8 +1,15 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch,useSelector } from 'react-redux'
 import { login } from '../../features/auth/authSlice'
+import { notification } from 'antd'
+import { useNavigate } from 'react-router'
 
 const Login = () => {
+
+    const { user } = useSelector((state)=>state.auth)
+
+    const navigate = useNavigate()
+
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -19,7 +26,12 @@ const Login = () => {
     }
     const onSubmit = (e) => {
         e.preventDefault()
-        dispatch(login(formData))
+        // if(){
+
+        // }else{
+            dispatch(login(formData))
+            // navigate('/')
+        // }
     }
     return (
         <form onSubmit={onSubmit}>

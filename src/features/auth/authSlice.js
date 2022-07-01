@@ -5,6 +5,9 @@ const user = JSON.parse(localStorage.getItem("user"));
 
 const initialState = {
   user: null ? user : null,
+  isError: false,
+  isSuccess: false,
+  message: "",
 };
 
 export const register = createAsyncThunk("auth/register", async (user) => {
@@ -37,12 +40,18 @@ export const authSlice = createSlice({
   reducer: {},
   extraReducers: (builder) => {
     builder
-      .addCase(login.fulfilled, (state, action) => {
+      .addCase(login.fulfilled, register.fulfilled,(state, action) => {
         state.user = action.payload;
+        state.isSuccess = true;
+        state.message = action.payload.message;
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
-      });
+      })
+      // .addCase(register.fulfilled, (state, action) => {
+      //   state.isSuccess = true;
+      //   state.message = action.payload.message;
+      // });
   },
 });
 

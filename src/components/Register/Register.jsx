@@ -1,9 +1,16 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux/es/exports'
+import { useDispatch, useSelector } from 'react-redux'
 import { register } from '../../features/auth/authSlice'
 import { notification } from 'antd'
+import { useNavigate } from 'react-router'
+
 
 const Register = () => {
+
+  const navigate = useNavigate()
+
+  const { user, message } = useSelector((state) => state.auth)
+  console.log(user)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -29,11 +36,14 @@ const Register = () => {
         description: 'Passwords do not match'
       })
     } else {
+      dispatch(register(formData))
       notification.success({
-        message: 'Welcome',
+        message: message,
         description: 'Happy hacking!'
       })
-      return dispatch(register(formData))
+      setTimeout(() => {
+        navigate('/login')
+      }, 3000)
     }
   }
   return (
