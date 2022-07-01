@@ -10,7 +10,7 @@ const Register = () => {
   const navigate = useNavigate()
 
   const { user, message } = useSelector((state) => state.auth)
-  console.log(user)
+  console.log(message)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
