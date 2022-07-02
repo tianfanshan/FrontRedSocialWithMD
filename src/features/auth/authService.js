@@ -15,24 +15,18 @@ const login = async (user) => {
   return res.data;
 };
 
-//-------------axios request errror about token-----------
-
 const logout = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user.token)
-  const res = await axios.put(API_URL + "/users/logout", {
+  const res = await axios.put(API_URL + "/users/logout", {},{
     headers: {
       authorization: user.token,
     },
   });
-  console.log('hoilaaaaa',res)
   if (res.data) {
     localStorage.removeItem("user");
   }
   return res.data
 };
-
-//-------------------------------------------------------
 
 const authService = {
   register,

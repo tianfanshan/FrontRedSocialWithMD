@@ -7,14 +7,12 @@ const initialState = {
   user: null ? user : null,
   isError: false,
   isSuccess: false,
-  message: "",
-  // token:{}
+  message: ""
 };
 
 export const register = createAsyncThunk(
   "auth/register",
   async (user, thunkAPI) => {
-    console.log(user);
     try {
       return await authService.register(user);
     } catch (error) {
@@ -37,7 +35,6 @@ export const logout = createAsyncThunk("auth/logout", async (thunkAPI) => {
   try {
     return await authService.logout();
   } catch (error) {
-    console.log(error);
     const message = error.response
     return thunkAPI.rejectWithValue(message)
   }
@@ -75,7 +72,8 @@ export const authSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state,action) => {
         state.user = null;
-        // state.message = action.payload
+        state.isSuccess = true
+        state.message = action.payload.message
       })
   },
 });

@@ -9,25 +9,22 @@ const Header = () => {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { user, message, isError, isSuccess } = useSelector((state) => state.auth)
+  const { user, message, isSuccess } = useSelector((state) => state.auth)
 
-  // useEffect(() => {
-  //   if (isSuccess) {
-  //     notification.success({
-  //       message: message
-  //     })
-  //   }
-  //   if (isError) {
-  //     notification.error({
-  //       message: message
-  //     })
-  //   }
-  // }, [isSuccess, isError, message])
+  useEffect(() => {
+    if (isSuccess) {
+      notification.success({
+        message: message
+      })
+    }
+    setTimeout(()=>{
+      navigate('/login')
+    },3000)
+  }, [isSuccess, message])
 
   const onLogout = (e) => {
     e.preventDefault()
     dispatch(logout())
-    navigate('/login')
   }
 
   return (
