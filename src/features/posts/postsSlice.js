@@ -45,7 +45,10 @@ export const postsSlice = createSlice({
           }
           return p;
         });
-      });
+      })
+      .addCase(likeDown.fulfilled, (state , action ) => {
+        
+      })
   },
 });
 
