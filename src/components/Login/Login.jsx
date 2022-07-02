@@ -1,46 +1,43 @@
-import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { login } from '../../features/auth/authSlice'
+import { login, reset } from '../../features/auth/authSlice'
 import { useNavigate } from 'react-router'
-import { Button, Checkbox, Form, Input, notification } from 'antd';
+import { Button, Form, Input, notification } from 'antd';
+import { useEffect } from 'react';
 
 const Login = () => {
 
-    const { user, message,token } = useSelector((state) => state.auth)
-    console.log(message)
-    console.log(user)
+    const { message, isError, isSuccess } = useSelector((state) => state.auth)
 
     const navigate = useNavigate()
 
-    // const [formData, setFormData] = useState({
-    //     email: '',
-    //     password: ''
-    // })
-
     const dispatch = useDispatch()
 
-    // const { email, password } = formData
-    // const onChange = (e) => {
-    //     setFormData((prevState) => ({
-    //         ...prevState,
-    //         [e.target.name]: e.target.value
-    //     }))
-    // }
+    useEffect(() => {
+        if (isError) {
+            notification.error({
+                message: 'Error',
+                description: message
+            })
+        }
+        if (isSuccess) {
+            notification.success({
+                message: 'Success',
+                description: message
+            })
+            setTimeout(() => {
+                navigate('/profile')
+            }, 3000)
+        }
+        dispatch(reset())
+    }, [isError, isSuccess, message])
 
     const onFinish = (value) => {
         dispatch(login(value))
-        notification.success({
-            message: message,
-            description: 'Happy hacking!'
-        })
-        setTimeout(() => {
-            navigate('/')
-        }, 3000)
     }
 
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
-      };
+    };
 
     return (
         <Form
@@ -60,9 +57,7 @@ const Login = () => {
         >
             <Form.Item
                 label="email"
-                name='email' 
-                // value={email} 
-                // onChange={onChange}
+                name='email'
                 rules={[
                     {
                         required: true,
@@ -75,9 +70,7 @@ const Login = () => {
 
             <Form.Item
                 label="Password"
-                name='password' 
-                // value={password} 
-                // onChange={onChange}
+                name='password'
                 rules={[
                     {
                         required: true,
@@ -100,11 +93,6 @@ const Login = () => {
             </Form.Item>
         </Form>
     );
-    // <form onSubmit={onSubmit}>
-    //     <input type="email" name='email' value={email} onChange={onChange} />
-    //     <input type="password" name='password' value={password} onChange={onChange} />
-    //     <button type='submit'>Login</button>
-    // </form>
 }
 
 export default Login

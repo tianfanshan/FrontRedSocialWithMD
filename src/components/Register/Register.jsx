@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { register } from '../../features/auth/authSlice'
+import { register, reset } from '../../features/auth/authSlice'
 import { useNavigate } from 'react-router'
 import { Button, Form, Input, notification, InputNumber } from 'antd';
 
@@ -9,22 +9,31 @@ const Register = () => {
 
   const navigate = useNavigate()
 
-  const { user, message } = useSelector((state) => state.auth)
-  console.log('user', user)
-  console.log('message', message)
+  const { message, isSuccess, isError } = useSelector((state) => state.auth)
 
   const dispatch = useDispatch()
 
+  useEffect(() => {
+    if (isSuccess) {
+      notification.success({
+        message: 'Happy hacking!',
+        description: message
+      })
+      setTimeout(()=>{
+        navigate('/login')
+      },3000)
+    }
+    if (isError) {
+      notification.error({
+        message: 'Error',
+        description: message
+      })
+    }
+    dispatch(reset())
+  }, [isSuccess, isError, message])
+
   const onFinish = (value) => {
     dispatch(register(value))
-    notification.success({
-      message: message,
-      description: 'Happy hacking!'
-    })
-    setTimeout(() => {
-      navigate('/login')
-    }, 3000)
-    // }
   };
 
   const onFinishFailed = (errorInfo) => {
