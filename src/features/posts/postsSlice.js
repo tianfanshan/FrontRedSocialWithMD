@@ -14,13 +14,13 @@ export const getAllPost = createAsyncThunk("posts/getAllPosts", async () => {
   }
 });
 
-export const like = createAsyncThunk('posts/like',async(_id) => {
+export const like = createAsyncThunk("posts/like", async (_id) => {
   try {
-    return await postsService.like(_id)
+    return await postsService.like(_id);
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
-})
+});
 
 export const postsSlice = createSlice({
   name: "posts",
@@ -31,20 +31,21 @@ export const postsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getAllPost.fulfilled, (state, action) => {
-      state.posts = action.payload;
-    });
-    builder.addCase(getAllPost.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(like.fulfilled,(state,action)=>{
-      const posts = state.posts.map((p)=>{
-        if(p._id === action.payload._id){
-          p = action.payload
-        }
-        return p
+    builder
+      .addCase(getAllPost.fulfilled, (state, action) => {
+        state.posts = action.payload;
       })
-    })
+      .addCase(getAllPost.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(like.fulfilled, (state, action) => {
+        const posts = state.posts.map((p) => {
+          if (p._id === action.payload._id) {
+            p = action.payload;
+          }
+          return p;
+        });
+      });
   },
 });
 
