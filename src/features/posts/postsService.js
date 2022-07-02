@@ -16,19 +16,19 @@ const like = async (_id) => {
     })
 }
 
-const likeDown = async (_id) => {
-    const user = JSON.parse(localStorage.getItem('user'))
-    const res = await axios.put(API_URL + '' + _id , {} , {
-        headers:{
-            authorization: user?.token
-        }
-    })
-}
+// const likeDown = async (_id) => {
+//     const user = JSON.parse(localStorage.getItem('user'))
+//     const res = await axios.put(API_URL + '' + _id , {} , {
+//         headers:{
+//             authorization: user?.token
+//         }
+//     })
+// }
 
 const postsService = {
     getAllPost,
     like,
-    likeDown
+    // likeDown
 }
 
 export default postsService

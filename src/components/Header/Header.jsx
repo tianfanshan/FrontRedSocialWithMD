@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux/es/exports'
 import { logout } from '../../features/auth/authSlice'
@@ -11,7 +11,8 @@ const Header = () => {
   const dispatch = useDispatch()
   const { user, message, isSuccess } = useSelector((state) => state.auth)
 
-  useEffect(() => {
+  const onLogout = (e) => {
+    e.preventDefault()
     if (isSuccess) {
       notification.success({
         message: message
@@ -20,10 +21,6 @@ const Header = () => {
     setTimeout(()=>{
       navigate('/login')
     },3000)
-  }, [isSuccess, message])
-
-  const onLogout = (e) => {
-    e.preventDefault()
     dispatch(logout())
   }
 
@@ -39,6 +36,9 @@ const Header = () => {
             <span>
               <Link to={'/profile'} >Profile</Link>
             </span>
+            <span>
+              <Link to={'/'} >Home</Link>
+            </span>
           </div>
           :
           <>
@@ -47,6 +47,9 @@ const Header = () => {
             </span>
             <span>
               <Link to={'/register'}>Register</Link>
+            </span>
+            <span>
+              <Link to={'/'} >Home</Link>
             </span>
           </>
         }

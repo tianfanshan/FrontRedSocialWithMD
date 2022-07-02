@@ -46,9 +46,9 @@ export const postsSlice = createSlice({
           return p;
         });
       })
-      .addCase(likeDown.fulfilled, (state , action ) => {
+      // .addCase(likeDown.fulfilled, (state , action ) => {
         
-      })
+      // })
   },
 });
 
