@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { register, reset } from '../../features/auth/authSlice'
 import { useNavigate } from 'react-router'
@@ -13,13 +12,15 @@ const Register = () => {
 
   const dispatch = useDispatch()
 
-  useEffect(() => {
+  const onFinish = (value) => {
+    dispatch(register(value))
     if (isSuccess) {
       notification.success({
         message: 'Happy hacking!',
         description: message
       })
       setTimeout(()=>{
+        dispatch(reset())
         navigate('/login')
       },3000)
     }
@@ -29,11 +30,6 @@ const Register = () => {
         description: message
       })
     }
-    dispatch(reset())
-  }, [isSuccess, isError, message])
-
-  const onFinish = (value) => {
-    dispatch(register(value))
   };
 
   const onFinishFailed = (errorInfo) => {
