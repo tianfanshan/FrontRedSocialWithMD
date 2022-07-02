@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { register, reset } from '../../features/auth/authSlice'
 import { useNavigate } from 'react-router'
 import { Button, Form, Input, notification, InputNumber } from 'antd';
+import { useEffect } from 'react';
 
 
 const Register = () => {
@@ -12,8 +13,7 @@ const Register = () => {
 
   const dispatch = useDispatch()
 
-  const onFinish = (value) => {
-    dispatch(register(value))
+  useEffect(()=>{
     if (isSuccess) {
       notification.success({
         message: 'Happy hacking!',
@@ -30,6 +30,10 @@ const Register = () => {
         description: message
       })
     }
+  },[isError,isSuccess,message])
+
+  const onFinish = (value) => {
+    dispatch(register(value))
   };
 
   const onFinishFailed = (errorInfo) => {
