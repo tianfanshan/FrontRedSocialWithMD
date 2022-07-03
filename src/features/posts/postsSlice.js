@@ -5,6 +5,7 @@ import postsService from "./postsService";
 const initialState = {
   posts: [],
   isLoading: false,
+  postMessage: ""
 };
 
 export const getAllPost = createAsyncThunk("posts/getAllPosts", async () => {
@@ -75,6 +76,14 @@ export const postsSlice = createSlice({
           }
           return p
         })
+      })
+      .addCase(addPost.fulfilled,(state,action)=>{
+        console.log(action.payload)
+        state.postMessage = action.payload.message
+      })
+      .addCase(addPost.rejected,(state,action)=>{
+        console.log(action.payload)
+        state.postMessage = action.payload.message
       })
   },
 });

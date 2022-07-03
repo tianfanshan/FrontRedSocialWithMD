@@ -38,7 +38,7 @@ const likesDown = async (_id) => {
 const addPost = async (post) =>{
     console.log(post)
     const user = JSON.parse(localStorage.getItem("user"))
-    const res = await axios.post(API_URL + "/posts",{},{post},{
+    const res = await axios.post(API_URL + "/posts",post,{
         headers:{
             authorization:user?.token
         }
