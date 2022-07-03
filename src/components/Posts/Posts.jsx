@@ -2,6 +2,7 @@ import React,{useEffect} from 'react'
 import Post from './Post/Post'
 import { useDispatch,useSelector } from 'react-redux/es/exports'
 import { getAllPost,isLoading, reset } from '../../features/posts/postsSlice'
+import AddPost from './AddPost/AddPost'
 
 const Posts = () => {
   const { isLoading } = useSelector((state)=>state.posts)
@@ -24,6 +25,7 @@ const Posts = () => {
     <div>
       <h1>Posts</h1> 
       <Post/>
+      <AddPost/>
     </div>
   )
 }

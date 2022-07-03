@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { register, reset } from '../../features/auth/authSlice'
+import { register, registerReset } from '../../features/auth/authSlice'
 import { useNavigate } from 'react-router'
 import { Button, Form, Input, notification, InputNumber } from 'antd';
 import { useEffect } from 'react';
@@ -9,28 +9,28 @@ const Register = () => {
 
   const navigate = useNavigate()
 
-  const { message, isSuccess, isError } = useSelector((state) => state.auth)
+  const { registerMessage, isSuccess, isError } = useSelector((state) => state.auth)
 
   const dispatch = useDispatch()
 
-  useEffect(()=>{
+  useEffect(() => {
     if (isSuccess) {
       notification.success({
         message: 'Happy hacking!',
-        description: message
+        description: registerMessage
       })
-      setTimeout(()=>{
-        dispatch(reset())
+      setTimeout(() => {
+        dispatch(registerReset())
         navigate('/login')
-      },3000)
+      }, 3000)
     }
     if (isError) {
       notification.error({
         message: 'Error',
-        description: message
+        description: registerMessage
       })
     }
-  },[isError,isSuccess,message])
+  }, [isError, isSuccess, registerMessage])
 
   const onFinish = (value) => {
     dispatch(register(value))

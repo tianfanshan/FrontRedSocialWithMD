@@ -1,35 +1,35 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { login, reset } from '../../features/auth/authSlice'
+import { login, loginReset } from '../../features/auth/authSlice'
 import { useNavigate } from 'react-router'
 import { Button, Form, Input, notification } from 'antd';
 import { useEffect } from 'react';
 
 const Login = () => {
 
-    const { message, isError, isSuccess } = useSelector((state) => state.auth)
-    
+    const { loginMessage, isError, isSuccess } = useSelector((state) => state.auth)
+
     const navigate = useNavigate()
 
     const dispatch = useDispatch()
 
-    useEffect(()=>{
+    useEffect(() => {
         if (isError) {
             notification.error({
                 message: 'Error',
-                description: message
+                description: loginMessage
             })
         }
         if (isSuccess) {
             notification.success({
                 message: 'Success',
-                description: message
+                description: loginMessage
             })
             setTimeout(() => {
-                dispatch(reset())
+                dispatch(loginReset())
                 navigate('/profile')
             }, 3000)
         }
-    },[isError,isSuccess,message])
+    }, [isError, isSuccess, loginMessage])
 
     const onFinish = (value) => {
         dispatch(login(value))

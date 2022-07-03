@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux/es/exports'
-import { logout } from '../../features/auth/authSlice'
+import { logout, logoutReset } from '../../features/auth/authSlice'
 import { useNavigate } from 'react-router'
 import { notification } from 'antd'
 
@@ -9,18 +9,19 @@ const Header = () => {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { user, message, isSuccess } = useSelector((state) => state.auth)
+  const { user, logoutMessage, isSuccess } = useSelector((state) => state.auth)
 
-  // useEffect(()=>{
-  //   if (isSuccess) {
-  //     notification.success({
-  //       message: message
-  //     })
-  //   }
-  //   setTimeout(()=>{
-  //     navigate('/login')
-  //   },3000)
-  // },[isSuccess,message])
+  useEffect(() => {
+    if (isSuccess) {
+      notification.success({
+        message: logoutMessage
+      })
+    }
+    setTimeout(() => {
+      dispatch(logoutReset())
+      navigate('/')
+    }, 3000)
+  }, [isSuccess, logoutMessage])
 
   const onLogout = (e) => {
     e.preventDefault()
