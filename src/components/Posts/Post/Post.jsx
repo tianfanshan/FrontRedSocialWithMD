@@ -9,12 +9,12 @@ const Post = () => {
   const { posts } = useSelector((state) => state.posts)
   const { user } = useSelector((state) => state.auth)
 
+  console.log(posts)
+
   const dispatch = useDispatch()
 
-  const post = posts.map(pos => {
+  const postss = posts.map(pos => {
     const isAlreadyLiked = pos.likes?.includes(user?.user._id)
-    console.log(user)
-    console.log(pos)
     return (
       <div key={pos._id}>
         <Card
@@ -37,7 +37,7 @@ const Post = () => {
   })
   return (
     <div>
-      {post}
+      {postss}
     </div>
   )
 }

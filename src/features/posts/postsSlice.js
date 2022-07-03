@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { act } from "react-dom/test-utils";
 import postsService from "./postsService";
 
 const initialState = {
   posts: [],
+  post:{},
   isLoading: false,
   postMessage: ""
 };
@@ -54,10 +54,18 @@ export const postsSlice = createSlice({
     builder
       .addCase(getAllPost.fulfilled, (state, action) => {
         console.log(action.payload)
-        state.posts = action.payload;
+        state.posts = [...action.payload,state.post];
       })
       .addCase(getAllPost.pending, (state) => {
         state.isLoading = true;
+      })
+      .addCase(addPost.fulfilled,(state,action)=>{
+        state.post = action.payload.post
+        state.postMessage = action.payload.message
+      })
+      .addCase(addPost.rejected,(state,action)=>{
+        console.log(action.payload)
+        state.postMessage = action.payload.message
       })
       .addCase(like.fulfilled, (state, action) => {
         console.log(action.payload)
@@ -76,14 +84,6 @@ export const postsSlice = createSlice({
           }
           return p
         })
-      })
-      .addCase(addPost.fulfilled,(state,action)=>{
-        console.log(action.payload)
-        state.postMessage = action.payload.message
-      })
-      .addCase(addPost.rejected,(state,action)=>{
-        console.log(action.payload)
-        state.postMessage = action.payload.message
       })
   },
 });
