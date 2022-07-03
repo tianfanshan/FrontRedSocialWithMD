@@ -9,14 +9,12 @@ const Post = () => {
   const { posts } = useSelector((state) => state.posts)
   const { user } = useSelector((state) => state.auth)
 
-  console.log(posts)
-
   const dispatch = useDispatch()
 
-  const postss = posts.map(pos => {
+  const postss = posts.map((pos,i) => {
     const isAlreadyLiked = pos.likes?.includes(user?.user._id)
     return (
-      <div key={pos._id}>
+      <div key={i}>
         <Card
           hoverable
           style={{

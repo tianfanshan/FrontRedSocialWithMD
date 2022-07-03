@@ -3,18 +3,13 @@ import axios from "axios";
 const API_URL = "http://localhost:8080";
 
 const register = async (userData) => {
-  console.log(userData)
   const res = await axios.post(API_URL + "/users", userData);
-  console.log(res)
   return res.data;
 };
 
 const login = async (user) => {
-  console.log(user)
   const res = await axios.post(API_URL + "/users/login", user);
-  console.log(res)
   if (res.data) {
-    console.log(res.data)
     localStorage.setItem("user", JSON.stringify(res.data));
   }
   return res.data;

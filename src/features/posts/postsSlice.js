@@ -17,7 +17,6 @@ export const getAllPost = createAsyncThunk("posts/getAllPosts", async () => {
 });
 
 export const like = createAsyncThunk("posts/like", async (_id) => {
-  console.log(_id)
   try {
     return await postsService.like(_id);
   } catch (error) {
@@ -34,7 +33,6 @@ export const likesDown = createAsyncThunk("posts/likesDown",async(_id)=>{
 })
 
 export const addPost = createAsyncThunk("posts/addPost",async(post)=>{
-  console.log(post)
   try {
     return await postsService.addPost(post)
   } catch (error) {
@@ -54,19 +52,20 @@ export const postsSlice = createSlice({
     builder
       .addCase(getAllPost.fulfilled, (state, action) => {
         console.log(action.payload)
-        state.posts = [...action.payload,state.post];
+        state.posts = action.payload;
       })
       .addCase(getAllPost.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(addPost.fulfilled,(state,action)=>{
-        state.post = action.payload.post
-        state.postMessage = action.payload.message
-      })
-      .addCase(addPost.rejected,(state,action)=>{
         console.log(action.payload)
+        state.posts = [...state.posts,action.payload.post]
         state.postMessage = action.payload.message
       })
+      // .addCase(addPost.rejected,(state,action)=>{
+      //   console.log(action.payload)
+      //   state.postMessage = action.payload.message
+      // })
       .addCase(like.fulfilled, (state, action) => {
         console.log(action.payload)
         const posts = state.posts.map((p) => {

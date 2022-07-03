@@ -1,16 +1,24 @@
-import { Input,Button,Form } from 'antd';
+import { Input,Button,Form,notification } from 'antd';
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { addPost } from '../../../features/posts/postsSlice';
 
 
 
 const AddPost = () => {
+
+  const { postMessage,post } = useSelector((state)=>state.posts)
+
+  console.log(post)
+
   const dispatch = useDispatch()
 
 const onFinish = (value) => {
   console.log(value)
   dispatch(addPost(value))
+  notification.success({
+    message:postMessage
+  })
 };
 
 const onFinishFailed = (errorInfo) => {
