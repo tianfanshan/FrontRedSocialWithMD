@@ -21,7 +21,7 @@ const Header = () => {
       dispatch(logoutReset())
       navigate('/')
     }, 3000)
-  }, [isSuccess, logoutMessage])
+  }, [logoutMessage])
 
   const onLogout = (e) => {
     e.preventDefault()
