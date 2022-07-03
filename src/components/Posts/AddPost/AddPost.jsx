@@ -61,7 +61,7 @@ const onFinishFailed = (errorInfo) => {
         rules={[
           {
             required: true,
-            message: 'Please input your coment!',
+            message: 'Escribe algo!!!',
           },
         ]}
       >
@@ -69,7 +69,7 @@ const onFinishFailed = (errorInfo) => {
       </Form.Item>
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
         <Button type="primary" htmlType="submit">
-          Comment
+          Postear!
         </Button>
         </Form.Item>
       </Form>

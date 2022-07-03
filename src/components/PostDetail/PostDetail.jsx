@@ -1,28 +1,28 @@
-import { useDispatch,useSelector } from "react-redux/es/exports"
+import { useDispatch, useSelector } from "react-redux/es/exports"
 import AddComment from "./AddComment/AddComment"
 
 const PostDetail = () => {
 
-    const { post } = useSelector((state)=>state.posts)
+    const { post } = useSelector((state) => state.posts)
 
     let comments = post.commentIds
 
     console.log(post)
 
-    const detail = comments.map((det)=>{
-        return(
-            <div>
+    const detail = comments.map((det,i) => {
+        return (
+            <div key={i}>
                 <h3>{det.comment}</h3>
-                <AddComment/>
+                <AddComment />
             </div>
         )
     })
 
-  return (
-    <div>
-        {detail}
-    </div>
-  )
+    return (
+        <div>
+            {detail}
+        </div>
+    )
 }
 
 export default PostDetail
