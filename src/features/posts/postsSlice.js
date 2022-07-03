@@ -40,6 +40,15 @@ export const addPost = createAsyncThunk("posts/addPost",async(post)=>{
   }
 })
 
+export const getPostById = createAsyncThunk("posts/getPostById",async(_id)=>{
+  console.log(_id)
+  try {
+    return await postsService.getPostById(_id)
+  } catch (error) {
+    console.error(error)
+  }
+})
+
 export const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -61,6 +70,10 @@ export const postsSlice = createSlice({
         console.log(action.payload)
         state.posts = [...state.posts,action.payload.post]
         state.postMessage = action.payload.message
+      })
+      .addCase(getPostById.fulfilled,(state,action)=>{
+        console.log(action.payload)
+        state.post = action.payload
       })
       // .addCase(addPost.rejected,(state,action)=>{
       //   console.log(action.payload)

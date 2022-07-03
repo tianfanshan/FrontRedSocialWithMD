@@ -48,11 +48,18 @@ const addPost = async (post) =>{
     return res.data
 }
 
+const getPostById = async (_id) => {
+  const res = await axios.get(API_URL + "/posts/id/" + _id)
+  console.log(res)
+  return res.data
+}
+
 const postsService = {
   getAllPost,
   like,
   likesDown,
-  addPost
+  addPost,
+  getPostById
 };
 
 export default postsService;

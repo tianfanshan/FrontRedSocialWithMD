@@ -9,6 +9,7 @@ const Posts = () => {
   const { user } = useSelector((state) => state.auth)
   const dispatch = useDispatch()
 
+
   const getPostAndReset = async () => {
     await dispatch(getAllPost())
     dispatch(reset())
