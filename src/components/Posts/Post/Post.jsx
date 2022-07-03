@@ -42,7 +42,9 @@ const Post = () => {
           cover={<img alt="example" src={pos.images} />}
         >
           <Meta title={pos.userName} description={pos.body} />
-          <>
+        </Card>
+        <span className="wish">Wish list: {pos.likes?.length}</span>
+        <>
             <Button type="primary" onClick={() => showModal(pos._id)}>
               Open Modal
             </Button>
@@ -50,8 +52,6 @@ const Post = () => {
               <PostDetail />
             </Modal>
           </>
-        </Card>
-        <span className="wish">Wish list: {pos.likes?.length}</span>
         {isAlreadyLiked ? (
           <HeartFilled onClick={() => dispatch(likesDown(pos._id))} />
         ) : (

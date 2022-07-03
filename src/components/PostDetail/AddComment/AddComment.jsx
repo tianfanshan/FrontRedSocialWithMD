@@ -5,10 +5,10 @@ import { useSelector, useDispatch } from 'react-redux/es/exports'
 
 const AddComment = () => {
 
-  const { post } = useSelector((state) => state.posts)
-  const { comment } = useSelector((state) => state.comments)
+  // const { post } = useSelector((state) => state.posts)
+  // const { comment } = useSelector((state) => state.comments)
 
-  console.log(comment)
+  // console.log(comment)
 
   const dispatch = useDispatch()
 

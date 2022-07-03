@@ -1,8 +1,11 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import commentsService from "./commentsService";
+// import { useSelector } from 'react-redux/es/exports'
+
+// const {}
 
 const initialState = {
-    comment:{}
+    comment:[]
 }
 
 export const createComment = createAsyncThunk("comments/createComment",async (comment) => {
