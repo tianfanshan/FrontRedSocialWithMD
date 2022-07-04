@@ -7,13 +7,9 @@ const Profile = () => {
   const { post } = useSelector((state) => state.posts)
   const { user } = useSelector((state) => state.auth)
 
+  console.log(post)
+
   const info = user?.user
-
-  let newArray = []
-
-  newArray.push(post)
-
-  console.log(newArray)
 
   const dispatch = useDispatch()
 
@@ -25,8 +21,6 @@ const Profile = () => {
     })
   },[])
 
-  
-
   return (
     <div>
       <span>Años: {info.age}</span><br />
@@ -37,7 +31,7 @@ const Profile = () => {
       <span>Followings: {info.followings.length}</span><br />
       <span>Correo: {info.name}</span><br />
       <span>Role: {info.role}</span><br />
-      <span>{post.body}</span>
+      <span>post: {post.body}</span>
     </div>
   )
 }

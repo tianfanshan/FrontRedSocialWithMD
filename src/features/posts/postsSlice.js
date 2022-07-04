@@ -53,6 +53,15 @@ export const getPostById = createAsyncThunk(
   }
 );
 
+export const getPostByText = createAsyncThunk("posts/getPostByText", async (text)=>{
+  console.log(text)
+  try {
+    return await postsService.getPostByText(text)
+  } catch (error) {
+    console.error(error)
+  }
+})
+
 export const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -82,13 +91,12 @@ export const postsSlice = createSlice({
         console.log(action.payload);
       })
       .addCase(getPostById.fulfilled,(state,action)=>{
-        console.log(action.payload)
         state.post = action.payload
       })
-      // .addCase(addPost.rejected,(state,action)=>{
-      //   console.log(action.payload)
-      //   state.postMessage = action.payload.message
-      // })
+      .addCase(getPostByText.fulfilled,(state,action)=>{
+        console.log(action.payload)
+        state.posts = action.payload.post
+      })
       .addCase(like.fulfilled, (state, action) => {
         const posts = state.posts.map((p) => {
           if (p._id === action.payload._id) {

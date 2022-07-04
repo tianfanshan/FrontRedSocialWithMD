@@ -50,12 +50,20 @@ const getPostById = async (_id) => {
   return res.data
 }
 
+const getPostByText = async (text) => {
+  console.log(text)
+  const res = await axios.get(API_URL + "/posts/body/" + text)
+  console.log(res)
+  return res.data
+}
+
 const postsService = {
   getAllPost,
   like,
   likesDown,
   addPost,
-  getPostById
+  getPostById,
+  getPostByText
 };
 
 export default postsService;
