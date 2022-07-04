@@ -3,9 +3,11 @@ import postsService from "./postsService";
 
 const initialState = {
   posts: [],
-  post:{},
+  post: {},
   isLoading: false,
-  postMessage: ""
+  addPostMessage: "",
+  addPostIsSuccess: false,
+  addPostIsError: false,
 };
 
 export const getAllPost = createAsyncThunk("posts/getAllPosts", async () => {
@@ -24,29 +26,32 @@ export const like = createAsyncThunk("posts/like", async (_id) => {
   }
 });
 
-export const likesDown = createAsyncThunk("posts/likesDown",async(_id)=>{
+export const likesDown = createAsyncThunk("posts/likesDown", async (_id) => {
   try {
-    return await postsService.likesDown(_id)
+    return await postsService.likesDown(_id);
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
-})
+});
 
-export const addPost = createAsyncThunk("posts/addPost",async(post)=>{
+export const addPost = createAsyncThunk("posts/addPost", async (post) => {
   try {
-    return await postsService.addPost(post)
+    return await postsService.addPost(post);
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
-})
+});
 
-export const getPostById = createAsyncThunk("posts/getPostById",async(_id)=>{
-  try {
-    return await postsService.getPostById(_id)
-  } catch (error) {
-    console.error(error)
+export const getPostById = createAsyncThunk(
+  "posts/getPostById",
+  async (_id) => {
+    try {
+      return await postsService.getPostById(_id);
+    } catch (error) {
+      console.error(error);
+    }
   }
-})
+);
 
 export const postsSlice = createSlice({
   name: "posts",
@@ -54,6 +59,10 @@ export const postsSlice = createSlice({
   reducers: {
     reset: (state) => {
       state.isLoading = false;
+    },
+    addPostReset: (state) => {
+      state.addPostIsSuccess = false;
+      state.addPostMessage = "";
     },
   },
   extraReducers: (builder) => {
@@ -64,12 +73,13 @@ export const postsSlice = createSlice({
       .addCase(getAllPost.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(addPost.fulfilled,(state,action)=>{
-        state.posts = [...state.posts,action.payload.post]
-        state.postMessage = action.payload.message
+      .addCase(addPost.fulfilled, (state, action) => {
+        state.addPostIsSuccess = true;
+        state.posts = [...state.posts, action.payload.post];
+        state.addPostMessage = action.payload.message;
       })
-      .addCase(addPost.rejected,(state,action)=>{
-        console.log(action.payload)
+      .addCase(addPost.rejected, (state, action) => {
+        console.log(action.payload);
       })
       // .addCase(addPost.rejected,(state,action)=>{
       //   console.log(action.payload)
@@ -83,16 +93,16 @@ export const postsSlice = createSlice({
           return p;
         });
       })
-      .addCase(likesDown.fulfilled, (state , action ) => {
-        const posts = state.posts.map((p)=>{
-          if(p._id===action.payload._id){
-            p=action.payload
+      .addCase(likesDown.fulfilled, (state, action) => {
+        const posts = state.posts.map((p) => {
+          if (p._id === action.payload._id) {
+            p = action.payload;
           }
-          return p
-        })
-      })
+          return p;
+        });
+      });
   },
 });
 
-export const { reset } = postsSlice.actions;
+export const { reset, addPostReset } = postsSlice.actions;
 export default postsSlice.reducer;
