@@ -81,6 +81,10 @@ export const postsSlice = createSlice({
       .addCase(addPost.rejected, (state, action) => {
         console.log(action.payload);
       })
+      .addCase(getPostById.fulfilled,(state,action)=>{
+        console.log(action.payload)
+        state.post = action.payload
+      })
       // .addCase(addPost.rejected,(state,action)=>{
       //   console.log(action.payload)
       //   state.postMessage = action.payload.message
