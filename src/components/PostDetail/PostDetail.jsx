@@ -13,7 +13,6 @@ const PostDetail = () => {
         return (
             <div key={i}>
                 <h3>{det.comment}</h3>
-                <AddComment />
             </div>
         )
     })
@@ -21,6 +20,7 @@ const PostDetail = () => {
     return (
         <div>
             {detail}
+            <AddComment />
         </div>
     )
 }
