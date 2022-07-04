@@ -68,8 +68,8 @@ export const postsSlice = createSlice({
         state.posts = [...state.posts,action.payload.post]
         state.postMessage = action.payload.message
       })
-      .addCase(getPostById.fulfilled,(state,action)=>{
-        state.post = action.payload
+      .addCase(addPost.rejected,(state,action)=>{
+        console.log(action.payload)
       })
       // .addCase(addPost.rejected,(state,action)=>{
       //   console.log(action.payload)

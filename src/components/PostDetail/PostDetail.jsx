@@ -6,17 +6,13 @@ import { createComment } from "../../features/comments/commentsSlice"
 const PostDetail = () => {
 
     const { post } = useSelector((state) => state.posts)
-    const { comment } = useSelector((state)=>state.comments)
-    // console.log(comment)
+    const { comment } = useSelector((state) => state.comments)
+    console.log(comment)
 
-    let comments = post.commentIds
-    // console.log(comments)
+    let comments = post?.commentIds
+    console.log('comments', comments)
 
-    let newArray = [...comments,comment]
-
-    console.log('new array',newArray)
-
-    const detail = newArray?.map((det,i) => {
+    const detail = comments?.map((det, i) => {
         return (
             <div key={i}>
                 <h3>Comment: {det.comment}</h3>
@@ -27,6 +23,7 @@ const PostDetail = () => {
     return (
         <div>
             {detail}
+            <span>{comment.comment}</span>
             <AddComment />
         </div>
     )
