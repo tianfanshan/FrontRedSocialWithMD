@@ -14,8 +14,9 @@ const Post = () => {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
+  const dispatch = useDispatch()
+
   const showModal = (_id) => {
-    console.log(_id)
     dispatch(getPostById(_id))
     setIsModalVisible(true);
   };
@@ -27,8 +28,6 @@ const Post = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-
-  const dispatch = useDispatch()
 
   const postss = posts.map((pos, i) => {
     const isAlreadyLiked = pos.likes?.includes(user?.user._id)

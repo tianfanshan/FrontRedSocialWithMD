@@ -1,4 +1,3 @@
-import React from 'react'
 import { Input, Button, Form, notification } from 'antd';
 import { createComment } from '../../../features/comments/commentsSlice'
 import { useSelector, useDispatch } from 'react-redux/es/exports'
@@ -6,9 +5,6 @@ import { useSelector, useDispatch } from 'react-redux/es/exports'
 const AddComment = () => {
 
   const { post } = useSelector((state) => state.posts)
-  const { comment } = useSelector((state) => state.comments)
-
-  console.log(comment)
 
   const dispatch = useDispatch()
 

@@ -4,7 +4,6 @@ const API_URL = "http://localhost:8080";
 
 const getAllPost = async () => {
   const res = await axios.get(API_URL + "/posts");
-  console.log(res)
   return res.data;
 };
 
@@ -37,21 +36,17 @@ const likesDown = async (_id) => {
 };
 
 const addPost = async (post) =>{
-    console.log(post)
     const user = JSON.parse(localStorage.getItem("user"))
     const res = await axios.post(API_URL + "/posts",post,{
         headers:{
             authorization:user?.token
         }
     })
-    console.log(res)
     return res.data
 }
 
 const getPostById = async (_id) => {
-  console.log(_id)
   const res = await axios.get(API_URL + "/posts/id/" + _id)
-  console.log(res)
   return res.data
 }
 
