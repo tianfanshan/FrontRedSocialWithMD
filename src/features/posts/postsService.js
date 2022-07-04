@@ -49,6 +49,7 @@ const addPost = async (post) =>{
 }
 
 const getPostById = async (_id) => {
+  console.log(_id)
   const res = await axios.get(API_URL + "/posts/id/" + _id)
   console.log(res)
   return res.data

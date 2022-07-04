@@ -9,7 +9,7 @@ const PostDetail = () => {
 
     console.log(post)
 
-    const detail = comments.map((det,i) => {
+    const detail = comments?.map((det,i) => {
         return (
             <div key={i}>
                 <h3>{det.comment}</h3>

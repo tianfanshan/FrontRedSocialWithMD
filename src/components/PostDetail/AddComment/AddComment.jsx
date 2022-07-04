@@ -5,16 +5,17 @@ import { useSelector, useDispatch } from 'react-redux/es/exports'
 
 const AddComment = () => {
 
-  // const { post } = useSelector((state) => state.posts)
-  // const { comment } = useSelector((state) => state.comments)
+  const { post } = useSelector((state) => state.posts)
+  const { comment } = useSelector((state) => state.comments)
 
-  // console.log(comment)
+  console.log(comment)
 
   const dispatch = useDispatch()
 
   const onFinish = (comment) => {
-    console.log(comment)
-    dispatch(createComment(comment))
+    let postId = post._id
+    let newOjb = {postId,...comment}
+    dispatch(createComment(newOjb))
     // notification.success({
     //   message: commentMessage
     // })
