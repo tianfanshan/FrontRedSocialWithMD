@@ -1,11 +1,9 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import commentsService from "./commentsService";
-// import { useSelector } from 'react-redux/es/exports'
-
-// const { post } = useSelector((state)=>state.post)
 
 const initialState = {
-    comment:[]
+    comment:[],
+    isSuccess:false
 }
 
 export const createComment = createAsyncThunk("comments/createComment",async (comment) => {
@@ -23,6 +21,7 @@ export const commentsSlice = createSlice({
     extraReducers:(builder) => {
         builder
             .addCase(createComment.fulfilled, (state,action)=>{
+                state.isSuccess = true
                 state.comment = action.payload.comment
             })
     }
