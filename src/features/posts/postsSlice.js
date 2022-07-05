@@ -102,9 +102,9 @@ export const postsSlice = createSlice({
       })
       .addCase(getPostById.fulfilled,(state,action)=>{
         state.post = action.payload
-        console.log(typeof(state.post))
-        const po = state.post.filter((p)=> typeof(p) != String)
-        state.posts.push(po)
+        if(typeof(state.post) == Object){
+          state.posts.push(state.post)
+        }
       })
       // .addCase(getPostById.rejected,(state,action)=>{
       //   console.log(action.payload)

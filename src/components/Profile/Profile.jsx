@@ -1,31 +1,29 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector,useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { getPostById } from '../../features/posts/postsSlice'
 
 import { like, likesDown } from '../../features/posts/postsSlice'
 import 'antd/dist/antd.css'
 import { HeartOutlined, HeartFilled } from '@ant-design/icons'
-import { Card, Button, Modal } from 'antd';
+import { Card, Button, Modal, Image } from 'antd';
 import PostDetail from "../PostDetail/PostDetail"
 const { Meta } = Card;
 
 const Profile = () => {
 
-  const { post,posts,getPostMessage } = useSelector((state) => state.posts)
+  const { post, posts } = useSelector((state) => state.posts)
   const { user } = useSelector((state) => state.auth)
-
-  console.log(getPostMessage)
 
   console.log(posts)
 
-  
+
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = (_id) => {
     dispatch(getPostById(_id))
     setIsModalVisible(true);
   };
-  
+
   const handleOk = () => {
     setIsModalVisible(false);
   };
@@ -34,7 +32,21 @@ const Profile = () => {
     setIsModalVisible(false);
   };
 
-  const po = posts.map((p)=>{
+  const info = user?.user
+
+  const dispatch = useDispatch()
+
+  const userPost = info.postIds
+
+  console.log(userPost)
+
+  useEffect(() => {
+    userPost.map((p) => {
+      dispatch(getPostById(p))
+    })
+  }, [])
+
+  const po = posts.map((p) => {
     const img = p.images?.map((im, i) => {
       return (
         <img alt="post-img" src={"http://localhost:8080/posts-images/" + im} key={i} />
@@ -83,30 +95,41 @@ const Profile = () => {
     )
   })
 
-  const info = user?.user
 
-  const dispatch = useDispatch()
-
-  const userPost = info.postIds
-
-  useEffect(()=>{
-    userPost.map((p)=>{
-      dispatch(getPostById(p))
-    })
-  },[])
 
   return (
     <div>
-      <span>Años: {info.age}</span><br />
-      <span>Cantidad de comentarios: {info.commentId.length}</span><br />
-      <span>Likes de comentarios: {info.commentsLikes.length}</span><br />
-      <span>Favoritos: {info.favorites.length}</span><br />
-      <span>Followers: {info.followers.length}</span><br />
-      <span>Followings: {info.followings.length}</span><br />
-      <span>Correo: {info.name}</span><br />
-      <span>Role: {info.role}</span><br />
-      <span>post: {post.body}</span><br />
-      {po}
+      {user.user.image ?
+        <div>
+          <Image
+            width={200}
+            src={"http://localhost:8080/users-images/" + user.user.image}
+          />
+          <span>Años: {info.age}</span><br />
+          <span>Cantidad de comentarios: {info.commentId.length}</span><br />
+          <span>Likes de comentarios: {info.commentsLikes.length}</span><br />
+          <span>Favoritos: {info.favorites.length}</span><br />
+          <span>Followers: {info.followers.length}</span><br />
+          <span>Followings: {info.followings.length}</span><br />
+          <span>Correo: {info.name}</span><br />
+          <span>Role: {info.role}</span><br />
+          <span>post: {post.body}</span><br />
+          {po}
+        </div>
+        :
+        <div>
+          <span>Años: {info.age}</span><br />
+          <span>Cantidad de comentarios: {info.commentId.length}</span><br />
+          <span>Likes de comentarios: {info.commentsLikes.length}</span><br />
+          <span>Favoritos: {info.favorites.length}</span><br />
+          <span>Followers: {info.followers.length}</span><br />
+          <span>Followings: {info.followings.length}</span><br />
+          <span>Correo: {info.name}</span><br />
+          <span>Role: {info.role}</span><br />
+          <span>post: {post.body}</span><br />
+          {po}
+        </div>
+      }
     </div>
   )
 }
