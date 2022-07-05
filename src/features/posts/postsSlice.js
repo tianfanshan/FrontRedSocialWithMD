@@ -44,11 +44,13 @@ export const addPost = createAsyncThunk("posts/addPost", async (post) => {
 
 export const getPostById = createAsyncThunk(
   "posts/getPostById",
-  async (_id) => {
+  async (_id,thunkAPI) => {
     try {
       return await postsService.getPostById(_id);
     } catch (error) {
-      console.error(error);
+      const getPostMessage = error
+      console.log(getPostMessage)
+      return thunkAPI.rejectWithValue(getPostMessage)
     }
   }
 );
@@ -57,6 +59,14 @@ export const getPostByText = createAsyncThunk("posts/getPostByText", async (text
   console.log(text)
   try {
     return await postsService.getPostByText(text)
+  } catch (error) {
+    console.error(error)
+  }
+})
+
+export const updatePost = createAsyncThunk("posts/updatePost",async (post)=>{
+  try {
+    return await postsService.updatePost(post)
   } catch (error) {
     console.error(error)
   }
@@ -92,10 +102,21 @@ export const postsSlice = createSlice({
       })
       .addCase(getPostById.fulfilled,(state,action)=>{
         state.post = action.payload
+        console.log(typeof(state.post))
+        const po = state.post.filter((p)=> typeof(p) != String)
+        state.posts.push(po)
       })
+      // .addCase(getPostById.rejected,(state,action)=>{
+      //   console.log(action.payload)
+      //   state.getPostMessage = action.payload
+      // })
       .addCase(getPostByText.fulfilled,(state,action)=>{
         console.log(action.payload)
         state.posts = action.payload.post
+      })
+      .addCase(updatePost.fulfilled,(state,action)=>{
+        console.log(action.payload)
+        state.post = action.payload
       })
       .addCase(like.fulfilled, (state, action) => {
         const posts = state.posts.map((p) => {

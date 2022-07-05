@@ -57,13 +57,26 @@ const getPostByText = async (text) => {
   return res.data
 }
 
+const updatePost = async (post,_id) =>{
+  console.log(post)
+  const user = JSON.parse(localStorage.getItem("user"))
+  const res = await axios.put(API_URL + "/posts/id/" + _id,{post},{
+    headers:{
+      authorization:user?.token
+    }
+  })
+  console.log(res)
+  return res.data
+}
+
 const postsService = {
   getAllPost,
   like,
   likesDown,
   addPost,
   getPostById,
-  getPostByText
+  getPostByText,
+  updatePost
 };
 
 export default postsService;

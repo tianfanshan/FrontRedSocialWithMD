@@ -20,7 +20,7 @@ const Post = () => {
     dispatch(getPostById(_id))
     setIsModalVisible(true);
   };
-
+  
   const handleOk = () => {
     setIsModalVisible(false);
   };
@@ -30,11 +30,11 @@ const Post = () => {
   };
 
   const postss = posts.map((pos, i) => {
-      const img = pos.images.map((im,i) => {
-        return(
-          <img alt="post-img" src={"http://localhost:8080/Images/posts-images/" + im} key={i}/>
-        )
-      })
+    const img = pos.images.map((im, i) => {
+      return (
+        <img alt="post-img" src={"http://localhost:8080/posts-images/" + im} key={i} />
+      )
+    })
     const isAlreadyLiked = pos.likes?.includes(user?.user._id)
     return (
       <div key={i}>
