@@ -30,32 +30,50 @@ const Post = () => {
   };
 
   const postss = posts.map((pos, i) => {
+      const img = pos.images.map((im,i) => {
+        return(
+          <img alt="post-img" src={"http://localhost:8080/Images/posts-images/" + im} key={i}/>
+        )
+      })
     const isAlreadyLiked = pos.likes?.includes(user?.user._id)
     return (
       <div key={i}>
-        <Card
-          hoverable
-          style={{
-            width: 240,
-          }}
-          cover={<img alt="example" src={pos.images} />}
-        >
-          <Meta title={pos.userName} description={pos.body} />
-        </Card>
-        <span className="wish">Wish list: {pos.likes?.length}</span>
-        <>
-            <Button type="primary" onClick={() => showModal(pos._id)}>
-              Open Modal
-            </Button>
-            <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-              <PostDetail />
-            </Modal>
-          </>
-        {isAlreadyLiked ? (
-          <HeartFilled onClick={() => dispatch(likesDown(pos._id))} />
-        ) : (
-          <HeartOutlined onClick={() => dispatch(like(pos._id))} />
-        )}
+        {pos.images.length > 0 ?
+          <Card
+            hoverable
+            style={{
+              width: 240,
+            }}
+            cover={img}
+          >
+            <Meta title={pos.userName} description={pos.body} />
+          </Card>
+          :
+          <div>
+            <Card
+              hoverable
+              style={{
+                width: 240,
+              }}
+            >
+              <Meta title={pos.userName} description={pos.body} />
+            </Card>
+            <span className="wish">Wish list: {pos.likes?.length}</span>
+            <>
+              <Button type="primary" onClick={() => showModal(pos._id)}>
+                Open Modal
+              </Button>
+              <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                <PostDetail />
+              </Modal>
+            </>
+            {isAlreadyLiked ? (
+              <HeartFilled onClick={() => dispatch(likesDown(pos._id))} />
+            ) : (
+              <HeartOutlined onClick={() => dispatch(like(pos._id))} />
+            )}
+          </div>
+        }
       </div>
     )
   })
