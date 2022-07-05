@@ -10,9 +10,9 @@ const getAllPost = async () => {
 const like = async (_id) => {
   console.log(_id);
   const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user)
   const res = await axios.put(
-    API_URL + "/posts/likesUp/" + _id,
-    {},
+    API_URL + "/posts/likesUp/" + _id,{},
     {
       headers: {
         authorization: user?.token,
@@ -51,9 +51,7 @@ const getPostById = async (_id) => {
 }
 
 const getPostByText = async (text) => {
-  console.log(text)
   const res = await axios.get(API_URL + "/posts/body/" + text)
-  console.log(res)
   return res.data
 }
 

@@ -14,8 +14,6 @@ const Profile = () => {
   const { post, posts } = useSelector((state) => state.posts)
   const { user } = useSelector((state) => state.auth)
 
-  console.log(posts)
-
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -38,8 +36,6 @@ const Profile = () => {
 
   const userPost = info.postIds
 
-  console.log(userPost)
-
   useEffect(() => {
     userPost.map((p) => {
       dispatch(getPostById(p))
@@ -56,15 +52,31 @@ const Profile = () => {
     return (
       <div key={p._id}>
         {p.images.length > 0 ?
-          <Card
-            hoverable
-            style={{
-              width: 240,
-            }}
-            cover={img}
-          >
-            <Meta title={p.userName} description={p.body} />
-          </Card>
+           <div>
+           <Card
+             hoverable
+             style={{
+               width: 240,
+             }}
+             cover={img}
+           >
+             <Meta title={p.userName} description={p.body} />
+           </Card>
+           <span className="wish">Wish list: {p.likes?.length}</span>
+           <>
+             <Button type="primary" onClick={() => showModal(p._id)}>
+               Open Modal
+             </Button>
+             <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+               <PostDetail />
+             </Modal>
+           </>
+           {isAlreadyLiked ? (
+             <HeartFilled onClick={() => dispatch(likesDown(p._id))} />
+           ) : (
+             <HeartOutlined onClick={() => dispatch(like(p._id))} />
+           )}
+         </div>
           :
           <div>
             <Card
@@ -113,7 +125,6 @@ const Profile = () => {
           <span>Followings: {info.followings.length}</span><br />
           <span>Correo: {info.name}</span><br />
           <span>Role: {info.role}</span><br />
-          <span>post: {post.body}</span><br />
           {po}
         </div>
         :
@@ -126,7 +137,6 @@ const Profile = () => {
           <span>Followings: {info.followings.length}</span><br />
           <span>Correo: {info.name}</span><br />
           <span>Role: {info.role}</span><br />
-          <span>post: {post.body}</span><br />
           {po}
         </div>
       }

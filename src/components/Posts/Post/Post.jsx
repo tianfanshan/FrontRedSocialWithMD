@@ -20,7 +20,7 @@ const Post = () => {
     dispatch(getPostById(_id))
     setIsModalVisible(true);
   };
-  
+
   const handleOk = () => {
     setIsModalVisible(false);
   };
@@ -39,15 +39,31 @@ const Post = () => {
     return (
       <div key={i}>
         {pos.images.length > 0 ?
-          <Card
-            hoverable
-            style={{
-              width: 240,
-            }}
-            cover={img}
-          >
-            <Meta title={pos.userName} description={pos.body} />
-          </Card>
+          <div>
+            <Card
+              hoverable
+              style={{
+                width: 240,
+              }}
+              cover={img}
+            >
+              <Meta title={pos.userName} description={pos.body} />
+            </Card>
+            <span className="wish">Wish list: {pos.likes?.length}</span>
+            <>
+              <Button type="primary" onClick={() => showModal(pos._id)}>
+                Open Modal
+              </Button>
+              <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                <PostDetail />
+              </Modal>
+            </>
+            {isAlreadyLiked ? (
+              <HeartFilled onClick={() => dispatch(likesDown(pos._id))} />
+            ) : (
+              <HeartOutlined onClick={() => dispatch(like(pos._id))} />
+            )}
+          </div>
           :
           <div>
             <Card
