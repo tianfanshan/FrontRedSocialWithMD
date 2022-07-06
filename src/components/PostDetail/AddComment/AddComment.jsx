@@ -29,8 +29,8 @@ const AddComment = () => {
 
   const onFinish = (comment) => {
     let postId = post._id
-    let newOjb = { postId, ...comment }
-    dispatch(createComment(newOjb))
+    let newObj = { postId, ...comment }
+    dispatch(createComment(newObj))
     form.resetFields()
   };
 

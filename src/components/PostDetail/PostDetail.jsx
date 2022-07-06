@@ -1,6 +1,4 @@
-import { useEffect } from "react"
 import { useSelector } from "react-redux/es/exports"
-import { notification } from 'antd';
 import AddComment from "./AddComment/AddComment"
 
 const PostDetail = () => {
