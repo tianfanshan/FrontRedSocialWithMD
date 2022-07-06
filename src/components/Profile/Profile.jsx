@@ -7,11 +7,12 @@ import 'antd/dist/antd.css'
 import { HeartOutlined, HeartFilled } from '@ant-design/icons'
 import { Card, Button, Modal, Image } from 'antd';
 import PostDetail from "../PostDetail/PostDetail"
+import { resetComments } from '../../features/comments/commentsSlice'
 const { Meta } = Card;
 
 const Profile = () => {
 
-  const { post, posts } = useSelector((state) => state.posts)
+  const { posts } = useSelector((state) => state.posts)
   const { user } = useSelector((state) => state.auth)
 
 
@@ -28,6 +29,7 @@ const Profile = () => {
 
   const handleCancel = () => {
     setIsModalVisible(false);
+    dispatch(resetComments())
   };
 
   const info = user?.user
