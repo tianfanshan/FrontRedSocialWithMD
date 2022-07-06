@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Card, Button, Modal, Input } from 'antd';
 import PostDetail from '../PostDetail/PostDetail';
 import { HeartOutlined, HeartFilled } from '@ant-design/icons'
+import { resetComments } from '../../features/comments/commentsSlice';
 const { Meta } = Card;
 
 const Home = () => {
@@ -24,6 +25,7 @@ const Home = () => {
 
   const handleCancel = () => {
     setIsModalVisible(false);
+    dispatch(resetComments())
   };
 
   const [isModalVisible, setIsModalVisible] = useState(false);
