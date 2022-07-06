@@ -34,7 +34,7 @@ export const commentsSlice = createSlice({
       .addCase(createComment.fulfilled, (state, action) => {
         state.commentIsSuccess = true;
         state.comment = action.payload.comment;
-        state.createCommentMessage = action.payload.massage;
+        state.createCommentMessage = action.payload.message;
         state.comments = [...state.comments, state.comment];
       })
       .addCase(createComment.rejected, (state, action) => {

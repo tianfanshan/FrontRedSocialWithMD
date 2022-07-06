@@ -3,7 +3,7 @@ import { useState } from "react"
 import { like, likesDown, getPostById } from '../../../features/posts/postsSlice'
 import 'antd/dist/antd.css'
 import { HeartOutlined, HeartFilled } from '@ant-design/icons'
-import { Card, Button, Modal } from 'antd';
+import { Card, Button, Modal, notification } from 'antd';
 import PostDetail from "../../PostDetail/PostDetail"
 import { resetComments } from "../../../features/comments/commentsSlice"
 const { Meta } = Card;
@@ -25,6 +25,9 @@ const Post = () => {
 
   const handleOk = () => {
     setIsModalVisible(false);
+    notification.success({
+      description: 'prueba'
+    })
   };
 
   const handleCancel = () => {
@@ -53,14 +56,10 @@ const Post = () => {
             >
               <Meta title={pos.userName} description={pos.body} />
             </Card>
-            
             <>
               <Button type="primary" onClick={() => showModal(pos._id)}>
-                Open Modal
+                Comentarios
               </Button>
-              <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                <PostDetail />
-              </Modal>
             </>
             <span className="wish">Likes: {pos.likes?.length}</span>
             {isAlreadyLiked ? (
@@ -81,14 +80,11 @@ const Post = () => {
             </Card>
             <>
               <Button type="primary" onClick={() => showModal(pos._id)}>
-                Open Modal
+                Comentarios
               </Button>
-              <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                <PostDetail />
-              </Modal>
             </>
             <span className="wish">Likes: {pos.likes?.length}</span>
-              <HeartFilled/>
+            <HeartFilled />
           </div>
         }
       </div>
@@ -97,6 +93,9 @@ const Post = () => {
   return (
     <div>
       {postss}
+      <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        <PostDetail />
+      </Modal>
     </div>
   )
 }

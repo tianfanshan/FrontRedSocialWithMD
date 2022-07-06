@@ -50,11 +50,8 @@ const Home = () => {
         <span className="wish">Wish list: {pos.likes?.length}</span>
         <>
           <Button type="primary" onClick={() => showModal(pos._id)}>
-            Open Modal
+            Comentarios
           </Button>
-          <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-            <PostDetail />
-          </Modal>
         </>
         {isAlreadyLiked ? (
           <HeartFilled onClick={() => dispatch(likesDown(pos._id))} />
@@ -88,7 +85,9 @@ const Home = () => {
         :
         <Posts />
       }
-
+      <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        <PostDetail />
+      </Modal>
     </div>
   )
 }

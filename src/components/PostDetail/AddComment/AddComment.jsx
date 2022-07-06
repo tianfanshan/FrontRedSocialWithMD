@@ -1,8 +1,25 @@
 import { Input, Button, Form, notification } from 'antd';
 import { createComment } from '../../../features/comments/commentsSlice'
 import { useSelector, useDispatch } from 'react-redux/es/exports'
+import { useEffect } from 'react';
 
 const AddComment = () => {
+
+  const { commentIsError, commentIsSuccess, createCommentMessage } = useSelector((state) => state.comments)
+
+    useEffect(() => {
+        if (commentIsSuccess) {
+            notification.success({
+                description: createCommentMessage
+            })
+        }
+        if (commentIsError) {
+            notification.error({
+                message: 'Error',
+                description: createCommentMessage
+            })
+        }
+    }, [commentIsError, commentIsSuccess, createCommentMessage])
 
   const { post } = useSelector((state) => state.posts)
 

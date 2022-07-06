@@ -7,23 +7,10 @@ const PostDetail = () => {
 
     const { post } = useSelector((state) => state.posts)
 
-    const { commentIsError, commentIsSuccess, createCommentMessage, comments } = useSelector((state) => state.comments)
+    const { comments } = useSelector((state) => state.comments)
 
     let commentss = post?.commentIds
 
-    useEffect(() => {
-        if (commentIsSuccess) {
-            notification.success({
-                description: createCommentMessage
-            })
-        }
-        if (commentIsError) {
-            notification.error({
-                message: 'Error',
-                description: createCommentMessage
-            })
-        }
-    }, [commentIsError, commentIsSuccess, createCommentMessage])
 
     const detail = commentss?.map(det => {
         return (
