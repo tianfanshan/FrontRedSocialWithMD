@@ -76,11 +76,7 @@ export const postsSlice = createSlice({
   reducers: {
     reset: (state) => {
       state.isLoading = false;
-    },
-    addPostReset: (state) => {
-      state.addPostIsSuccess = false;
-      state.addPostMessage = "";
-    },
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -119,6 +115,7 @@ export const postsSlice = createSlice({
           }
           return p;
         });
+        state.posts = posts
       })
       .addCase(likesDown.fulfilled, (state, action) => {
         const posts = state.posts.map((p) => {
@@ -127,9 +124,10 @@ export const postsSlice = createSlice({
           }
           return p;
         });
+        state.posts = posts
       });
   },
 });
 
-export const { reset, addPostReset } = postsSlice.actions;
+export const { reset } = postsSlice.actions;
 export default postsSlice.reducer;

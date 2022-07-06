@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { register, registerReset } from '../../features/auth/authSlice'
+import { register } from '../../features/auth/authSlice'
 import { useNavigate } from 'react-router'
 import { Button, Form, Input, notification, InputNumber } from 'antd';
 import { useEffect } from 'react';
@@ -20,7 +20,6 @@ const Register = () => {
         description: registerMessage
       })
       setTimeout(() => {
-        dispatch(registerReset())
         navigate('/login')
       }, 3000)
     }

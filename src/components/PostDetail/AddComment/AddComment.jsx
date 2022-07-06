@@ -1,35 +1,20 @@
 import { Input, Button, Form, notification } from 'antd';
-import { createComment,createCommentReset } from '../../../features/comments/commentsSlice'
+import { createComment } from '../../../features/comments/commentsSlice'
 import { useSelector, useDispatch } from 'react-redux/es/exports'
-import { useEffect } from 'react';
 
 const AddComment = () => {
 
   const { post } = useSelector((state) => state.posts)
-  const { commentIsError, commentIsSuccess, createCommentMessage } = useSelector((state) => state.comments)
 
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    if (commentIsSuccess) {
-      notification.success({
-        description: createCommentMessage
-      })
-      dispatch(createCommentReset())
-    }
-    if (commentIsError) {
-      notification.error({
-        message: 'Error',
-        description: createCommentMessage
-      })
-      dispatch(createCommentReset())
-    }
-  }, [commentIsError, commentIsSuccess, createCommentMessage])
+  const [form] = Form.useForm()
 
   const onFinish = (comment) => {
     let postId = post._id
     let newOjb = { postId, ...comment }
     dispatch(createComment(newOjb))
+    form.resetFields()
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -52,6 +37,7 @@ const AddComment = () => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
+        form={form}
       >
         <Form.Item
           label="Comentar!"

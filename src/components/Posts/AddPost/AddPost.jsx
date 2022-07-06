@@ -1,11 +1,13 @@
 import { Input, Button, Form, notification } from 'antd';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addPost, addPostReset } from '../../../features/posts/postsSlice';
+import { addPost } from '../../../features/posts/postsSlice';
 
 
 
 const AddPost = () => {
+
+  const [form] = Form.useForm()
 
   const { addPostIsSuccess, addPostMessage, post } = useSelector((state) => state.posts)
 
@@ -18,7 +20,6 @@ const AddPost = () => {
       notification.success({
         message: addPostMessage
       })
-      dispatch(addPostReset())
     }
   }, [addPostIsSuccess, addPostMessage])
 
@@ -28,6 +29,7 @@ const AddPost = () => {
     notification.success({
       message: postMessage
     })
+    form.resetFields()
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -50,6 +52,7 @@ const AddPost = () => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
+        form={form}
       >
         <Form.Item
           label="Title"

@@ -1,21 +1,42 @@
 import { useEffect } from "react"
 import { useSelector } from "react-redux/es/exports"
+import { notification } from 'antd';
 import AddComment from "./AddComment/AddComment"
-import { createComment } from "../../features/comments/commentsSlice"
 
 const PostDetail = () => {
 
     const { post } = useSelector((state) => state.posts)
-    const { comment } = useSelector((state) => state.comments)
-    console.log(comment)
 
-    let comments = post?.commentIds
-    console.log('comments', comments)
+    const { commentIsError, commentIsSuccess, createCommentMessage, comments } = useSelector((state) => state.comments)
 
-    const detail = comments?.map((det, i) => {
+    let commentss = post?.commentIds
+
+    useEffect(() => {
+        if (commentIsSuccess) {
+            notification.success({
+                description: createCommentMessage
+            })
+        }
+        if (commentIsError) {
+            notification.error({
+                message: 'Error',
+                description: createCommentMessage
+            })
+        }
+    }, [commentIsError, commentIsSuccess, createCommentMessage])
+
+    const detail = commentss?.map(det => {
         return (
-            <div key={i}>
+            <div key={det._id}>
                 <h3>Comment: {det.comment}</h3>
+            </div>
+        )
+    })
+
+    const com = comments?.map((c)=>{
+        return(
+            <div key={c._id}>
+                <h3>Comment: {c.comment}</h3>
             </div>
         )
     })
@@ -23,7 +44,7 @@ const PostDetail = () => {
     return (
         <div>
             {detail}
-            <span>{comment.comment}</span>
+            {com}
             <AddComment />
         </div>
     )

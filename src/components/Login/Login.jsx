@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { login, loginReset } from '../../features/auth/authSlice'
+import { login } from '../../features/auth/authSlice'
 import { useNavigate } from 'react-router'
 import { Button, Form, Input, notification } from 'antd';
 import { useEffect } from 'react';
@@ -25,7 +25,6 @@ const Login = () => {
                 description: loginMessage
             })
             setTimeout(() => {
-                dispatch(loginReset())
                 navigate('/profile')
             }, 3000)
         }

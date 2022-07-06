@@ -5,10 +5,12 @@ import 'antd/dist/antd.css'
 import { HeartOutlined, HeartFilled } from '@ant-design/icons'
 import { Card, Button, Modal } from 'antd';
 import PostDetail from "../../PostDetail/PostDetail"
+import { resetComments } from "../../../features/comments/commentsSlice"
 const { Meta } = Card;
 
 
 const Post = () => {
+
   const { posts } = useSelector((state) => state.posts)
   const { user } = useSelector((state) => state.auth)
 
@@ -27,6 +29,7 @@ const Post = () => {
 
   const handleCancel = () => {
     setIsModalVisible(false);
+    dispatch(resetComments())
   };
 
   const postss = posts.map((pos, i) => {
@@ -36,6 +39,7 @@ const Post = () => {
       )
     })
     const isAlreadyLiked = pos.likes?.includes(user?.user._id)
+    console.log(isAlreadyLiked)
     return (
       <div key={i}>
         {pos.images.length > 0 ?
@@ -49,7 +53,7 @@ const Post = () => {
             >
               <Meta title={pos.userName} description={pos.body} />
             </Card>
-            <span className="wish">Wish list: {pos.likes?.length}</span>
+            
             <>
               <Button type="primary" onClick={() => showModal(pos._id)}>
                 Open Modal
@@ -58,10 +62,11 @@ const Post = () => {
                 <PostDetail />
               </Modal>
             </>
+            <span className="wish">Likes: {pos.likes?.length}</span>
             {isAlreadyLiked ? (
-              <HeartFilled onClick={() => dispatch(likesDown(pos._id))} />
+              <HeartFilled onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
             ) : (
-              <HeartOutlined onClick={() => dispatch(like(pos._id))} />
+              <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(like(pos._id)) : () => dispatch(likesDown(pos._id))} />
             )}
           </div>
           :
@@ -74,7 +79,6 @@ const Post = () => {
             >
               <Meta title={pos.userName} description={pos.body} />
             </Card>
-            <span className="wish">Wish list: {pos.likes?.length}</span>
             <>
               <Button type="primary" onClick={() => showModal(pos._id)}>
                 Open Modal
@@ -83,11 +87,8 @@ const Post = () => {
                 <PostDetail />
               </Modal>
             </>
-            {isAlreadyLiked ? (
-              <HeartFilled onClick={() => dispatch(likesDown(pos._id))} />
-            ) : (
-              <HeartOutlined onClick={() => dispatch(like(pos._id))} />
-            )}
+            <span className="wish">Likes: {pos.likes?.length}</span>
+              <HeartFilled/>
           </div>
         }
       </div>

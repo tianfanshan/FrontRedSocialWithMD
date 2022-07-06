@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux/es/exports'
-import { logout, logoutReset } from '../../features/auth/authSlice'
+import { logout } from '../../features/auth/authSlice'
 import { useNavigate } from 'react-router'
 import { notification } from 'antd'
 
@@ -20,7 +20,6 @@ const Header = () => {
       })
     }
     setTimeout(() => {
-      dispatch(logoutReset())
       navigate('/')
     }, 3000)
   }, [logoutMessage])
