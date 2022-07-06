@@ -46,17 +46,17 @@ const Profile = () => {
     })
   }, [])
 
-  const po = posts.map((p) => {
-    const img = p.images?.map((im, i) => {
+  const po = posts.map((pos) => {
+    const img = pos.images?.map((im, i) => {
       return (
         <img alt="post-img" src={"http://localhost:8080/posts-images/" + im} key={i} />
       )
     })
-    const isAlreadyLiked = p.likes?.includes(user?.user._id)
+    const isAlreadyLiked = pos.likes?.includes(user?.user._id)
     return (
-      <div key={p._id}>
-        {p.images.length > 0 ?
-          <div>
+      <div key={pos._id}>
+        <div>
+          {pos.images.length > 0 ?
             <Card
               hoverable
               style={{
@@ -64,43 +64,30 @@ const Profile = () => {
               }}
               cover={img}
             >
-              <Meta title={p.userName} description={p.body} />
+              <Meta title={pos.userName} description={pos.body} />
             </Card>
-            <span className="wish">Wish list: {p.likes?.length}</span>
-            <>
-              <Button type="primary" onClick={() => showModal(p._id)}>
-                Comentarios
-              </Button>
-            </>
-            {isAlreadyLiked ? (
-              <HeartFilled onClick={isAlreadyLiked ? () => dispatch(likesDown(p._id)) : () => dispatch(like(p._id))} />
-            ) : (
-              <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(likesDown(p._id)) : () => dispatch(like(p._id))} />
-            )}
-          </div>
-          :
-          <div>
+            :
             <Card
               hoverable
               style={{
                 width: 240,
               }}
             >
-              <Meta title={p.userName} description={p.body} />
+              <Meta title={pos.userName} description={pos.body} />
             </Card>
-            <span className="wish">Likes: {p.likes?.length}</span>
-            <>
-              <Button type="primary" onClick={() => showModal(p._id)}>
-                Comentarios
-              </Button>
-            </>
-            {isAlreadyLiked ? (
-              <HeartFilled onClick={isAlreadyLiked ? () => dispatch(likesDown(p._id)) : () => dispatch(like(p._id))} />
-            ) : (
-              <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(likesDown(p._id)) : () => dispatch(like(p._id))} />
-            )}
-          </div>
-        }
+          }
+          <>
+            <Button type="primary" onClick={() => showModal(pos._id)}>
+              Comentarios
+            </Button>
+          </>
+          <span className="wish">Likes: {pos.likes?.length}</span>
+          {isAlreadyLiked ? (
+            <HeartFilled onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
+          ) : (
+            <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
+          )}
+        </div>
       </div>
     )
   })
@@ -109,41 +96,25 @@ const Profile = () => {
 
   return (
     <div>
-      {user.user.image ?
-        <div>
+      <div>
+        {user.user.image ?
           <Image
             width={200}
             src={"http://localhost:8080/users-images/" + user.user.image}
-          />
-          <span>Años: {info.age}</span><br />
-          <span>Cantidad de comentarios: {info.commentId.length}</span><br />
-          <span>Likes de comentarios: {info.commentsLikes.length}</span><br />
-          <span>Favoritos: {info.favorites.length}</span><br />
-          <span>Followers: {info.followers.length}</span><br />
-          <span>Followings: {info.followings.length}</span><br />
-          <span>Name: {info.name}</span><br />
-          <span>Role: {info.role}</span><br />
-          {po}
-          <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-            <PostDetail />
-          </Modal>
-        </div>
-        :
-        <div>
-          <span>Años: {info.age}</span><br />
-          <span>Cantidad de comentarios: {info.commentId.length}</span><br />
-          <span>Likes de comentarios: {info.commentsLikes.length}</span><br />
-          <span>Favoritos: {info.favorites.length}</span><br />
-          <span>Followers: {info.followers.length}</span><br />
-          <span>Followings: {info.followings.length}</span><br />
-          <span>Name: {info.name}</span><br />
-          <span>Role: {info.role}</span><br />
-          {po}
-          <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-            <PostDetail />
-          </Modal>
-        </div>
-      }
+          /> : null}
+        <span>Años: {info.age}</span><br />
+        <span>Cantidad de comentarios: {info.commentId.length}</span><br />
+        <span>Likes de comentarios: {info.commentsLikes.length}</span><br />
+        <span>Favoritos: {info.favorites.length}</span><br />
+        <span>Followers: {info.followers.length}</span><br />
+        <span>Followings: {info.followings.length}</span><br />
+        <span>Name: {info.name}</span><br />
+        <span>Role: {info.role}</span><br />
+        {po}
+        <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+          <PostDetail />
+        </Modal>
+      </div>
     </div>
   )
 }

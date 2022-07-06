@@ -119,13 +119,13 @@ export const postsSlice = createSlice({
       })
       .addCase(likesDown.fulfilled, (state, action) => {
         console.log(action.payload)
-        const pos = state.posts.map((p) => {
+        const posts = state.posts.map((p) => {
           if (p._id === action.payload._id) {
             p = action.payload;
           }
           return p;
         });
-        state.posts = pos
+        state.posts = posts
       });
   },
 });
