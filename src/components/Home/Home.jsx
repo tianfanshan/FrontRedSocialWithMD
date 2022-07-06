@@ -35,29 +35,60 @@ const Home = () => {
 
 
   const post = posts.map((pos) => {
+    const img = pos.images.map((im, i) => {
+      return (
+        <img alt="post-img" src={"http://localhost:8080/posts-images/" + im} key={i} />
+      )
+    })
     const isAlreadyLiked = pos.likes?.includes(user?.user._id)
     return (
-      <div>
-        <Card
-          hoverable
-          style={{
-            width: 240,
-          }}
-          cover={<img alt="example" src={pos.images} />}
-        >
-          <Meta title={pos.userName} description={pos.body} />
-        </Card>
-        <span className="wish">Wish list: {pos.likes?.length}</span>
-        <>
-          <Button type="primary" onClick={() => showModal(pos._id)}>
-            Comentarios
-          </Button>
-        </>
-        {isAlreadyLiked ? (
-          <HeartFilled onClick={() => dispatch(likesDown(pos._id))} />
-        ) : (
-          <HeartOutlined onClick={() => dispatch(like(pos._id))} />
-        )}
+      <div key={pos._id}>
+        {pos.images.length > 0 ?
+          <div>
+            <Card
+              hoverable
+              style={{
+                width: 240,
+              }}
+              cover={img}
+            >
+              <Meta title={pos.userName} description={pos.body} />
+            </Card>
+            <>
+              <Button type="primary" onClick={() => showModal(pos._id)}>
+                Comentarios
+              </Button>
+            </>
+            <span className="wish">Likes: {pos.likes?.length}</span>
+            {isAlreadyLiked ? (
+              <HeartFilled onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
+            ) : (
+              <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
+            )}
+          </div>
+          :
+          <div>
+            <Card
+              hoverable
+              style={{
+                width: 240,
+              }}
+            >
+              <Meta title={pos.userName} description={pos.body} />
+            </Card>
+            <>
+              <Button type="primary" onClick={() => showModal(pos._id)}>
+                Comentarios
+              </Button>
+            </>
+            <span className="wish">Likes: {pos.likes?.length}</span>
+            {isAlreadyLiked ? (
+              <HeartFilled onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
+            ) : (
+              <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
+            )}
+          </div>
+        }
       </div>
     )
   })

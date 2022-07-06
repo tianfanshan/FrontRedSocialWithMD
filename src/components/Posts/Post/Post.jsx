@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { like, likesDown, getPostById } from '../../../features/posts/postsSlice'
 import 'antd/dist/antd.css'
 import { HeartOutlined, HeartFilled } from '@ant-design/icons'
@@ -17,6 +17,10 @@ const Post = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const dispatch = useDispatch()
+
+  useEffect(()=>{
+    
+  },[likesDown,like])
 
   const showModal = (_id) => {
     dispatch(getPostById(_id))
@@ -65,7 +69,7 @@ const Post = () => {
             {isAlreadyLiked ? (
               <HeartFilled onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
             ) : (
-              <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(like(pos._id)) : () => dispatch(likesDown(pos._id))} />
+              <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
             )}
           </div>
           :
@@ -84,7 +88,11 @@ const Post = () => {
               </Button>
             </>
             <span className="wish">Likes: {pos.likes?.length}</span>
-            <HeartFilled />
+            {isAlreadyLiked ? (
+              <HeartFilled onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
+            ) : (
+              <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
+            )}
           </div>
         }
       </div>

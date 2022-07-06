@@ -34,6 +34,8 @@ const Profile = () => {
 
   const info = user?.user
 
+  console.log(info)
+
   const dispatch = useDispatch()
 
   const userPost = info.postIds
@@ -71,9 +73,9 @@ const Profile = () => {
               </Button>
             </>
             {isAlreadyLiked ? (
-              <HeartFilled onClick={() => dispatch(likesDown(p._id))} />
+              <HeartFilled onClick={isAlreadyLiked ? () => dispatch(likesDown(p._id)) : () => dispatch(like(p._id))} />
             ) : (
-              <HeartOutlined onClick={() => dispatch(like(p._id))} />
+              <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(likesDown(p._id)) : () => dispatch(like(p._id))} />
             )}
           </div>
           :
@@ -86,16 +88,16 @@ const Profile = () => {
             >
               <Meta title={p.userName} description={p.body} />
             </Card>
-            <span className="wish">Wish list: {p.likes?.length}</span>
+            <span className="wish">Likes: {p.likes?.length}</span>
             <>
               <Button type="primary" onClick={() => showModal(p._id)}>
                 Comentarios
               </Button>
             </>
             {isAlreadyLiked ? (
-              <HeartFilled onClick={() => dispatch(likesDown(p._id))} />
+              <HeartFilled onClick={isAlreadyLiked ? () => dispatch(likesDown(p._id)) : () => dispatch(like(p._id))} />
             ) : (
-              <HeartOutlined onClick={() => dispatch(like(p._id))} />
+              <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(likesDown(p._id)) : () => dispatch(like(p._id))} />
             )}
           </div>
         }
@@ -119,7 +121,7 @@ const Profile = () => {
           <span>Favoritos: {info.favorites.length}</span><br />
           <span>Followers: {info.followers.length}</span><br />
           <span>Followings: {info.followings.length}</span><br />
-          <span>Correo: {info.name}</span><br />
+          <span>Name: {info.name}</span><br />
           <span>Role: {info.role}</span><br />
           {po}
           <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
@@ -134,7 +136,7 @@ const Profile = () => {
           <span>Favoritos: {info.favorites.length}</span><br />
           <span>Followers: {info.followers.length}</span><br />
           <span>Followings: {info.followings.length}</span><br />
-          <span>Correo: {info.name}</span><br />
+          <span>Name: {info.name}</span><br />
           <span>Role: {info.role}</span><br />
           {po}
           <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>

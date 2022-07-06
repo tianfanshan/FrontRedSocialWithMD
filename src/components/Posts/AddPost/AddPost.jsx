@@ -11,8 +11,6 @@ const AddPost = () => {
 
   const { addPostIsSuccess, addPostMessage, post } = useSelector((state) => state.posts)
 
-  console.log(post)
-
   const dispatch = useDispatch()
 
   useEffect(() => {

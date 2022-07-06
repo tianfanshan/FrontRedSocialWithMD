@@ -10,7 +10,6 @@ const getAllPost = async () => {
 const like = async (_id) => {
   console.log(_id);
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user)
   const res = await axios.put(
     API_URL + "/posts/likesUp/" + _id,{},
     {
@@ -19,10 +18,11 @@ const like = async (_id) => {
       },
     }
   );
-  console.log("res like", res);
+    return res.data
 };
 
 const likesDown = async (_id) => {
+  console.log('likesdown',_id)
   const user = JSON.parse(localStorage.getItem("user"));
   const res = await axios.put(
     API_URL + "/posts/likesDown/" + _id,
@@ -33,6 +33,8 @@ const likesDown = async (_id) => {
       },
     }
   );
+  console.log('likesdown res',res.data)
+  return res.data
 };
 
 const addPost = async (post) =>{
