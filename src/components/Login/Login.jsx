@@ -12,7 +12,8 @@ const Login = () => {
 
     const dispatch = useDispatch()
 
-    useEffect(() => {
+    const onFinish = (value) => {
+        dispatch(login(value))
         if (isError) {
             notification.error({
                 message: 'Error',
@@ -28,10 +29,6 @@ const Login = () => {
                 navigate('/profile')
             }, 3000)
         }
-    }, [isError, isSuccess, loginMessage])
-
-    const onFinish = (value) => {
-        dispatch(login(value))
     }
 
     const onFinishFailed = (errorInfo) => {

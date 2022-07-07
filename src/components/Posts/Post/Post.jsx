@@ -48,9 +48,10 @@ const Post = () => {
     const likesArray = pos.likes.map((l)=>{
       return l._id
     })
-    console.log(likesArray)
+    console.log('user id',user?.user._id)
+    console.log('likes array',likesArray)
     const isAlreadyLiked = likesArray.includes(user?.user._id)
-    console.log(isAlreadyLiked)
+    console.log('is already liked',isAlreadyLiked)
     return (
       <div key={pos._id}>
         <div>
