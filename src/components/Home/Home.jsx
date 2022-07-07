@@ -34,7 +34,7 @@ const Home = () => {
 
 
 
-  const post = posts.map((pos) => {
+  const postss = posts.map(pos => {
     const img = pos.images.map((im, i) => {
       return (
         <img alt="post-img" src={"http://localhost:8080/posts-images/" + im} key={i} />
@@ -53,7 +53,7 @@ const Home = () => {
               cover={img}
             >
               <Meta title={pos.userName} description={pos.body} />
-            </Card> 
+            </Card>
             :
             <Card
               hoverable
@@ -102,9 +102,9 @@ const Home = () => {
         onSearch={onSearch}
       />
       <h1>Home</h1>
-      {!post ?
+      {!postss ?
         <div>
-          {post}
+          {postss}
         </div>
         :
         <Posts />

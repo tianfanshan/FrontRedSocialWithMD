@@ -44,8 +44,8 @@ const Profile = () => {
     })
   }, [])
 
-  const po = posts.map((pos) => {
-    const img = pos.images?.map((im, i) => {
+  const postss = posts.map(pos => {
+    const img = pos.images.map((im, i) => {
       return (
         <img alt="post-img" src={"http://localhost:8080/posts-images/" + im} key={i} />
       )
@@ -80,11 +80,13 @@ const Profile = () => {
             </Button>
           </>
           <span className="wish">Likes: {pos.likes?.length}</span>
-          {isAlreadyLiked ? (
-            <HeartFilled onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
-          ) : (
-            <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
-          )}
+            <>
+              {isAlreadyLiked ? (
+                <HeartFilled onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
+              ) : (
+                <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
+              )}
+            </>
         </div>
       </div>
     )
@@ -108,7 +110,7 @@ const Profile = () => {
         <span>Followings: {info.followings.length}</span><br />
         <span>Name: {info.name}</span><br />
         <span>Role: {info.role}</span><br />
-        {po}
+        {postss}
         <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
           <PostDetail />
         </Modal>

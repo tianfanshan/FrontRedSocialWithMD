@@ -8,7 +8,7 @@ const getAllPost = async () => {
 };
 
 const like = async (_id) => {
-  console.log(_id);
+  console.log('like id',_id);
   const user = JSON.parse(localStorage.getItem("user"));
   const res = await axios.put(
     API_URL + "/posts/likesUp/" + _id,{},
