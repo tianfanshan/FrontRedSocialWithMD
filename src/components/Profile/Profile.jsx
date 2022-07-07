@@ -34,8 +34,6 @@ const Profile = () => {
 
   const info = user?.user
 
-  console.log(info)
-
   const dispatch = useDispatch()
 
   const userPost = info.postIds

@@ -45,7 +45,12 @@ const Post = () => {
         <img alt="post-img" src={"http://localhost:8080/posts-images/" + im} key={i} />
       )
     })
-    const isAlreadyLiked = pos.likes?.includes(user?.user._id)
+    const likesArray = pos.likes.map((l)=>{
+      return l._id
+    })
+    console.log(likesArray)
+    const isAlreadyLiked = likesArray.includes(user?.user._id)
+    console.log(isAlreadyLiked)
     return (
       <div key={pos._id}>
         <div>

@@ -28,6 +28,7 @@ export const like = createAsyncThunk("posts/like", async (_id) => {
 });
 
 export const likesDown = createAsyncThunk("posts/likesDown", async (_id) => {
+  console.log(_id)
   try {
     return await postsService.likesDown(_id);
   } catch (error) {
