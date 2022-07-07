@@ -10,14 +10,14 @@ const Posts = () => {
   const dispatch = useDispatch()
 
 
-  const getPostAndReset = async () => {
-    await dispatch(getAllPost())
-    dispatch(reset())
-  }
+  // const getPostAndReset = async () => {
+  //   await dispatch(getAllPost())
+  //   dispatch(reset())
+  // }
 
-  useEffect(() => {
-    getPostAndReset()
-  }, [])
+  // useEffect(() => {
+  //   getPostAndReset()
+  // }, [])
 
   if (isLoading) {
     return <h1>Cargando posts...</h1>

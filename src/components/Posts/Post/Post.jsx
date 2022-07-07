@@ -45,7 +45,12 @@ const Post = () => {
         <img alt="post-img" src={"http://localhost:8080/posts-images/" + im} key={i} />
       )
     })
+    if(typeof(user?.user._id) == Object){
+      return user?.user._id.toString()
+    }
     const isAlreadyLiked = pos.likes?.includes(user?.user._id)
+    console.log(isAlreadyLiked)
+    console.log(pos.likes)
     return (
       <div key={pos._id}>
         <div>
@@ -94,7 +99,7 @@ const Post = () => {
   return (
     <div>
       {postss}
-      <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+      <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={[]}>
         <PostDetail />
       </Modal>
     </div>

@@ -7,13 +7,13 @@ import { notification } from 'antd'
 
 const Header = () => {
 
-
-
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { user, logoutMessage, isSuccess } = useSelector((state) => state.auth)
 
-  useEffect(() => {
+  const onLogout = (e) => {
+    e.preventDefault()
+    dispatch(logout())
     if (isSuccess) {
       notification.success({
         message: logoutMessage
@@ -22,11 +22,6 @@ const Header = () => {
     setTimeout(() => {
       navigate('/')
     }, 3000)
-  }, [logoutMessage])
-
-  const onLogout = (e) => {
-    e.preventDefault()
-    dispatch(logout())
   }
 
   return (

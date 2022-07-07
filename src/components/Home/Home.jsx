@@ -109,7 +109,7 @@ const Home = () => {
         :
         <Posts />
       }
-      <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+      <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={[]}>
         <PostDetail />
       </Modal>
     </div>

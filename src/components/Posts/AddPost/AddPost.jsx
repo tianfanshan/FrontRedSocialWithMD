@@ -9,24 +9,17 @@ const AddPost = () => {
 
   const [form] = Form.useForm()
 
-  const { addPostIsSuccess, addPostMessage, post } = useSelector((state) => state.posts)
+  const { addPostIsSuccess, addPostMessage } = useSelector((state) => state.posts)
 
   const dispatch = useDispatch()
 
-  useEffect(() => {
+  const onFinish = (value) => {
+    dispatch(addPost(value))
     if (addPostIsSuccess) {
       notification.success({
         message: addPostMessage
       })
     }
-  }, [addPostIsSuccess, addPostMessage])
-
-  const onFinish = (value) => {
-    console.log(value)
-    dispatch(addPost(value))
-    notification.success({
-      message: postMessage
-    })
     form.resetFields()
   };
 

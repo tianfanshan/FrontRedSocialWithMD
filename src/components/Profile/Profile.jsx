@@ -36,7 +36,7 @@ const Profile = () => {
 
   const dispatch = useDispatch()
 
-  const userPost = info.postIds
+  const userPost = info?.postIds
 
   useEffect(() => {
     userPost.map((p) => {
@@ -51,6 +51,8 @@ const Profile = () => {
       )
     })
     const isAlreadyLiked = pos.likes?.includes(user?.user._id)
+    console.log(isAlreadyLiked)
+    console.log(pos.likes)
     return (
       <div key={pos._id}>
         <div>
@@ -97,7 +99,7 @@ const Profile = () => {
   return (
     <div>
       <div>
-        {user.user.image ?
+        {user?.user.image ?
           <Image
             width={200}
             src={"http://localhost:8080/users-images/" + user.user.image}
@@ -111,7 +113,7 @@ const Profile = () => {
         <span>Name: {info.name}</span><br />
         <span>Role: {info.role}</span><br />
         {postss}
-        <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={[]}>
           <PostDetail />
         </Modal>
       </div>
