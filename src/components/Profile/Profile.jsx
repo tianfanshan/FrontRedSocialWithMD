@@ -12,8 +12,9 @@ const { Meta } = Card;
 
 const Profile = () => {
 
-  const { posts } = useSelector((state) => state.posts)
+  const { profilePosts, post } = useSelector((state) => state.posts)
   const { user } = useSelector((state) => state.auth)
+
 
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -37,6 +38,18 @@ const Profile = () => {
   const dispatch = useDispatch()
 
   const userPost = info?.postIds
+  
+  let newArray = []
+
+  newArray.push(post)
+
+  // console.log('user',user)
+  console.log('post', post)
+
+
+  console.log('new Array',newArray)
+  // console.log('profilePosts',profilePosts)
+  
 
   useEffect(() => {
     userPost.map((p) => {
@@ -44,7 +57,11 @@ const Profile = () => {
     })
   }, [])
 
-  const postss = posts.map(pos => {
+
+
+
+
+  const postss = newArray.map(pos => {
     const img = pos.images.map((im, i) => {
       return (
         <img alt="post-img" src={"http://localhost:8080/posts-images/" + im} key={i} />
@@ -82,13 +99,13 @@ const Profile = () => {
             </Button>
           </>
           <span className="wish">Likes: {pos.likes?.length}</span>
-            <>
-              {isAlreadyLiked ? (
-                <HeartFilled onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
-              ) : (
-                <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
-              )}
-            </>
+          <>
+            {isAlreadyLiked ? (
+              <HeartFilled onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
+            ) : (
+              <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
+            )}
+          </>
         </div>
       </div>
     )

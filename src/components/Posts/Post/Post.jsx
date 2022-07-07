@@ -14,6 +14,8 @@ const Post = () => {
   const { posts } = useSelector((state) => state.posts)
   const { user } = useSelector((state) => state.auth)
 
+  console.log(posts)
+
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const dispatch = useDispatch()

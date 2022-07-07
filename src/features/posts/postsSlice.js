@@ -3,7 +3,7 @@ import postsService from "./postsService";
 
 const initialState = {
   posts: [],
-  post: {},
+  post: [],
   isLoading: false,
   addPostMessage: "",
   addPostIsSuccess: false,
@@ -83,6 +83,7 @@ export const postsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getAllPost.fulfilled, (state, action) => {
+        console.log(action.payload)
         state.posts = action.payload;
       })
       .addCase(getAllPost.pending, (state) => {
@@ -94,10 +95,8 @@ export const postsSlice = createSlice({
         state.addPostMessage = action.payload.message;
       })
       .addCase(getPostById.fulfilled, (state, action) => {
+        console.log(action.payload)
         state.post = action.payload;
-        if (typeof state.post == Object) {
-          state.posts.push(state.post);
-        }
       })
       .addCase(getPostByText.fulfilled, (state, action) => {
         state.posts = action.payload.post;
@@ -115,11 +114,13 @@ export const postsSlice = createSlice({
         state.posts = posts;
       })
       .addCase(likesDown.fulfilled, (state, action) => {
-        const newLikes = action.payload.post.likes.filter((id) => id !== action.payload.user._id);
-        action.payload.post.likes = newLikes
+        const newLikes = action.payload.post.likes.filter(
+          (id) => id !== action.payload.user._id
+        );
+        action.payload.post.likes = newLikes;
         const posts = state.posts.map((p) => {
-          if(p._id === action.payload.post._id){
-            p = action.payload.post
+          if (p._id === action.payload.post._id) {
+            p = action.payload.post;
           }
           return p;
         });
