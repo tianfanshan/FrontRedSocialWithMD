@@ -105,7 +105,9 @@ const Profile = () => {
           <Image
             width={200}
             src={"http://localhost:8080/users-images/" + user.user.image}
-          /> : null}
+          /> 
+          :
+           null}
         <span>Años: {info.age}</span><br />
         <span>Cantidad de comentarios: {info.commentId.length}</span><br />
         <span>Likes de comentarios: {info.commentsLikes.length}</span><br />
