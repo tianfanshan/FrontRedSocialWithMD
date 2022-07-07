@@ -8,7 +8,6 @@ const getAllPost = async () => {
 };
 
 const like = async (_id) => {
-  console.log('like id',_id);
   const user = JSON.parse(localStorage.getItem("user"));
   const res = await axios.put(
     API_URL + "/posts/likesUp/" + _id,{},
@@ -22,7 +21,6 @@ const like = async (_id) => {
 };
 
 const likesDown = async (_id) => {
-  console.log('likesdown',_id)
   const user = JSON.parse(localStorage.getItem("user"));
   const res = await axios.put(
     API_URL + "/posts/likesDown/" + _id,
@@ -33,7 +31,6 @@ const likesDown = async (_id) => {
       },
     }
   );
-  console.log('likesdown res',res.data)
   return res.data
 };
 
@@ -69,6 +66,18 @@ const updatePost = async (post,_id) =>{
   return res.data
 }
 
+const deletePost = async(_id) =>{
+  console.log(_id)
+  const user = JSON.parse(localStorage.getItem("user"))
+  const res = await axios.delete(API_URL + "/posts/id/" + _id,{},{
+    headers:{
+      authorization:user?.token
+    }
+  })
+  console.log(res)
+  return res
+}
+
 const postsService = {
   getAllPost,
   like,
@@ -76,7 +85,8 @@ const postsService = {
   addPost,
   getPostById,
   getPostByText,
-  updatePost
+  updatePost,
+  deletePost
 };
 
 export default postsService;

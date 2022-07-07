@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import { like, likesDown, getPostById } from '../../../features/posts/postsSlice'
+import { like, likesDown, getPostById, deletePost } from '../../../features/posts/postsSlice'
 import 'antd/dist/antd.css'
-import { HeartOutlined, HeartFilled } from '@ant-design/icons'
+import { HeartOutlined, HeartFilled, DeleteOutlined } from '@ant-design/icons'
 import { Card, Button, Modal, notification } from 'antd';
 import PostDetail from "../../PostDetail/PostDetail"
 import { resetComments } from "../../../features/comments/commentsSlice"
@@ -47,7 +47,7 @@ const Post = () => {
         <img alt="post-img" src={"http://localhost:8080/posts-images/" + im} key={i} />
       )
     })
-    if(typeof(user?.user._id) == Object){
+    if (typeof (user?.user._id) == Object) {
       return user?.user._id.toString()
     }
     const isAlreadyLiked = pos.likes?.includes(user?.user._id)
@@ -89,6 +89,7 @@ const Post = () => {
               ) : (
                 <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
               )}
+              <DeleteOutlined onClick={()=>dispatch(deletePost(pos._id))}/>
             </>
             :
             <HeartFilled />

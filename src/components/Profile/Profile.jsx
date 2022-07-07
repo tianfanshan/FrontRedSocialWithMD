@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getPostById } from '../../features/posts/postsSlice'
+import { getAllPost, getPostById, reset } from '../../features/posts/postsSlice'
 
 import { like, likesDown } from '../../features/posts/postsSlice'
 import 'antd/dist/antd.css'
@@ -12,10 +12,10 @@ const { Meta } = Card;
 
 const Profile = () => {
 
-  const { profilePosts, post } = useSelector((state) => state.posts)
+  const { posts } = useSelector((state) => state.posts)
   const { user } = useSelector((state) => state.auth)
 
-
+  const dispatch = useDispatch()
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -33,35 +33,20 @@ const Profile = () => {
     dispatch(resetComments())
   };
 
-  const info = user?.user
-
-  const dispatch = useDispatch()
-
-  const userPost = info?.postIds
-  
-  let newArray = []
-
-  newArray.push(post)
-
-  // console.log('user',user)
-  console.log('post', post)
-
-
-  console.log('new Array',newArray)
-  // console.log('profilePosts',profilePosts)
-  
+  const getPostAndReset = async () => {
+    await dispatch(getAllPost())
+    dispatch(reset())
+  }
 
   useEffect(() => {
-    userPost.map((p) => {
-      dispatch(getPostById(p))
-    })
+    getPostAndReset()
   }, [])
 
+  const info = user?.user
 
+  const po = posts.filter((p)=>p.userId == info._id)
 
-
-
-  const postss = newArray.map(pos => {
+  const postss = po.map(pos => {
     const img = pos.images.map((im, i) => {
       return (
         <img alt="post-img" src={"http://localhost:8080/posts-images/" + im} key={i} />

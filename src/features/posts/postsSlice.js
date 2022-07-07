@@ -72,6 +72,22 @@ export const updatePost = createAsyncThunk("posts/updatePost", async (post) => {
   }
 });
 
+export const deletePost = createAsyncThunk("posts/deletePost",async(_id)=>{
+  console.log(_id)
+  try {
+    return await postsService.deletePost(_id)
+  } catch (error) {
+   console.error(error) 
+  }
+})
+
+
+
+
+
+
+
+
 export const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -83,7 +99,6 @@ export const postsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getAllPost.fulfilled, (state, action) => {
-        console.log(action.payload)
         state.posts = action.payload;
       })
       .addCase(getAllPost.pending, (state) => {
@@ -95,7 +110,6 @@ export const postsSlice = createSlice({
         state.addPostMessage = action.payload.message;
       })
       .addCase(getPostById.fulfilled, (state, action) => {
-        console.log(action.payload)
         state.post = action.payload;
       })
       .addCase(getPostByText.fulfilled, (state, action) => {
@@ -125,7 +139,13 @@ export const postsSlice = createSlice({
           return p;
         });
         state.posts = posts;
-      });
+      })
+      .addCase(deletePost.fulfilled,(state,action)=>{
+        console.log(action.payload)
+        state.posts = state.posts.filter(
+          (post)=>post._id !== action.payload._id
+        )
+      })
   },
 });
 
