@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getAllPost, getPostById, reset } from '../../features/posts/postsSlice'
+import { getAllPost, getPostById, reset, deletePost } from '../../features/posts/postsSlice'
 
 import { like, likesDown } from '../../features/posts/postsSlice'
 import 'antd/dist/antd.css'
-import { HeartOutlined, HeartFilled } from '@ant-design/icons'
+import { HeartOutlined, HeartFilled, EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Card, Button, Modal, Image } from 'antd';
 import PostDetail from "../PostDetail/PostDetail"
 import { resetComments } from '../../features/comments/commentsSlice'
+import EditModal from './EditModal/EditModal'
 const { Meta } = Card;
 
 const Profile = () => {
@@ -18,6 +19,16 @@ const Profile = () => {
   const dispatch = useDispatch()
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalVisibleTwo, setIsModalVisibleTwo] = useState(false);
+
+  const showModalEditPost = (_id) =>{
+    dispatch(getPostById(_id))
+    setIsModalVisibleTwo(true)
+  }
+
+  const handleCancelTwo = () => {
+    setIsModalVisibleTwo(false);
+  };
 
   const showModal = (_id) => {
     dispatch(getPostById(_id))
@@ -53,8 +64,6 @@ const Profile = () => {
       )
     })
     const isAlreadyLiked = pos.likes?.includes(user?.user._id)
-    console.log(isAlreadyLiked)
-    console.log(pos.likes)
     return (
       <div key={pos._id}>
         <div>
@@ -90,6 +99,8 @@ const Profile = () => {
             ) : (
               <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
             )}
+            <EditOutlined onClick={()=>showModalEditPost(pos._id)}/>
+            <DeleteOutlined onClick={()=>dispatch(deletePost(pos._id))}/>
           </>
         </div>
       </div>
@@ -117,6 +128,9 @@ const Profile = () => {
         <span>Name: {info.name}</span><br />
         <span>Role: {info.role}</span><br />
         {postss}
+        <Modal title="Basic Modal" visible={isModalVisibleTwo} onOk={handleOk} onCancel={handleCancelTwo} footer={[]}>
+          <EditModal />
+        </Modal>
         <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={[]}>
           <PostDetail />
         </Modal>

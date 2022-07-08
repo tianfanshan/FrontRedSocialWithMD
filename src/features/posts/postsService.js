@@ -67,15 +67,13 @@ const updatePost = async (post,_id) =>{
 }
 
 const deletePost = async(_id) =>{
-  console.log(_id)
   const user = JSON.parse(localStorage.getItem("user"))
-  const res = await axios.delete(API_URL + "/posts/id/" + _id,{},{
+  const res = await axios.delete(API_URL + "/posts/id/" + _id,{
     headers:{
       authorization:user?.token
     }
   })
-  console.log(res)
-  return res
+  return res.data
 }
 
 const postsService = {
