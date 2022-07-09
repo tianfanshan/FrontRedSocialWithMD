@@ -99,8 +99,15 @@ const Post = () => {
             :
             <HeartFilled />
           }
-          <UserAddOutlined onClick={() => dispatch(follow(pos.userId))} />
-          <UserDeleteOutlined onClick={() => dispatch(followOut(pos.userId))} />
+          {user ?
+            <div>
+              <UserAddOutlined onClick={() => dispatch(follow(pos.userId))} />
+              <UserDeleteOutlined onClick={() => dispatch(followOut(pos.userId))} />
+            </div>
+            :
+            null
+          }
+
         </div>
       </div>
     )
