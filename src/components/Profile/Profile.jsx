@@ -35,10 +35,6 @@ const Profile = () => {
     setIsModalVisible(true);
   };
 
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
   const handleCancel = () => {
     setIsModalVisible(false);
     dispatch(resetComments())
@@ -129,7 +125,7 @@ const Profile = () => {
         <span>Role: {info.role}</span><br />
         {postss}
         <EditModal visible={isModalVisibleTwo} setVisible={setIsModalVisibleTwo} onCancel={handleCancelTwo}/>
-        <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={[]}>
+        <Modal title="Basic Modal" visible={isModalVisible} onCancel={handleCancel} footer={[]}>
           <PostDetail />
         </Modal>
       </div>
