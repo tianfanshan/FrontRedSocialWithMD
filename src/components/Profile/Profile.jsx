@@ -21,7 +21,7 @@ const Profile = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalVisibleTwo, setIsModalVisibleTwo] = useState(false);
 
-  const showModalEditPost = (_id) =>{
+  const showModalEditPost = (_id) => {
     dispatch(getPostById(_id))
     setIsModalVisibleTwo(true)
   }
@@ -55,7 +55,7 @@ const Profile = () => {
 
   const info = user?.user
 
-  const po = posts.filter((p)=>p.userId == info._id)
+  const po = posts.filter((p) => p.userId == info._id)
 
   const postss = po.map(pos => {
     const img = pos.images.map((im, i) => {
@@ -99,8 +99,8 @@ const Profile = () => {
             ) : (
               <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
             )}
-            <EditOutlined onClick={()=>showModalEditPost(pos._id)}/>
-            <DeleteOutlined onClick={()=>dispatch(deletePost(pos._id))}/>
+            <EditOutlined onClick={() => showModalEditPost(pos._id)} />
+            <DeleteOutlined onClick={() => dispatch(deletePost(pos._id))} />
           </>
         </div>
       </div>
@@ -116,9 +116,9 @@ const Profile = () => {
           <Image
             width={200}
             src={"http://localhost:8080/users-images/" + user.user.image}
-          /> 
+          />
           :
-           null}
+          null}
         <span>Años: {info.age}</span><br />
         <span>Cantidad de comentarios: {info.commentId.length}</span><br />
         <span>Likes de comentarios: {info.commentsLikes.length}</span><br />
@@ -128,9 +128,7 @@ const Profile = () => {
         <span>Name: {info.name}</span><br />
         <span>Role: {info.role}</span><br />
         {postss}
-        <Modal title="Basic Modal" visible={isModalVisibleTwo} onOk={handleOk} onCancel={handleCancelTwo} footer={[]}>
-          <EditModal />
-        </Modal>
+        <EditModal visible={isModalVisibleTwo} setVisible={setIsModalVisibleTwo} onCancel={handleCancelTwo}/>
         <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={[]}>
           <PostDetail />
         </Modal>

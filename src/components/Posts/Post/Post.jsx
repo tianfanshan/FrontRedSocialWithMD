@@ -23,13 +23,6 @@ const Post = () => {
     setIsModalVisible(true);
   };
 
-  const handleOk = () => {
-    setIsModalVisible(false);
-    notification.success({
-      description: 'prueba'
-    })
-  };
-
   const handleCancel = () => {
     setIsModalVisible(false);
     dispatch(resetComments())
@@ -93,7 +86,7 @@ const Post = () => {
   return (
     <div>
       {postss}
-      <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={[]}>
+      <Modal title="Basic Modal" visible={isModalVisible} onCancel={handleCancel} footer={[]}>
         <PostDetail />
       </Modal>
     </div>

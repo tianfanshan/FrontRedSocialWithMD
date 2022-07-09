@@ -3,20 +3,16 @@ import { Button, Modal, Form, InputNumber, Select, Input } from "antd"
 import { useEffect } from "react"
 import { updatePost } from "../../../features/posts/postsSlice"
 
-const EditModal = ({visible,setVisible}) => {
+const EditModal = ({visible,setVisible,onCancel}) => {
 
   const dispatch = useDispatch()
-  // const { Option } = Select;
   const { post } = useSelector((state)=>state.posts)
-  console.log(post)
 
   const [form] = Form.useForm()
 
   useEffect(()=>{
-    form.setFiledsValue()
-  },[])
-
-
+    form.setFieldsValue(post)
+  },[post])
 
   const onFinish = (values)=>{
     const postWithId = {...values,_id:post._id}
@@ -26,22 +22,21 @@ const EditModal = ({visible,setVisible}) => {
 
   return (
     <Modal
-    title="Edit Post"
+    title='Edit post'
     visible={visible}
     footer={[]}
+    onCancel={onCancel}
     >
-      <Form onFinish={onFinish}>
-        <Form.Item label="Post title" name="title">
-          <input placeholder="Post title" />
+      <Form onFinish={onFinish} form={form}>
+        <Form.Item label='Post Title' name='userName'>
+          <Input placeholder="Post title"/>
         </Form.Item>
-        <Form.Item label="Post userName" name="userName">
-          <input placeholder="Post body" />
+        <Form.Item label={'post name'} name='body'>
+          <Input placeholder="Post body"/>
         </Form.Item>
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Click para ejecutar movida!
-          </Button>
-        </Form.Item>
+        <Button type="primary" htmlType='submit'>
+          Ejecuta movida!!!
+        </Button>
       </Form>
     </Modal>
   )

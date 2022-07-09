@@ -76,7 +76,6 @@ export const updatePost = createAsyncThunk("posts/updatePost", async (post) => {
 export const deletePost = createAsyncThunk(
   "posts/deletePost",
   async (_id, thunkAPI) => {
-    console.log(_id);
     try {
       return await postsService.deletePost(_id);
     } catch (error) {
@@ -114,7 +113,14 @@ export const postsSlice = createSlice({
         state.posts = action.payload.post;
       })
       .addCase(updatePost.fulfilled, (state, action) => {
-        state.post = action.payload;
+        state.post = action.payload.post;
+        const posts = state.posts.map((p)=>{
+          if(p._id === state.post._id){
+            p = state.post
+          }
+          return p
+        })
+        state.posts = posts
       })
       .addCase(like.fulfilled, (state, action) => {
         const posts = state.posts.map((p) => {
