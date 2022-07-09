@@ -2,19 +2,40 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { like, likesDown, getPostById } from '../../../features/posts/postsSlice'
 import 'antd/dist/antd.css'
-import { HeartOutlined, HeartFilled } from '@ant-design/icons'
+import { HeartOutlined, HeartFilled, UserAddOutlined, UserDeleteOutlined } from '@ant-design/icons'
 import { Card, Button, Modal, notification } from 'antd';
 import PostDetail from "../../PostDetail/PostDetail"
 import { resetComments } from "../../../features/comments/commentsSlice"
+import '../Post/Post.scss'
+import { follow, followOut } from "../../../features/auth/authSlice"
+
+
 const { Meta } = Card;
 
 
 const Post = () => {
 
   const { posts } = useSelector((state) => state.posts)
-  const { user } = useSelector((state) => state.auth)
+  const { user, followMessage, followOutMessage, isFollowed, isNotFollowed, resetFollow, resetFollowOut } = useSelector((state) => state.auth)
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+
+  console.log(isFollowed)
+
+  useEffect(() => {
+    if (isFollowed) {
+      notification.warn({
+        message: followMessage
+      })
+      dispatch(resetFollow())
+    }
+    if (isNotFollowed) {
+      notification.warn({
+        message: followOutMessage
+      })
+      dispatch(resetFollowOut())
+    }
+  }, [followOutMessage, followMessage])
 
   const dispatch = useDispatch()
 
@@ -78,13 +99,15 @@ const Post = () => {
             :
             <HeartFilled />
           }
+          <UserAddOutlined onClick={() => dispatch(follow(pos.userId))} />
+          <UserDeleteOutlined onClick={() => dispatch(followOut(pos.userId))} />
         </div>
       </div>
     )
   })
 
   return (
-    <div>
+    <div className="postContainer">
       {postss}
       <Modal title="Basic Modal" visible={isModalVisible} onCancel={handleCancel} footer={[]}>
         <PostDetail />

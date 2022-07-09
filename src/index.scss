@@ -1,0 +1,11 @@
+@import '../colors.scss';
+
+body {
+    background-color:$lightGrey;
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

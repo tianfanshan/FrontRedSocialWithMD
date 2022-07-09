@@ -101,7 +101,6 @@ const Home = () => {
         size="large"
         onSearch={onSearch}
       />
-      <h1>Home</h1>
       {!postss ?
         <div>
           {postss}

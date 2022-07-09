@@ -28,10 +28,34 @@ const logout = async () => {
   return res.data
 };
 
+const follow = async (_id) =>{
+  const user = JSON.parse(localStorage.getItem("user"))
+  const res = await axios.put(API_URL + "/users/followerId/" + _id,{},{
+    headers:{
+      authorization:user.token
+    }
+  })
+  console.log(res.data)
+  return res.data
+}
+
+const followOut = async (_id) =>{
+  const user = JSON.parse(localStorage.getItem("user"))
+  const res = await axios.put(API_URL + "/users/followeroutId/" +_id,{},{
+    headers:{
+      authorization:user.token
+    }
+  })
+  console.log(res.data)
+  return res.data
+}
+
 const authService = {
   register,
   login,
   logout,
+  follow,
+  followOut
 };
 
 export default authService;

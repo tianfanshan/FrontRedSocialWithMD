@@ -7,9 +7,13 @@ const initialState = {
   user: user ? user : null,
   isError: false,
   isSuccess: false,
+  isFollowed: false,
+  isNotFollowed: false,
   registerMessage: "",
   loginMessage: "",
   logoutMessage: "",
+  followMessage: "",
+  followOutMessage: "",
 };
 
 export const register = createAsyncThunk(
@@ -42,10 +46,38 @@ export const logout = createAsyncThunk("auth/logout", async (thunkAPI) => {
   }
 });
 
+export const follow = createAsyncThunk("auth/follow", async (_id, thunkAPI) => {
+  try {
+    return await authService.follow(_id);
+  } catch (error) {
+    const followMessage = error.response;
+    return thunkAPI.rejectWithValue(followMessage);
+  }
+});
+
+export const followOut = createAsyncThunk(
+  "auth/followOut",
+  async (_id, thunkAPI) => {
+    try {
+      return await authService.followOut(_id);
+    } catch (error) {
+      const followOutMessage = error.response;
+      return thunkAPI.rejectWithValue(followOutMessage);
+    }
+  }
+);
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    resetFollow: (state) => {
+      state.isFollowed = false;
+    },
+    resetFollowOut: (state) => {
+      state.isNotFollowed = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(register.fulfilled, (state, action) => {
@@ -67,12 +99,26 @@ export const authSlice = createSlice({
         state.loginMessage = action.payload.message;
       })
       .addCase(logout.fulfilled, (state, action) => {
-        console.log(action.payload)
+        console.log(action.payload);
         state.user = null;
         state.isSuccess = true;
         state.logoutMessage = action.payload.message;
+      })
+      .addCase(follow.fulfilled, (state, action) => {
+        console.log(action.payload);
+        if (typeof action.payload == String) {
+          state.isFollowed = true;
+          state.followMessage = action.payload;
+        }
+      })
+      .addCase(followOut.fulfilled, (state, action) => {
+        if (typeof action.payload == String) {
+          state.isNotFollowed = true;
+          state.followOutMessage = action.payload;
+        }
       });
   },
 });
 
+export const { resetFollow, resetFollowOut } = authSlice.actions;
 export default authSlice.reducer;

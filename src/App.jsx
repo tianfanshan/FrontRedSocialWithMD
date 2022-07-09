@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import './App.css';
 
 import Login from './components/Login/Login';
 import Header from './components/Header/Header'
@@ -9,6 +8,7 @@ import Register from './components/Register/Register';
 import Profile from './components/Profile/Profile';
 import PrivateZone from './guards/PrivateZone';
 import NotFound from './components/NotFound/Notfound';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
@@ -26,6 +26,7 @@ function App() {
           } />
           <Route path="*" element={<NotFound/>}/>
         </Routes>
+        <Footer/>
       </BrowserRouter>
     </div>
   );

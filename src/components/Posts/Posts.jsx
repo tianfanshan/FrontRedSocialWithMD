@@ -25,7 +25,6 @@ const Posts = () => {
 
   return (
     <div>
-      <h1>Posts</h1>
       {user ?
         <div>
           <Post />

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getAllPost, getPostById, reset, deletePost } from '../../features/posts/postsSlice'
+import './Profile.scss'
+import { Divider } from 'antd';
+
 
 import { like, likesDown } from '../../features/posts/postsSlice'
 import 'antd/dist/antd.css'
@@ -51,7 +54,7 @@ const Profile = () => {
 
   const info = user?.user
 
-  const po = posts.filter((p) => p.userId == info._id)
+  const po = posts.filter((p) => p.userId == info?._id)
 
   const postss = po.map(pos => {
     const img = pos.images.map((im, i) => {
@@ -115,16 +118,65 @@ const Profile = () => {
           />
           :
           null}
-        <span>Años: {info.age}</span><br />
-        <span>Cantidad de comentarios: {info.commentId.length}</span><br />
-        <span>Likes de comentarios: {info.commentsLikes.length}</span><br />
-        <span>Favoritos: {info.favorites.length}</span><br />
-        <span>Followers: {info.followers.length}</span><br />
-        <span>Followings: {info.followings.length}</span><br />
-        <span>Name: {info.name}</span><br />
-        <span>Role: {info.role}</span><br />
+        <Divider orientation="left" plain>
+          Cuantos Años tienes!!!!!!🧓
+        </Divider>
+        <span>{info.age}</span><br />
+        <Divider orientation="left" plain>
+          Cuantas movidas has dejado en los posts😀
+        </Divider>
+        <span>{info.commentId.length}</span><br />
+        <Divider orientation="left" plain>
+          Y les gustan tus comentarios❗❓
+        </Divider>
+        <span>{info.commentsLikes.length}</span><br />
+        <Divider orientation="left" plain>
+          Los posts que te has gustado...no me lo puedo creer🤡
+        </Divider>
+        <span>{info.favorites.length}</span><br />
+        {info.followers.length < 1 ?
+          <div>
+            <Divider orientation="left" plain>
+              Nadie te quiere.../(ㄒoㄒ)/~~
+            </Divider>
+            <span>Mis followers {info.followers.length}!!!</span><br />
+          </div>
+          :
+          <div>
+            <Divider orientation="left" plain>
+              ┗|｀O′|┛ Alquien te esta persiguiendo ε=ε=ε=(~￣▽￣)~
+            </Divider>
+            <span>{info.followers.length}</span><br />
+          </div>
+        }
+        {info.followings.length < 1 ?
+          <div>
+            <Divider orientation="left" plain>
+              Muy chulo crack,quiere estar solo toda la vida ヾ(≧ ▽ ≦)ゝ
+            </Divider>
+            <span>Quieres movida con {info.followings.length} usuarios</span><br />
+          </div>
+          :
+          <div>
+            <Divider orientation="left" plain>
+              El boton esta fallando, no puede dar follower al usuario (╯▔皿▔)╯
+            </Divider>
+            <span>Estas persiguiendo a {info.followings.length} humanos, o no...</span><br />
+          </div>
+        }
+        <Divider orientation="left" plain>
+          Tu nombre es👇
+        </Divider>
+        <span>Es {info.name}!!!</span><br />
+        <Divider orientation="left" plain>
+          Quien eres👇
+        </Divider>
+        <span>Soy {info.role}!!!</span><br />
+        <Divider orientation="left" plain>
+          👇Posts!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!👇
+        </Divider>
         {postss}
-        <EditModal visible={isModalVisibleTwo} setVisible={setIsModalVisibleTwo} onCancel={handleCancelTwo}/>
+        <EditModal visible={isModalVisibleTwo} setVisible={setIsModalVisibleTwo} onCancel={handleCancelTwo} />
         <Modal title="Basic Modal" visible={isModalVisible} onCancel={handleCancel} footer={[]}>
           <PostDetail />
         </Modal>

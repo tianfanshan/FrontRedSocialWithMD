@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
+import './Header.scss'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux/es/exports'
 import { logout } from '../../features/auth/authSlice'
 import { useNavigate } from 'react-router'
 import { notification } from 'antd'
+import { HomeOutlined, UserOutlined, LogoutOutlined, LoginOutlined, SolutionOutlined } from '@ant-design/icons'
 
 const Header = () => {
 
@@ -26,30 +27,41 @@ const Header = () => {
 
   return (
     <nav>
-      <span>header</span>
-      <div>
+      <div className='navLink'>
         {user ?
           <div>
             <span>
-              <Link to={'/login'} onClick={onLogout}>Logout</Link>
+              <Link to={'/login'} onClick={onLogout}>
+                <LogoutOutlined />
+              </Link>
             </span>
             <span>
-              <Link to={'/profile'} >Profile</Link>
+              <Link to={'/profile'} >
+                <UserOutlined />
+              </Link>
             </span>
             <span>
-              <Link to={'/'} >Home</Link>
+              <Link to={'/'} >
+                <HomeOutlined />
+              </Link>
             </span>
           </div>
           :
           <>
             <span>
-              <Link to={'/login'}>Login</Link>
+              <Link to={'/login'}>
+                <LoginOutlined />
+              </Link>
             </span>
             <span>
-              <Link to={'/register'}>Register</Link>
+              <Link to={'/register'}>
+                <SolutionOutlined />
+              </Link>
             </span>
             <span>
-              <Link to={'/'} >Home</Link>
+              <Link to={'/'} >
+                <HomeOutlined />
+              </Link>
             </span>
           </>
         }
