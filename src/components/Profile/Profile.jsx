@@ -131,7 +131,6 @@ const Profile = () => {
         <img alt="post-img" src={"http://localhost:8080/posts-images/" + im} key={i} />
       )
     })
-    const isAlreadyLiked = pos.likes?.includes(user?.user._id)
     return (
       <div key={pos._id}>
         <div>
