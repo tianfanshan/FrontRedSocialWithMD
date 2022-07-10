@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { like, likesDown, getPostById } from '../../../features/posts/postsSlice'
 import 'antd/dist/antd.css'
 import { HeartOutlined, HeartFilled, UserAddOutlined, UserDeleteOutlined } from '@ant-design/icons'
-import { Card, Button, Modal, notification } from 'antd';
+import { Card, Button, Modal } from 'antd';
 import PostDetail from "../../PostDetail/PostDetail"
 import { resetComments } from "../../../features/comments/commentsSlice"
 import '../Post/Post.scss'
@@ -16,26 +16,11 @@ const { Meta } = Card;
 const Post = () => {
 
   const { posts } = useSelector((state) => state.posts)
-  const { user, followMessage, followOutMessage, isFollowed, isNotFollowed, resetFollow, resetFollowOut } = useSelector((state) => state.auth)
+  const { user } = useSelector((state) => state.auth)
+
+  console.log(user)
 
   const [isModalVisible, setIsModalVisible] = useState(false);
-
-  console.log(isFollowed)
-
-  useEffect(() => {
-    if (isFollowed) {
-      notification.warn({
-        message: followMessage
-      })
-      dispatch(resetFollow())
-    }
-    if (isNotFollowed) {
-      notification.warn({
-        message: followOutMessage
-      })
-      dispatch(resetFollowOut())
-    }
-  }, [followOutMessage, followMessage])
 
   const dispatch = useDispatch()
 

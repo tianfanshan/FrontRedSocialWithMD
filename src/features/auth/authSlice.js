@@ -1,12 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { notification } from "antd";
 import authService from "./authService";
 
 const user = JSON.parse(localStorage.getItem("user"));
 
 const initialState = {
   user: user ? user : null,
-  isError: false,
-  isSuccess: false,
+  isRegisterSuccess: false,
+  isRegisterError: false,
+  isLoginSuccess: false,
+  isLoginError: false,
   isFollowed: false,
   isNotFollowed: false,
   registerMessage: "",
@@ -71,54 +74,59 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    resetFollow: (state) => {
-      state.isFollowed = false;
+    resetLogin: (state) => {
+      state.isLoginSuccess = false;
+      state.isLoginError = false;
     },
-    resetFollowOut: (state) => {
-      state.isNotFollowed = false;
+    resetRegister: (state) => {
+      state.isRegisterError = false;
+      state.isRegisterSuccess = false;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(register.fulfilled, (state, action) => {
-        state.isSuccess = true;
+        state.isRegisterSuccess = true;
         state.user = action.payload;
         state.registerMessage = action.payload.message;
       })
       .addCase(register.rejected, (state, action) => {
-        state.isError = true;
+        state.isRegisterError = true;
         state.registerMessage = action.payload.message;
       })
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload;
-        state.isSuccess = true;
+        state.isLoginSuccess = true;
         state.loginMessage = action.payload.message;
       })
       .addCase(login.rejected, (state, action) => {
-        state.isError = true;
+        state.isLoginError = true;
         state.loginMessage = action.payload.message;
       })
       .addCase(logout.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.user = null;
         state.isSuccess = true;
         state.logoutMessage = action.payload.message;
       })
       .addCase(follow.fulfilled, (state, action) => {
-        console.log(action.payload);
-        if (typeof action.payload == String) {
-          state.isFollowed = true;
-          state.followMessage = action.payload;
+        console.log("follow", action.payload);
+        if(action.payload == String){
+          notification.error({
+            message:action.payload
+          })
         }
       })
       .addCase(followOut.fulfilled, (state, action) => {
-        if (typeof action.payload == String) {
-          state.isNotFollowed = true;
-          state.followOutMessage = action.payload;
+        console.log('followOut',action.payload)
+         if(action.payload == String){
+          console.log('hola')
+          notification.error({
+            message:action.payload
+          })
         }
       });
   },
 });
 
-export const { resetFollow, resetFollowOut } = authSlice.actions;
+export const { resetLogin, resetRegister } = authSlice.actions;
 export default authSlice.reducer;
