@@ -12,6 +12,7 @@ const initialState = {
   isLoginError: false,
   isFollowed: false,
   isNotFollowed: false,
+  getCurrentUser:{},
   registerMessage: "",
   loginMessage: "",
   logoutMessage: "",
@@ -70,6 +71,17 @@ export const followOut = createAsyncThunk(
   }
 );
 
+export const getCurrentUser = createAsyncThunk(
+  "auth/getCurrentUser",
+  async () => {
+    try {
+      return authService.getCurrentUser();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -110,21 +122,25 @@ export const authSlice = createSlice({
       })
       .addCase(follow.fulfilled, (state, action) => {
         console.log("follow", action.payload);
-        if(action.payload == String){
+        if (action.payload == String) {
           notification.error({
-            message:action.payload
-          })
+            message: action.payload,
+          });
         }
       })
       .addCase(followOut.fulfilled, (state, action) => {
-        console.log('followOut',action.payload)
-         if(action.payload == String){
-          console.log('hola')
+        console.log("followOut", action.payload);
+        if (action.payload == String) {
+          console.log("hola");
           notification.error({
-            message:action.payload
-          })
+            message: action.payload,
+          });
         }
-      });
+      })
+      .addCase(getCurrentUser.fulfilled,(state,action)=>{
+        console.log(action.payload.user)
+        state.currentUser = action.payload.user
+      })
   },
 });
 

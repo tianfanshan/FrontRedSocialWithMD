@@ -12,19 +12,26 @@ import { Card, Button, Modal, Image } from 'antd';
 import PostDetail from "../PostDetail/PostDetail"
 import { resetComments } from '../../features/comments/commentsSlice'
 import EditModal from './EditModal/EditModal'
+import { getCurrentUser } from '../../features/auth/authSlice';
 const { Meta } = Card;
 
 const Profile = () => {
-
-  const { posts } = useSelector((state) => state.posts)
-  const { user } = useSelector((state) => state.auth)
-
-  console.log(user)
+  const { currentUser } = useSelector((state) => state.auth)
 
   const dispatch = useDispatch()
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalVisibleTwo, setIsModalVisibleTwo] = useState(false);
+
+  useEffect(() => {
+    dispatch(getCurrentUser())
+    getPostAndReset()
+  }, [])
+
+  const getPostAndReset = async () => {
+    await dispatch(getAllPost())
+    dispatch(reset())
+  }
 
   const showModalEditPost = (_id) => {
     dispatch(getPostById(_id))
@@ -45,26 +52,15 @@ const Profile = () => {
     dispatch(resetComments())
   };
 
-  const getPostAndReset = async () => {
-    await dispatch(getAllPost())
-    dispatch(reset())
-  }
+  const post = currentUser?.postIds
 
-  useEffect(() => {
-    getPostAndReset()
-  }, [])
-
-  const info = user?.user
-
-  const po = posts.filter((p) => p.userId == info?._id)
-
-  const postss = po.map(pos => {
+  const postss = post?.map(pos => {
     const img = pos.images.map((im, i) => {
       return (
         <img alt="post-img" src={"http://localhost:8080/posts-images/" + im} key={i} />
       )
     })
-    const isAlreadyLiked = pos.likes?.includes(user?.user._id)
+    const isAlreadyLiked = pos.likes?.includes(currentUser?._id)
     return (
       <div key={pos._id}>
         <div>
@@ -108,7 +104,9 @@ const Profile = () => {
     )
   })
 
-  const followers = user?.user.followers.map((f) => {
+  const follow = currentUser?.followers
+
+  const followers = follow?.map((f) => {
     return (
       <div>
         <span>Nombre: {f.name}</span><br />
@@ -117,7 +115,9 @@ const Profile = () => {
     )
   })
 
-  const followings = user?.user.followings.map((f) => {
+  const following = currentUser?.followings
+
+  const followings = following?.map((f) => {
     return (
       <div>
         <span>{f.name}</span>
@@ -125,7 +125,9 @@ const Profile = () => {
     )
   })
 
-  const favorites = user?.user.favorites.map((pos) => {
+  const favorite = currentUser?.favorites
+
+  const favorites = favorite?.map((pos) => {
     const img = pos.images.map((im, i) => {
       return (
         <img alt="post-img" src={"http://localhost:8080/posts-images/" + im} key={i} />
@@ -169,30 +171,30 @@ const Profile = () => {
   return (
     <div>
       <div>
-        {user?.user.image ?
+        {currentUser?.image ?
           <Image
             width={200}
-            src={"http://localhost:8080/users-images/" + user.user.image}
+            src={"http://localhost:8080/users-images/" + currentUser.image}
           />
           :
           null}
         <Divider orientation="left" plain>
           Cuantos Años tienes!!!!!!🧓
         </Divider>
-        <span>{info?.age}</span><br />
+        <span>{currentUser?.age}</span><br />
         <Divider orientation="left" plain>
           Cuantas movidas has dejado en los posts😀
         </Divider>
-        <span>{info?.commentId.length}</span><br />
+        <span>{currentUser?.commentId?.length}</span><br />
         <Divider orientation="left" plain>
           Y les gustan tus comentarios❗❓
         </Divider>
-        <span>{info?.commentsLikes.length}</span><br />
+        <span>{currentUser?.commentsLikes?.length}</span><br />
         <Divider orientation="left" plain>
           Los posts que te has gustado...no me lo puedo creer🤡
         </Divider>
         <span>{favorites}</span><br />
-        {info?.followers.length < 1 ?
+        {currentUser?.followers?.length < 1 ?
           <div>
             <Divider orientation="left" plain>
               Nadie te quiere.../(ㄒoㄒ)/~~
@@ -207,7 +209,7 @@ const Profile = () => {
             <span>{followers}</span><br />
           </div>
         }
-        {info?.followings.length < 1 ?
+        {currentUser?.followings?.length < 1 ?
           <div>
             <Divider orientation="left" plain>
               Muy chulo crack,quiere estar solo toda la vida ヾ(≧ ▽ ≦)ゝ
@@ -225,11 +227,11 @@ const Profile = () => {
         <Divider orientation="left" plain>
           Tu nombre es👇
         </Divider>
-        <span>Es {info?.name}!!!</span><br />
+        <span>Es {currentUser?.name}!!!</span><br />
         <Divider orientation="left" plain>
           Quien eres👇
         </Divider>
-        <span>Soy {info?.role}!!!</span><br />
+        <span>Soy {currentUser?.role}!!!</span><br />
         <Divider orientation="left" plain>
           👇Posts!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!👇
         </Divider>

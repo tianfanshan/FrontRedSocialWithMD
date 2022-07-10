@@ -48,12 +48,25 @@ const followOut = async (_id) =>{
   return res.data
 }
 
+const getCurrentUser = async ()=>{
+  
+  const user = JSON.parse(localStorage.getItem("user"))
+  const res = await axios.get(API_URL + "/users/currentUser",{
+    headers:{
+      authorization:user.token
+    }
+  })
+  console.log(res.data)
+  return res.data
+}
+
 const authService = {
   register,
   login,
   logout,
   follow,
-  followOut
+  followOut,
+  getCurrentUser
 };
 
 export default authService;
