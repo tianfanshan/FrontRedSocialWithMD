@@ -108,7 +108,7 @@ const Profile = () => {
 
   const followers = follow?.map((f) => {
     return (
-      <div>
+      <div key={f._id}>
         <span>Nombre: {f.name}</span><br />
         <span>Role: {f.role}</span>
       </div>
@@ -119,7 +119,7 @@ const Profile = () => {
 
   const followings = following?.map((f) => {
     return (
-      <div>
+      <div key={f._id}>
         <span>{f.name}</span>
       </div>
     )

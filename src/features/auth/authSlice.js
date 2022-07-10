@@ -138,7 +138,6 @@ export const authSlice = createSlice({
         }
       })
       .addCase(getCurrentUser.fulfilled,(state,action)=>{
-        console.log(action.payload.user)
         state.currentUser = action.payload.user
       })
   },

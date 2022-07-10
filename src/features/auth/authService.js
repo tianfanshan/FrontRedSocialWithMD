@@ -56,7 +56,6 @@ const getCurrentUser = async ()=>{
       authorization:user.token
     }
   })
-  console.log(res.data)
   return res.data
 }
 
