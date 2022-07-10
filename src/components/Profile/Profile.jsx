@@ -109,8 +109,7 @@ const Profile = () => {
   const followers = follow?.map((f) => {
     return (
       <div key={f._id}>
-        <span>Nombre: {f.name}</span><br />
-        <span>Role: {f.role}</span>
+        <span>Es {f.name}!...pero si solo es un {f.role} corriente..</span>
       </div>
     )
   })
@@ -120,7 +119,7 @@ const Profile = () => {
   const followings = following?.map((f) => {
     return (
       <div key={f._id}>
-        <span>{f.name}</span>
+        <span>La persona que buscas se llama {f.name}...y no te gusta ∑( 口 ||</span>
       </div>
     )
   })
@@ -179,27 +178,27 @@ const Profile = () => {
           :
           null}
         <Divider orientation="left" plain>
-          Cuantos Años tienes!!!!!!🧓
+          👮‍ Cuantos Años tienes 📋
         </Divider>
-        <span>{currentUser?.age}</span><br />
+        <span>Tengo {currentUser?.age} años,me han hecho 40 cumpleaños en el Bootcamp...👨‍🦳</span><br />
         <Divider orientation="left" plain>
-          Cuantas movidas has dejado en los posts😀
+          Las movidas que has hecho (⌐■_■)
         </Divider>
-        <span>{currentUser?.commentId?.length}</span><br />
+        {currentUser?.commentId?.length < 1 ?
+        <span>Necesitas un poco de contacto social (•_•)</span>
+        :
+        <div><span>Has hecho {currentUser?.commentId?.length} de comentarios</span><br /></div>
+        }
         <Divider orientation="left" plain>
-          Y les gustan tus comentarios❗❓
+          Y les han gustado tus comentarios❗❓...O no...
         </Divider>
-        <span>{currentUser?.commentsLikes?.length}</span><br />
-        <Divider orientation="left" plain>
-          Los posts que te has gustado...no me lo puedo creer🤡
-        </Divider>
-        <span>{favorites}</span><br />
+        <span>Tus {currentUser?.commentsLikes?.length} post les han gustado la gente ヾ(•ω•`)o </span><br />
         {currentUser?.followers?.length < 1 ?
           <div>
             <Divider orientation="left" plain>
               Nadie te quiere.../(ㄒoㄒ)/~~
             </Divider>
-            <span>00000000000000000000</span><br />
+            <span>No es nada dificil postear tu foto en nuestra pagina 😍</span><br />
           </div>
           :
           <div>
@@ -214,26 +213,30 @@ const Profile = () => {
             <Divider orientation="left" plain>
               Muy chulo crack,quiere estar solo toda la vida ヾ(≧ ▽ ≦)ゝ
             </Divider>
-            <span>零零零零零零零零零零零零零零零零零零零</span><br />
+            <span>Tienes que ser mas iniciativa!</span><br />
           </div>
           :
           <div>
             <Divider orientation="left" plain>
               El boton esta fallando, no puede dar follower al usuario (╯▔皿▔)╯
             </Divider>
-            <span>Estas persiguiendo a {followings} humanos, o no...</span><br />
+            <span>{followings}</span><br />
           </div>
         }
         <Divider orientation="left" plain>
-          Tu nombre es👇
+          👮‍ Enseñame tu 💳
         </Divider>
-        <span>Es {currentUser?.name}!!!</span><br />
+        <span>Mi nombre es: {currentUser?.name} (╯°□°）╯︵ ┻━┻</span><br />
         <Divider orientation="left" plain>
-          Quien eres👇
+          👮‍ Quieres una cafe,venir con nosotros 🚓
         </Divider>
-        <span>Soy {currentUser?.role}!!!</span><br />
+        <span>Soy {currentUser?.role}, tengo derecho a guardar silencio (◎﹏◎)</span><br />
         <Divider orientation="left" plain>
-          👇Posts!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!👇
+          Los posts que te has gustado...no me lo puedo creer (⊙_⊙)？
+        </Divider>
+        <span>{favorites}</span><br />
+        <Divider orientation="left" plain>
+          👮‍ Mira que has poseado,esta noche va ser larga...🌙
         </Divider>
         {postss}
         <EditModal visible={isModalVisibleTwo} setVisible={setIsModalVisibleTwo} onCancel={handleCancelTwo} />
