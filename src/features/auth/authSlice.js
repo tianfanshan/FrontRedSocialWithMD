@@ -101,10 +101,6 @@ export const authSlice = createSlice({
     resetLogout: (state) => {
       state.isLogoutSuccess = false;
     },
-    // resetFollow: (state) => {
-    //   state.isNotFollowed = false;
-    //   state.isFollowed = false;
-    // },
     resetFollow1: (state) => {
       state.isNotFollowed1 = false;
       state.isFollowed1 = false;
@@ -136,25 +132,13 @@ export const authSlice = createSlice({
         state.logoutMessage = action.payload.message;
       })
       .addCase(follow.fulfilled, (state, action) => {
-        console.log(action.payload)
         state.isFollowed1 = true;
         state.followMessage1 = action.payload.message;
       })
-      // .addCase(follow.rejected, (state, action) => {
-      //   console.log(action.payload.data);
-      //   state.isFollowed = true;
-      //   state.followMessage = action.payload.data;
-      // })
       .addCase(followOut.fulfilled, (state, action) => {
-        console.log(action.payload)
         state.isNotFollowed1 = true;
         state.followOutMessage1 = action.payload.message;
       })
-      // .addCase(followOut.rejected, (state, action) => {
-      //   console.log(action.payload);
-      //   state.isNotFollowed = true;
-      //   state.followOutMessage = action.payload;
-      // })
       .addCase(getCurrentUser.fulfilled, (state, action) => {
         state.currentUser = action.payload.user;
       });

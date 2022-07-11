@@ -46,14 +46,12 @@ const getAllComments = async () => {
 }
 
 const EditComment = async (comment) => {
-  console.log(comment)
   const user = JSON.parse(localStorage.getItem("user"))
   const res = await axios.put(API_URL + "/comments/id/" + comment._id  ,comment,{
     headers:{
       authorization:user?.token
     }
   })
-  console.log(res.data)
   return res.data
 }
 

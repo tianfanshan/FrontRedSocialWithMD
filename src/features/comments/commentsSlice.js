@@ -46,7 +46,6 @@ export const getAllComments = createAsyncThunk("comments/getAllComments",async()
 })
 
 export const EditComment = createAsyncThunk("comments/EditComment",async(comment)=>{
-  console.log(comment)
   try {
     return await commentsService.EditComment(comment)
   } catch (error) {
@@ -109,7 +108,6 @@ export const commentsSlice = createSlice({
       })
       .addCase(EditComment.fulfilled,(state,action)=>{
         state.comment = action.payload
-        console.log(action.payload)
         const comments = state.comments.map((c)=>{
           if(c._id === state.comment._id){
             c = state.comment
