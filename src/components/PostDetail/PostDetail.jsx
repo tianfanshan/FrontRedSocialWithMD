@@ -4,7 +4,6 @@ import { HeartOutlined, HeartFilled, EditOutlined, DeleteOutlined } from '@ant-d
 import { commentLikeDown, getCommentById, likeComment } from "../../features/comments/commentsSlice"
 import { useState } from "react"
 import EditModal from './EditComment/EditComment'
-import { getCurrentUser } from "../../features/auth/authSlice"
 
 const PostDetail = () => {
 
