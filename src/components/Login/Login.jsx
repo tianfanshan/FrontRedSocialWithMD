@@ -28,7 +28,7 @@ const Login = () => {
             dispatch(resetLogin())
             setTimeout(() => {
                 navigate('/profile')
-            }, 2000)
+            }, 1000)
         }
     }
 

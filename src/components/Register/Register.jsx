@@ -87,7 +87,7 @@ const Register = () => {
         <Input />
       </Form.Item>
 
-      <Form.Item label="InputNumber"
+      <Form.Item label="Age"
         name='age'
       >
         <InputNumber />
