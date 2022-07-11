@@ -1,7 +1,7 @@
 import './Header.scss'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux/es/exports'
-import { logout } from '../../features/auth/authSlice'
+import { logout, resetLogout } from '../../features/auth/authSlice'
 import { useNavigate } from 'react-router'
 import { notification } from 'antd'
 import { HomeOutlined, UserOutlined, LogoutOutlined, LoginOutlined, SolutionOutlined } from '@ant-design/icons'
@@ -10,19 +10,20 @@ const Header = () => {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { user, logoutMessage, isSuccess } = useSelector((state) => state.auth)
+  const { user, logoutMessage, isLogoutSuccess } = useSelector((state) => state.auth)
 
   const onLogout = (e) => {
     e.preventDefault()
     dispatch(logout())
-    if (isSuccess) {
+    if (isLogoutSuccess) {
       notification.success({
         message: logoutMessage
       })
     }
+    dispatch(resetLogout())
     setTimeout(() => {
       navigate('/')
-    }, 3000)
+    }, 2000)
   }
 
   return (

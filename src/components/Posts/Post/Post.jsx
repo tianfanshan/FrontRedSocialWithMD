@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { like, likesDown, getPostById } from '../../../features/posts/postsSlice'
 import 'antd/dist/antd.css'
 import { HeartOutlined, HeartFilled, UserAddOutlined, UserDeleteOutlined } from '@ant-design/icons'
 import { Card, Button, Modal } from 'antd';
 import PostDetail from "../../PostDetail/PostDetail"
-import { resetComments } from "../../../features/comments/commentsSlice"
+import { getAllComments, resetComments } from "../../../features/comments/commentsSlice"
 import '../Post/Post.scss'
 import { follow, followOut } from "../../../features/auth/authSlice"
 
@@ -24,6 +24,7 @@ const Post = () => {
 
   const showModal = (_id) => {
     dispatch(getPostById(_id))
+    dispatch(getAllComments())
     setIsModalVisible(true);
   };
 
@@ -78,19 +79,12 @@ const Post = () => {
               ) : (
                 <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
               )}
+              <UserAddOutlined onClick={() => dispatch(follow(pos.userId))} />
+              <UserDeleteOutlined onClick={() => dispatch(followOut(pos.userId))} />
             </>
             :
             <HeartFilled />
           }
-          {user ?
-            <div>
-              <UserAddOutlined onClick={() => dispatch(follow(pos.userId))} />
-              <UserDeleteOutlined onClick={() => dispatch(followOut(pos.userId))} />
-            </div>
-            :
-            null
-          }
-
         </div>
       </div>
     )

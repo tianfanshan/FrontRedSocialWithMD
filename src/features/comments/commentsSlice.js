@@ -21,6 +21,30 @@ export const createComment = createAsyncThunk(
   }
 );
 
+export const likeComment = createAsyncThunk("comments/likeComment",async(_id)=>{
+  try {
+    return await commentsService.likeComment(_id)
+  } catch (error) {
+    console.error(error)
+  }
+})
+
+export const commentLikeDown = createAsyncThunk("comments/commentLikeDown",async(_id)=>{
+  try {
+    return await commentsService.commentLikeDown(_id)
+  } catch (error) {
+    console.error(error)
+  }
+})
+
+export const getAllComments = createAsyncThunk("comments/getAllComments",async()=>{
+  try {
+    return await commentsService.getAllComments()
+  } catch (error) {
+    console.error(error)
+  }
+})
+
 export const commentsSlice = createSlice({
   name: "comments",
   initialState,
@@ -40,7 +64,33 @@ export const commentsSlice = createSlice({
       .addCase(createComment.rejected, (state, action) => {
         state.commentIsError = true;
         state.createCommentMessage = action.payload;
-      });
+      })
+      .addCase(likeComment.fulfilled,(state,action)=>{
+        const comments = state.comments.map((c) => {
+          if (c._id === action.payload._id) {
+            c = action.payload;
+          }
+          return c;
+        });
+        state.comments = comments;
+      })
+      .addCase(commentLikeDown.fulfilled,(state,action)=>{
+        const newLikes = action.payload.likes.filter(
+          (id) => id !== action.payload._id
+        );
+        action.payload.likes = newLikes;
+        const comments = state.comments.map((c) => {
+          if (c._id === action.payload._id) {
+            c = action.payload;
+          }
+          return c;
+        });
+        state.comments = comments;
+
+      })
+      .addCase(getAllComments.fulfilled,(state,action)=>{
+        state.comments = action.payload
+      })
   },
 });
 

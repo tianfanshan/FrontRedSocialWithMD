@@ -6,13 +6,14 @@ const user = JSON.parse(localStorage.getItem("user"));
 
 const initialState = {
   user: user ? user : null,
+  isLogoutSuccess: false,
   isRegisterSuccess: false,
   isRegisterError: false,
   isLoginSuccess: false,
   isLoginError: false,
   isFollowed: false,
   isNotFollowed: false,
-  getCurrentUser:{},
+  getCurrentUser: {},
   registerMessage: "",
   loginMessage: "",
   logoutMessage: "",
@@ -94,6 +95,9 @@ export const authSlice = createSlice({
       state.isRegisterError = false;
       state.isRegisterSuccess = false;
     },
+    resetLogout: (state) => {
+      state.isLogoutSuccess = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -117,7 +121,7 @@ export const authSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state, action) => {
         state.user = null;
-        state.isSuccess = true;
+        state.isLogoutSuccess = true;
         state.logoutMessage = action.payload.message;
       })
       .addCase(follow.fulfilled, (state, action) => {
@@ -137,11 +141,11 @@ export const authSlice = createSlice({
           });
         }
       })
-      .addCase(getCurrentUser.fulfilled,(state,action)=>{
-        state.currentUser = action.payload.user
-      })
+      .addCase(getCurrentUser.fulfilled, (state, action) => {
+        state.currentUser = action.payload.user;
+      });
   },
 });
 
-export const { resetLogin, resetRegister } = authSlice.actions;
+export const { resetLogin, resetRegister, resetLogout } = authSlice.actions;
 export default authSlice.reducer;
