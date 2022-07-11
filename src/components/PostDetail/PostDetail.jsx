@@ -1,14 +1,15 @@
 import { useDispatch, useSelector } from "react-redux/es/exports"
 import AddComment from "./AddComment/AddComment"
 import { HeartOutlined, HeartFilled, EditOutlined, DeleteOutlined } from '@ant-design/icons'
-import { commentLikeDown, getCommentById, likeComment } from "../../features/comments/commentsSlice"
+import { commentLikeDown, deleteCommentById, getAllComments, getCommentById, likeComment } from "../../features/comments/commentsSlice"
 import { useState } from "react"
 import EditModal from './EditComment/EditComment'
+import { notification } from "antd"
 
 const PostDetail = () => {
 
   const { post } = useSelector((state) => state.posts)
-  const { comments } = useSelector((state) => state.comments)
+  const { comments, deleteCommentMessage } = useSelector((state) => state.comments)
   const { user } = useSelector((state) => state.auth)
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -23,6 +24,14 @@ const PostDetail = () => {
   const handleCancel = () => {
     setIsModalVisible(false)
   };
+
+  const deleteComment = async (_id) =>{
+    await dispatch(deleteCommentById(_id))
+    notification.success({
+      message:deleteCommentMessage
+    })
+    dispatch(getAllComments())
+  }
 
   const commentOfPost = comments?.filter((c) => c.postId == post._id)
 
@@ -47,7 +56,7 @@ const PostDetail = () => {
           <div>
             <EditOutlined onClick={() => showModalEditComment(det._id)} />
             <EditModal visible={isModalVisible} setVisible={setIsModalVisible} onCancel={handleCancel} />
-            <DeleteOutlined />
+            <DeleteOutlined onClick={() => deleteComment(det._id)} />
           </div>
           :
           null}
