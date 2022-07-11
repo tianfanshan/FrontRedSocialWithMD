@@ -2,24 +2,25 @@ import { Input, Button, Form, notification } from 'antd';
 import { createComment } from '../../../features/comments/commentsSlice'
 import { useSelector, useDispatch } from 'react-redux/es/exports'
 import { useEffect } from 'react';
+import { getCurrentUser } from '../../../features/auth/authSlice';
 
 const AddComment = () => {
 
   const { commentIsError, commentIsSuccess, createCommentMessage } = useSelector((state) => state.comments)
 
-    useEffect(() => {
-        if (commentIsSuccess) {
-            notification.success({
-                description: createCommentMessage
-            })
-        }
-        if (commentIsError) {
-            notification.error({
-                message: 'Error',
-                description: createCommentMessage
-            })
-        }
-    }, [commentIsError, commentIsSuccess, createCommentMessage])
+  useEffect(() => {
+    if (commentIsSuccess) {
+      notification.success({
+        description: createCommentMessage
+      })
+    }
+    if (commentIsError) {
+      notification.error({
+        message: 'Error',
+        description: createCommentMessage
+      })
+    }
+  }, [commentIsError, commentIsSuccess, createCommentMessage])
 
   const { post } = useSelector((state) => state.posts)
 
@@ -27,10 +28,11 @@ const AddComment = () => {
 
   const [form] = Form.useForm()
 
-  const onFinish = (comment) => {
+  const onFinish = async(comment) => {
     let postId = post._id
     let newObj = { postId, ...comment }
-    dispatch(createComment(newObj))
+    await dispatch(createComment(newObj))
+    dispatch(getCurrentUser())
     form.resetFields()
   };
 

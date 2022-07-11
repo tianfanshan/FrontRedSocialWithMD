@@ -1,13 +1,14 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
-import { like, likesDown, getPostById } from '../../../features/posts/postsSlice'
+import { like, likesDown, getPostById, getAllPost, reset } from '../../../features/posts/postsSlice'
 import 'antd/dist/antd.css'
 import { HeartOutlined, HeartFilled, UserAddOutlined, UserDeleteOutlined } from '@ant-design/icons'
-import { Card, Button, Modal } from 'antd';
+import { Card, Button, Modal, notification } from 'antd';
 import PostDetail from "../../PostDetail/PostDetail"
 import { getAllComments, resetComments } from "../../../features/comments/commentsSlice"
 import '../Post/Post.scss'
-import { follow, followOut } from "../../../features/auth/authSlice"
+import { follow, followOut, resetFollow1 } from "../../../features/auth/authSlice"
+import { useEffect } from "react"
 
 
 const { Meta } = Card;
@@ -16,11 +17,38 @@ const { Meta } = Card;
 const Post = () => {
 
   const { posts } = useSelector((state) => state.posts)
-  const { user } = useSelector((state) => state.auth)
+  const { user, followOutMessage1, followMessage1, isNotFollowed1, isFollowed1 } = useSelector((state) => state.auth)
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (isNotFollowed1) {
+      notification.success({
+        message: followOutMessage1
+      })
+      dispatch(resetFollow1())
+    }
+    if (isFollowed1) {
+      notification.success({
+        message: followMessage1
+      })
+      dispatch(resetFollow1())
+    }
+  }, [followMessage1, followOutMessage1, isNotFollowed1, isFollowed1])
+
+  const follows = async (_id) => {
+    await dispatch(follow(_id))
+    await dispatch(getAllPost())
+    dispatch(reset())
+  }
+
+  const followOuts = async (_id) => {
+    await dispatch(followOut(_id))
+    await dispatch(getAllPost())
+    dispatch(reset()) 
+  }
 
   const showModal = (_id) => {
     dispatch(getPostById(_id))
@@ -43,6 +71,8 @@ const Post = () => {
       return user?.user._id.toString()
     }
     const isAlreadyLiked = pos.likes?.includes(user?.user._id)
+    const isAlreadyFollowed = pos.userId?.followers?.includes(user?.user._id)
+
     return (
       <div key={pos._id}>
         <div>
@@ -79,8 +109,11 @@ const Post = () => {
               ) : (
                 <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
               )}
-              <UserAddOutlined onClick={() => dispatch(follow(pos.userId))} />
-              <UserDeleteOutlined onClick={() => dispatch(followOut(pos.userId))} />
+              {isAlreadyFollowed ? (
+                <UserDeleteOutlined onClick={()=>followOuts(pos.userId._id)} />
+              ) : (
+                <UserAddOutlined onClick={()=>follows(pos.userId._id)} />
+              )}
             </>
             :
             <HeartFilled />

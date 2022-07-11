@@ -49,7 +49,7 @@ const Profile = () => {
 
   const handleCancel = () => {
     setIsModalVisible(false);
-    dispatch(resetComments())
+    // dispatch(resetComments())
   };
 
   const post = currentUser?.postIds
@@ -180,7 +180,7 @@ const Profile = () => {
         <Divider orientation="left" plain>
           👮‍ Cuantos Años tienes 📋
         </Divider>
-        <span>Tengo {currentUser?.age} años,me han hecho 40 cumpleaños en el Bootcamp...👨‍🦳</span><br />
+        <span>Tengo {currentUser?.age} años,me han hecho {currentUser?.age - 1} cumpleaños en el Bootcamp...👨‍🦳</span><br />
         <Divider orientation="left" plain>
           Las movidas que has hecho (⌐■_■)
         </Divider>

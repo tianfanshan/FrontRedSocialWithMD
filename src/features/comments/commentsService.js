@@ -45,11 +45,30 @@ const getAllComments = async () => {
     return res.data
 }
 
+const EditComment = async (comment) => {
+  console.log(comment)
+  const user = JSON.parse(localStorage.getItem("user"))
+  const res = await axios.put(API_URL + "/comments/id/" + comment._id  ,comment,{
+    headers:{
+      authorization:user?.token
+    }
+  })
+  console.log(res.data)
+  return res.data
+}
+
+const getCommentById = async (_id) => {
+  const res = await axios.get(API_URL + "/comments/getCommentById/" + _id)
+  return res.data
+}
+
 const commentsService = {
   createComment,
   likeComment,
   commentLikeDown,
-  getAllComments
+  getAllComments,
+  EditComment,
+  getCommentById
 };
 
 export default commentsService;

@@ -45,6 +45,23 @@ export const getAllComments = createAsyncThunk("comments/getAllComments",async()
   }
 })
 
+export const EditComment = createAsyncThunk("comments/EditComment",async(comment)=>{
+  console.log(comment)
+  try {
+    return await commentsService.EditComment(comment)
+  } catch (error) {
+    console.error(error)
+  }
+})
+
+export const getCommentById = createAsyncThunk("commens/getCommentById",async(_id)=>{
+  try {
+    return await commentsService.getCommentById(_id)
+  } catch (error) {
+    console.log(error)
+  }
+})
+
 export const commentsSlice = createSlice({
   name: "comments",
   initialState,
@@ -86,10 +103,23 @@ export const commentsSlice = createSlice({
           return c;
         });
         state.comments = comments;
-
       })
       .addCase(getAllComments.fulfilled,(state,action)=>{
         state.comments = action.payload
+      })
+      .addCase(EditComment.fulfilled,(state,action)=>{
+        state.comment = action.payload
+        console.log(action.payload)
+        const comments = state.comments.map((c)=>{
+          if(c._id === state.comment._id){
+            c = state.comment
+          }
+          return c
+        })
+        state.comments = comments
+      })
+      .addCase(getCommentById.fulfilled,(state,action)=>{
+        state.comment = action.payload
       })
   },
 });
