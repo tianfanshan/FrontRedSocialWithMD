@@ -187,7 +187,7 @@ const Profile = () => {
         {currentUser?.commentId?.length < 1 ?
         <span>Necesitas un poco de contacto social (•_•)</span>
         :
-        <div><span>Has hecho {currentUser?.commentId?.length} de comentarios</span><br /></div>
+        <div><span>Has hecho {currentUser?.commentId?.length} comentarios</span><br /></div>
         }
         <Divider orientation="left" plain>
           Y les han gustado tus comentarios❗❓...O no...
