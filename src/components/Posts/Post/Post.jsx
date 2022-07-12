@@ -47,7 +47,7 @@ const Post = () => {
   const followOuts = async (_id) => {
     await dispatch(followOut(_id))
     await dispatch(getAllPost())
-    dispatch(reset()) 
+    dispatch(reset())
   }
 
   const showModal = (_id) => {
@@ -73,6 +73,8 @@ const Post = () => {
     const isAlreadyLiked = pos.likes?.includes(user?.user._id)
     const isAlreadyFollowed = pos.userId?.followers?.includes(user?.user._id)
 
+    console.log(pos)
+
     return (
       <div key={pos._id}>
         <div>
@@ -93,7 +95,12 @@ const Post = () => {
                 width: 240,
               }}
             >
-              <Meta title={pos.userName} description={pos.body} />
+              <Meta title={pos.userName} description={
+                <div>
+                  <span>{pos.body}</span><br />
+                  <span>Posteador: {pos.userId.name}</span>
+                </div>
+              } />
             </Card>
           }
           <>
@@ -110,9 +117,9 @@ const Post = () => {
                 <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
               )}
               {isAlreadyFollowed ? (
-                <UserDeleteOutlined onClick={()=>followOuts(pos.userId._id)} />
+                <UserDeleteOutlined onClick={() => followOuts(pos.userId._id)} />
               ) : (
-                <UserAddOutlined onClick={()=>follows(pos.userId._id)} />
+                <UserAddOutlined onClick={() => follows(pos.userId._id)} />
               )}
             </>
             :
