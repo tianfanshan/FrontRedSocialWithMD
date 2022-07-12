@@ -73,8 +73,6 @@ const Post = () => {
     const isAlreadyLiked = pos.likes?.includes(user?.user._id)
     const isAlreadyFollowed = pos.userId?.followers?.includes(user?.user._id)
 
-    console.log(pos)
-
     return (
       <div key={pos._id}>
         <div>
