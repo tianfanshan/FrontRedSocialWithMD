@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getAllPost, getPostById, reset, deletePost } from '../../features/posts/postsSlice'
-import './Profile.scss'
-import { Divider } from 'antd';
-
-
-import { like, likesDown } from '../../features/posts/postsSlice'
-import 'antd/dist/antd.css'
 import { HeartOutlined, HeartFilled, EditOutlined, DeleteOutlined } from '@ant-design/icons'
-import { Card, Button, Modal, Image } from 'antd';
+import { Card, Button, Modal, Image, Divider } from 'antd';
 import PostDetail from "../PostDetail/PostDetail"
 import EditModal from './EditModal/EditModal'
 import { getCurrentUser } from '../../features/auth/authSlice';
+import { getAllPost, getPostById, reset, deletePost, like, likesDown } from '../../features/posts/postsSlice'
+
+import 'antd/dist/antd.css'
+import './Profile.scss'
+
 const { Meta } = Card;
 
 const Profile = () => {
@@ -159,8 +157,8 @@ const Profile = () => {
             </Button>
           </>
           <div className="card-bottom2">
-          <span className="wish">Likes: {pos.likes?.length}</span>
-          <HeartFilled />
+            <span className="wish">Likes: {pos.likes?.length}</span>
+            <HeartFilled />
           </div>
         </div>
       </div>
@@ -173,7 +171,7 @@ const Profile = () => {
         {currentUser?.image ?
           <Image
             width={200}
-            src={"http://localhost:8080/users-images/" + currentUser.image}
+            src={currentUser.image}
           />
           :
           null}
@@ -185,9 +183,9 @@ const Profile = () => {
           Las movidas que has hecho (⌐■_■)
         </Divider>
         {currentUser?.commentId?.length < 1 ?
-        <span>Necesitas un poco de contacto social (•_•)</span>
-        :
-        <div><span>Has hecho {currentUser?.commentId?.length} comentarios</span><br /></div>
+          <span>Necesitas un poco de contacto social (•_•)</span>
+          :
+          <div><span>Has hecho {currentUser?.commentId?.length} comentarios</span><br /></div>
         }
         <Divider orientation="left" plain>
           Y les han gustado tus comentarios❗❓...O no...
