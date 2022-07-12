@@ -1,2 +1,32 @@
 @import '../../../colors.scss';
 
+.postCard1{
+    padding:20px;
+    border: 1px solid black;
+    margin-bottom:20px;
+    display:flex;
+    flex-direction: column;
+    gap:15px;
+    flex-wrap:wrap;
+}
+.mega-wrap{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-evenly;
+}
+.wrapper2{
+    max-width:800px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color: antiquewhite;
+}
+
+.card-bottom2{
+    display:flex;
+    
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}

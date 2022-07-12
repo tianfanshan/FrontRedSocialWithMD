@@ -102,6 +102,7 @@ export const postsSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(addPost.fulfilled, (state, action) => {
+        console.log(action.payload)
         state.addPostIsSuccess = true;
         state.posts = [...state.posts, action.payload.post];
         state.addPostMessage = action.payload.message;

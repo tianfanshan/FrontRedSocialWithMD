@@ -74,7 +74,7 @@ const Post = () => {
     const isAlreadyFollowed = pos.userId?.followers?.includes(user?.user._id)
 
     return (
-      <div key={pos._id}>
+      <div key={pos._id} className='postCard'>
         <div>
           {pos.images.length > 0 ?
             <Card

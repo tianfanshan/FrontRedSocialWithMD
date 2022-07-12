@@ -1,13 +1,19 @@
 @import '../../../../colors.scss';
 
-meta{
-    font-family:$font-montserrat ;
-}
-
 .postContainer{
     display: flex;
-    flex-direction: row;
     justify-content: space-around;
     flex-wrap: wrap;
     margin: 3em;
+    margin-left: 10em;
+    margin-right: 10em;
+}
+
+.postCard{
+    width: auto;
+    padding: 1.5rem;
+    margin: 1rem;
+    border-style:solid;
+    border-radius: 0.5rem;
+    border-color: $grey;
 }

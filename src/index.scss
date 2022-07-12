@@ -1,13 +1,9 @@
 @import '../colors.scss';
 
-body {
-    background-color:$lightGrey;
-    background-size:cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    margin: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    display: flex;
-    text-align: center;
-}
+// body {
+//     background-color:$lightGrey;
+//     margin: 0;
+//     display: flex;
+//     text-align: center;
+//     justify-content: center;
+// }

@@ -28,40 +28,46 @@ const Header = () => {
 
   return (
     <nav>
-      <div className='navLink'>
+      <div className='header'>
         {user ?
-          <div>
+          <>
             <span>
               <Link to={'/login'} onClick={onLogout}>
-                <LogoutOutlined />
+                <LogoutOutlined /><br />
+                <span>Logout</span>
               </Link>
             </span>
             <span>
               <Link to={'/profile'} >
-                <UserOutlined />
+                <UserOutlined /><br />
+                <span>Profile</span>
               </Link>
             </span>
             <span>
               <Link to={'/'} >
-                <HomeOutlined />
+                <HomeOutlined /><br />
+                <span>Home</span>
               </Link>
             </span>
-          </div>
+          </>
           :
           <>
             <span>
               <Link to={'/login'}>
-                <LoginOutlined />
+                <LoginOutlined /><br />
+                <span>Login</span>
               </Link>
             </span>
             <span>
               <Link to={'/register'}>
-                <SolutionOutlined />
+                <SolutionOutlined /><br />
+                <span>Register</span>
               </Link>
             </span>
             <span>
               <Link to={'/'} >
-                <HomeOutlined />
+                <HomeOutlined /><br />
+                <span>Home</span>
               </Link>
             </span>
           </>

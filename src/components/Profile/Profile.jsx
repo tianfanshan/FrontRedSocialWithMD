@@ -10,7 +10,6 @@ import 'antd/dist/antd.css'
 import { HeartOutlined, HeartFilled, EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Card, Button, Modal, Image } from 'antd';
 import PostDetail from "../PostDetail/PostDetail"
-import { resetComments } from '../../features/comments/commentsSlice'
 import EditModal from './EditModal/EditModal'
 import { getCurrentUser } from '../../features/auth/authSlice';
 const { Meta } = Card;
@@ -49,7 +48,6 @@ const Profile = () => {
 
   const handleCancel = () => {
     setIsModalVisible(false);
-    // dispatch(resetComments())
   };
 
   const post = currentUser?.postIds
@@ -133,8 +131,8 @@ const Profile = () => {
       )
     })
     return (
-      <div key={pos._id}>
-        <div>
+      <div key={pos._id} className="wrapper2">
+        <div className='postCard1'>
           {pos.images.length > 0 ?
             <Card
               hoverable
@@ -160,8 +158,10 @@ const Profile = () => {
               Comentarios
             </Button>
           </>
+          <div className="card-bottom2">
           <span className="wish">Likes: {pos.likes?.length}</span>
           <HeartFilled />
+          </div>
         </div>
       </div>
     )
@@ -169,7 +169,7 @@ const Profile = () => {
 
   return (
     <div>
-      <div>
+      <div className='postContainer1'>
         {currentUser?.image ?
           <Image
             width={200}
@@ -234,7 +234,7 @@ const Profile = () => {
         <Divider orientation="left" plain>
           Los posts que te has gustado...no me lo puedo creer (⊙_⊙)？
         </Divider>
-        <span>{favorites}</span><br />
+        <div className="mega-wrap">{favorites}</div><br />
         <Divider orientation="left" plain>
           👮‍ Mira que has poseado,esta noche va ser larga...🌙
         </Divider>
