@@ -23,7 +23,7 @@ const Profile = () => {
   useEffect(() => {
     dispatch(getCurrentUser())
     getPostAndReset()
-  }, [])
+  }, [()=>deletePost1()])
 
   const getPostAndReset = async () => {
     await dispatch(getAllPost())
@@ -47,6 +47,10 @@ const Profile = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+
+  const deletePost1 = (_id) => {
+    dispatch(deletePost(_id))
+  }
 
   const post = currentUser?.postIds
 
@@ -75,7 +79,7 @@ const Profile = () => {
             <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
           )}
           <EditOutlined onClick={() => showModalEditPost(pos._id)} />
-          <DeleteOutlined onClick={() => dispatch(deletePost(pos._id))} />
+          <DeleteOutlined onClick={() => deletePost1(pos._id)} />
         </>
       </div>
     )

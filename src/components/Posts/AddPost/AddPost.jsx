@@ -1,10 +1,9 @@
 import { Input, Button, Form, notification } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { addPost } from '../../../features/posts/postsSlice';
+import { addPost, getAllPost, reset } from '../../../features/posts/postsSlice';
 import './AddPost.scss'
 
 const AddPost = () => {
-
 
   const [form] = Form.useForm()
 
@@ -12,18 +11,16 @@ const AddPost = () => {
 
   const dispatch = useDispatch()
 
-
-
-  const onFinish = async (value) => {
-
-    dispatch(addPost(value))
+  const onFinish =async (value) => {
+    await dispatch(addPost(value))
     if (addPostIsSuccess) {
       notification.success({
         message: addPostMessage
       })
-
     }
+    await dispatch(getAllPost())
     form.resetFields()
+    dispatch(reset())
   };
 
   const onFinishFailed = (errorInfo) => {

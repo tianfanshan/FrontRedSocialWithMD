@@ -35,7 +35,7 @@ const EditModal = ({visible,setVisible,onCancel}) => {
           <Input placeholder="Post body"/>
         </Form.Item>
         <Button type="primary" htmlType='submit'>
-          Ejecuta movida!!!
+          Motify your post
         </Button>
       </Form>
     </Modal>
