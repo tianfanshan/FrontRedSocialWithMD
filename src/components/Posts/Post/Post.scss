@@ -3,8 +3,12 @@
 .postContainer{
     display: flex;
     border: solid;
+    justify-content: space-around;
     background-color: $lightGrey;
-    // .postCard{
-        
-    // }
-}
+    .postCard{
+        border: solid red;
+        // width: auto;
+        // display: flex;
+        // justify-content: space-around;
+    }
+}   

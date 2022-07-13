@@ -59,41 +59,41 @@ const Profile = () => {
     const isAlreadyLiked = pos.likes?.includes(currentUser?._id)
     return (
       <div key={pos._id} className='usersPost'>
-          {pos.images.length > 0 ?
-            <Card
-              hoverable
-              style={{
-                width: 240,
-              }}
-              cover={img}
-            >
-              <Meta title={pos.userName} description={pos.body} />
-            </Card>
-            :
-            <Card
-              hoverable
-              style={{
-                width: 240,
-              }}
-            >
-              <Meta title={pos.userName} description={pos.body} />
-            </Card>
-          }
-          <>
-            <Button type="primary" onClick={() => showModal(pos._id)}>
-              Comentarios
-            </Button>
-          </>
-          <span className="wish">Likes: {pos.likes?.length}</span>
-          <>
-            {isAlreadyLiked ? (
-              <HeartFilled onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
-            ) : (
-              <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
-            )}
-            <EditOutlined onClick={() => showModalEditPost(pos._id)} />
-            <DeleteOutlined onClick={() => dispatch(deletePost(pos._id))} />
-          </>
+        {pos.images.length > 0 ?
+          <Card
+            hoverable
+            style={{
+              width: 240,
+            }}
+            cover={img}
+          >
+            <Meta title={pos.userName} description={pos.body} />
+          </Card>
+          :
+          <Card
+            hoverable
+            style={{
+              width: 240,
+            }}
+          >
+            <Meta title={pos.userName} description={pos.body} />
+          </Card>
+        }
+        <>
+          <Button type="primary" onClick={() => showModal(pos._id)}>
+            Comentarios
+          </Button>
+        </>
+        <span className="wish">Likes: {pos.likes?.length}</span>
+        <>
+          {isAlreadyLiked ? (
+            <HeartFilled onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
+          ) : (
+            <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
+          )}
+          <EditOutlined onClick={() => showModalEditPost(pos._id)} />
+          <DeleteOutlined onClick={() => dispatch(deletePost(pos._id))} />
+        </>
       </div>
     )
   })
@@ -128,35 +128,35 @@ const Profile = () => {
     })
     return (
       <div key={pos._id} className="favoritePost">
-          {pos.images.length > 0 ?
-            <Card
-              hoverable
-              style={{
-                width: 240,
-              }}
-              cover={img}
-            >
-              <Meta title={pos.userName} description={pos.body} />
-            </Card>
-            :
-            <Card
-              hoverable
-              style={{
-                width: 240,
-              }}
-            >
-              <Meta title={pos.userName} description={pos.body} />
-            </Card>
-          }
-          <>
-            <Button type="primary" onClick={() => showModal(pos._id)}>
-              Comentarios
-            </Button>
-          </>
-          <div className="card-bottom2">
-            <span className="wish">Likes: {pos.likes?.length}</span>
-            <HeartFilled />
-          </div>
+        {pos.images.length > 0 ?
+          <Card
+            hoverable
+            style={{
+              width: 240,
+            }}
+            cover={img}
+          >
+            <Meta title={pos.userName} description={pos.body} />
+          </Card>
+          :
+          <Card
+            hoverable
+            style={{
+              width: 240,
+            }}
+          >
+            <Meta title={pos.userName} description={pos.body} />
+          </Card>
+        }
+        <>
+          <Button type="primary" onClick={() => showModal(pos._id)}>
+            Comentarios
+          </Button>
+        </>
+        <div className="card-bottom2">
+          <span className="wish">Likes: {pos.likes?.length}</span>
+          <HeartFilled />
+        </div>
       </div>
     )
   })
@@ -230,7 +230,8 @@ const Profile = () => {
         <Divider orientation="left" plain>
           Los posts que te has gustado...no me lo puedo creer (⊙_⊙)？
         </Divider>
-        {favorites}<br />
+        {favorites}
+        <br />
         <Divider orientation="left" plain>
           👮‍ Mira que has poseado,esta noche va ser larga...🌙
         </Divider>
