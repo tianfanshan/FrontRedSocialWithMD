@@ -5,7 +5,6 @@ import { commentLikeDown, deleteCommentById, getAllComments, getCommentById, lik
 import { useState } from "react"
 import EditModal from './EditComment/EditComment'
 import { notification } from "antd"
-import './PostDetail.scss'
 
 const PostDetail = () => {
 
