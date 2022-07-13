@@ -93,7 +93,7 @@ En la sección de inicio los usuarios logueados ven el formulario para añadir u
 
 El usuario puede dar like al post, y seguir el usuario que ha hecho el post.
 
-![](./doc/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-07-13%20180703.png)
+![](./doc/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-07-13%20202559.png)
 
 El usuario logeado puede comentar al post.
 
