@@ -5,6 +5,7 @@ import { commentLikeDown, deleteCommentById, getAllComments, getCommentById, lik
 import { useState } from "react"
 import EditModal from './EditComment/EditComment'
 import { notification } from "antd"
+import { like } from "../../features/posts/postsSlice"
 
 const PostDetail = () => {
 
@@ -25,18 +26,39 @@ const PostDetail = () => {
     setIsModalVisible(false)
   };
 
-  const deleteComment = async (_id) =>{
+  const deleteComment = async (_id) => {
     await dispatch(deleteCommentById(_id))
     notification.success({
-      message:deleteCommentMessage
+      message: deleteCommentMessage
     })
     dispatch(getAllComments())
   }
+
+
 
   const commentOfPost = comments?.filter((c) => c.postId == post._id)
 
   const comment = commentOfPost?.map(det => {
     const isAlreadyLiked = det.likes?.includes(user?.user._id)
+
+    const like = async (_id) => {
+      if (isAlreadyLiked) {
+        await dispatch(commentLikeDown(_id))
+      } else {
+        await dispatch(likeComment(_id))
+      }
+      dispatch(getAllComments())
+    }
+
+    const like2 = async (_id) => {
+      if (isAlreadyLiked) {
+        await dispatch(commentLikeDown(_id))
+      } else {
+        await dispatch(likeComment(_id))
+      }
+      dispatch(getAllComments())
+    }
+
     return (
       <div key={det._id}>
         <h3>User: {det.userId.name}</h3>
@@ -45,9 +67,9 @@ const PostDetail = () => {
         {user ?
           <>
             {isAlreadyLiked ? (
-              <HeartFilled onClick={isAlreadyLiked ? () => dispatch(commentLikeDown(det._id)) : () => dispatch(likeComment(det._id))} />
+              <HeartFilled onClick={() => like(det._id)} />
             ) : (
-              <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(commentLikeDown(det._id)) : () => dispatch(likeComment(det._id))} />
+              <HeartOutlined onClick={()=> like2(det._id)} />
             )}
           </>
           :
