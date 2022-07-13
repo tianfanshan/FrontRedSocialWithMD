@@ -53,7 +53,7 @@ const PostDetail = () => {
           :
           <HeartFilled />
         }
-        {user?.user._id === (det.userId) ?
+        {user?.user._id === (det.userId._id) ?
           <div>
             <EditOutlined onClick={() => showModalEditComment(det._id)} />
             <EditModal visible={isModalVisible} setVisible={setIsModalVisible} onCancel={handleCancel} />
