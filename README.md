@@ -6,7 +6,7 @@ El último proyecto individual del Bootcamp Full Stack en The Bridge, hecho con 
 
 ### Requisitos del ejercicio
 
-- [X]Registro de usuarios.
+- [X] Registro de usuarios.
 - [X] Login de usuarios.
 - [X] Que se pueda ver las publicaciones y crear nuevas.
 - [X] Que se puedan editar y eliminar las publicaciones que hace el usuario logeado
