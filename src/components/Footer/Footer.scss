@@ -2,9 +2,15 @@
 
 
 .footer{
-    background-color: $grey;
-    font-family: $font-joan;
+    background-color: $blue;
+    font-family: $font-montserrat;
     font-size: 2rem;
     display: flex;
     justify-content: space-around;
+    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+    a{
+        color:$lightGrey;
+    }
 }

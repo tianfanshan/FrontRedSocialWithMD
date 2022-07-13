@@ -1,1 +1,10 @@
 @import '../../../../colors.scss';
+
+.postContainer{
+    display: flex;
+    border: solid;
+    background-color: $lightGrey;
+    .postCard{
+        
+    }
+}

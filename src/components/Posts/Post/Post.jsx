@@ -75,55 +75,53 @@ const Post = () => {
 
     return (
       <div key={pos._id} className='postCard'>
-        <div>
-          {pos.images.length > 0 ?
-            <Card
-              hoverable
-              style={{
-                width: 240,
-              }}
-              cover={img}
-            >
-              <Meta title={pos.userName} description={pos.body} />
-            </Card>
-            :
-            <Card
-              hoverable
-              style={{
-                width: 240,
-              }}
-            >
-              <Meta title={pos.userName} description={
-                <div>
-                  <span>{pos.body}</span><br />
-                  <span>Posteador: {pos.userId.name}</span>
-                </div>
-              } />
-            </Card>
-          }
+        {pos.images.length > 0 ?
+          <Card
+            hoverable
+            style={{
+              width: 240,
+            }}
+            cover={img}
+          >
+            <Meta title={pos.userName} description={pos.body} />
+          </Card>
+          :
+          <Card
+            hoverable
+            style={{
+              width: 240,
+            }}
+          >
+            <Meta title={pos.userName} description={
+              <div>
+                <span>{pos.body}</span><br />
+                <span>Posteador: {pos.userId.name}</span>
+              </div>
+            } />
+          </Card>
+        }
+        <>
+          <Button type="primary" onClick={() => showModal(pos._id)}>
+            Comentarios
+          </Button>
+        </>
+        <span className="wish">Likes: {pos.likes?.length}</span>
+        {user ?
           <>
-            <Button type="primary" onClick={() => showModal(pos._id)}>
-              Comentarios
-            </Button>
+            {isAlreadyLiked ? (
+              <HeartFilled onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
+            ) : (
+              <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
+            )}
+            {isAlreadyFollowed ? (
+              <UserDeleteOutlined onClick={() => followOuts(pos.userId._id)} />
+            ) : (
+              <UserAddOutlined onClick={() => follows(pos.userId._id)} />
+            )}
           </>
-          <span className="wish">Likes: {pos.likes?.length}</span>
-          {user ?
-            <>
-              {isAlreadyLiked ? (
-                <HeartFilled onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
-              ) : (
-                <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
-              )}
-              {isAlreadyFollowed ? (
-                <UserDeleteOutlined onClick={() => followOuts(pos.userId._id)} />
-              ) : (
-                <UserAddOutlined onClick={() => follows(pos.userId._id)} />
-              )}
-            </>
-            :
-            <HeartFilled />
-          }
-        </div>
+          :
+          <HeartFilled />
+        }
       </div>
     )
   })

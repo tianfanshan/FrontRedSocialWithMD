@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { login, resetLogin } from '../../features/auth/authSlice'
 import { useNavigate } from 'react-router'
 import { Button, Form, Input, notification } from 'antd';
+import './Login.scss'
 
 const Login = () => {
 
@@ -51,43 +52,48 @@ const Login = () => {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
+            className='loginForm'
         >
-            <Form.Item
-                label="email"
-                name='email'
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please input your username!',
-                    },
-                ]}
-            >
-                <Input />
-            </Form.Item>
+            <div className='inputForm'>
+                <Form.Item
+                    label="Email"
+                    name='email'
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your username!',
+                        },
+                    ]}
+                    className='formItem'
+                >
+                    <Input />
+                </Form.Item>
 
-            <Form.Item
-                label="Password"
-                name='password'
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please input your password!',
-                    },
-                ]}
-            >
-                <Input.Password />
-            </Form.Item>
+                <Form.Item
+                    label="Password"
+                    name='password'
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your password!',
+                        },
+                    ]}
+                    className='formItem'
+                >
+                    <Input.Password />
+                </Form.Item>
 
-            <Form.Item
-                wrapperCol={{
-                    offset: 8,
-                    span: 16,
-                }}
-            >
-                <Button type="primary" htmlType="submit">
-                    Submit
-                </Button>
-            </Form.Item>
+                <Form.Item
+                    wrapperCol={{
+                        offset: 8,
+                        span: 16,
+                    }}
+                >
+                    <Button type="primary" htmlType="submit" className='button'>
+                        Logeate
+                    </Button>
+                </Form.Item>
+            </div>
         </Form>
     );
 }

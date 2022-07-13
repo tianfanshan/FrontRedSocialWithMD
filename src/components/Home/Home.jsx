@@ -44,7 +44,6 @@ const Home = () => {
     const isAlreadyLiked = pos.likes?.includes(user?.user._id)
     return (
       <div key={pos._id}>
-        <div>
           {pos.images.length > 0 ?
             <Card
               hoverable
@@ -83,7 +82,6 @@ const Home = () => {
             <HeartFilled />
           }
         </div>
-      </div>
     )
   })
 
@@ -94,14 +92,17 @@ const Home = () => {
   };
 
   return (
-    <div className='search'>
-      <Search
-        placeholder="input search text"
-        allowClear
-        enterButton="Search"
-        size="large"
-        onSearch={onSearch}
-      />
+    <>
+      <div className='searchContainer'>
+        <Search
+          placeholder="input search text"
+          allowClear
+          enterButton="Search"
+          size="large"
+          onSearch={onSearch}
+          className='search'
+        />
+      </div>
       {!postss ?
         <div>
           {postss}
@@ -112,7 +113,7 @@ const Home = () => {
       <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={[]}>
         <PostDetail />
       </Modal>
-    </div>
+    </>
   )
 }
 

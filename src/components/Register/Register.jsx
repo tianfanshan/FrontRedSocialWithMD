@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router'
 import { Button, Form, Input, notification, InputNumber, message, Upload } from 'antd';
 import { useEffect, useState } from 'react';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import './Register.scss'
 
 
 const getBase64 = (img, callback) => {
@@ -33,8 +34,6 @@ const Register = () => {
 
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState();
-
-  console.log(imageUrl)
 
   const handleChange = (info) => {
     if (info.file.status === 'uploading') {
@@ -101,7 +100,6 @@ const Register = () => {
     formData.append('password', value.password)
     formData.append('confirm', value.confirm)
 
-    console.log(formData)
     dispatch(register(formData))
   };
 
@@ -110,7 +108,7 @@ const Register = () => {
   };
 
   return (
-    <div>
+    <div className='register'>
       <Upload
         name="avatar"
         listType="picture-card"
@@ -146,6 +144,7 @@ const Register = () => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
+        className='registerForm'
       >
         <Form.Item
           label="Username"
@@ -162,7 +161,7 @@ const Register = () => {
 
         <Form.Item
           name="email"
-          label="email"
+          label="Email"
           rules={[
             {
               type: 'email',
@@ -226,7 +225,7 @@ const Register = () => {
           }}
         >
           <Button type="submit" htmlType="submit">
-            Submit
+            Registear
           </Button>
         </Form.Item>
       </Form>

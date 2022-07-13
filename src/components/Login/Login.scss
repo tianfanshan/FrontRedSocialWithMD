@@ -1,1 +1,23 @@
 @import '../../../colors.scss';
+
+.loginForm{
+    display: flex;
+    justify-content: center;
+    background-color: $lightGrey;
+    .inputForm{
+        width: 50%;
+        margin-top: 5rem;
+        margin-bottom: 13rem;
+        border: solid white;
+        border-radius: 3rem;
+        .formItem{
+            margin-bottom: 3rem;
+            margin-top: 3rem;
+            margin-right: 5rem;
+        }
+        .button{
+            color: $deepBlue;
+            border-radius: 0.5rem;
+        }
+    }
+}

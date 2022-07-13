@@ -1,0 +1,14 @@
+@import '../../../../colors.scss';
+
+.addCard{
+    display: flex;
+    flex-direction:column;
+    background-color: $lightGrey;
+    .postInput{
+        padding: 3rem;
+        border: solid white;
+        border-radius: 0.5rem;
+        width: 40%;
+        margin: 2rem auto ;
+    }
+}

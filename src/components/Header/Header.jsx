@@ -12,18 +12,16 @@ const Header = () => {
   const dispatch = useDispatch()
   const { user, logoutMessage, isLogoutSuccess } = useSelector((state) => state.auth)
 
-  const onLogout = (e) => {
+  const onLogout =async (e) => {
     e.preventDefault()
-    dispatch(logout())
+    await dispatch(logout())
     if (isLogoutSuccess) {
       notification.success({
         message: logoutMessage
       })
     }
-    dispatch(resetLogout())
-    setTimeout(() => {
-      navigate('/')
-    }, 2000)
+    await dispatch(resetLogout())
+     dispatch(navigate('/'))
   }
 
   return (

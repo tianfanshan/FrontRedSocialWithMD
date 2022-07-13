@@ -1,0 +1,19 @@
+@import '../../../colors.scss';
+
+.register{
+    background-color: $lightGrey;
+    display: flex;
+    flex-direction: column;
+    padding-top: 2rem;
+    padding-bottom: 5rem;
+    .avatar-uploader{
+        position: relative;
+        left: 30rem;
+        margin-bottom: 2rem;
+    }
+    .registerForm{
+        width: 50%;
+        position: relative;
+        left: 12rem;
+    }
+}

@@ -1,9 +1,17 @@
 @import '../../../colors.scss';
 
 .header{
-    background-color: $grey;
-    font-family: $font-joan;
+    background-color: $blue;
     font-size: 2rem;
     display: flex;
     justify-content: space-around;
+    width: 100%;
+    text-align: center;
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+    a{
+        color:$lightGrey;
+        font-size:1.8rem;
+        font-family: $font-montserrat;
+    }
 }

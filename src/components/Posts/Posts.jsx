@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
 import Post from './Post/Post'
 import { useDispatch, useSelector } from 'react-redux/es/exports'
-import { getAllPost, isLoading, reset } from '../../features/posts/postsSlice'
+import { getAllPost, reset } from '../../features/posts/postsSlice'
 import AddPost from './AddPost/AddPost'
+import './Posts.scss'
 
 const Posts = () => {
   const { isLoading } = useSelector((state) => state.posts)
@@ -24,15 +25,15 @@ const Posts = () => {
   }
 
   return (
-    <div>
+    <>
       {user ?
-        <div>
+        <>
           <Post />
           <AddPost />
-        </div>
+        </>
         :
-        <Post />}
-    </div>
+        <Post/>}
+    </>
   )
 }
 

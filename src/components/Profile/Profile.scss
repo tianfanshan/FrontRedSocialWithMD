@@ -1,1 +1,17 @@
 @import '../../../colors.scss';
+
+.postContainer1{
+    background-color: $lightGrey;
+    .userInfo{
+        width: 100%;
+        text-align: center;
+        font-size: 1rem;
+        color: $grey;
+    }
+    .favoritePost{
+        background-color: red;
+    }
+    .usersPost{
+        background-color: black;
+    }
+}
