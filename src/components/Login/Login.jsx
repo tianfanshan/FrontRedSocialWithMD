@@ -12,8 +12,8 @@ const Login = () => {
 
     const dispatch = useDispatch()
 
-    const onFinish = (value) => {
-        dispatch(login(value))
+    const onFinish = async(value) => {
+        await dispatch(login(value))
         if (isLoginError) {
             notification.error({
                 message: 'Error',
@@ -26,7 +26,7 @@ const Login = () => {
                 message: 'Success',
                 description: loginMessage
             })
-            dispatch(resetLogin())
+            await dispatch(resetLogin())
             setTimeout(() => {
                 navigate('/profile')
             }, 1000)

@@ -6,7 +6,6 @@ const initialState = {
   comments: [],
   createCommentMessage: "",
   commentIsSuccess: false,
-  commentIsError: false,
   deleteCommentMessage:""
 };
 
@@ -103,10 +102,6 @@ export const commentsSlice = createSlice({
         state.comment = action.payload.comment;
         state.createCommentMessage = action.payload.message;
         state.comments = [...state.comments, state.comment];
-      })
-      .addCase(createComment.rejected, (state, action) => {
-        state.commentIsError = true;
-        state.createCommentMessage = action.payload;
       })
       .addCase(likeComment.fulfilled, (state, action) => {
         const comments = state.comments.map((c) => {

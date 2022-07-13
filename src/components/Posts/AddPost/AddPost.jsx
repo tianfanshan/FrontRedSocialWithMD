@@ -7,17 +7,15 @@ const AddPost = () => {
 
   const [form] = Form.useForm()
 
-  const { addPostIsSuccess, addPostMessage } = useSelector((state) => state.posts)
+  const { addPostMessage } = useSelector((state) => state.posts)
 
   const dispatch = useDispatch()
 
   const onFinish =async (value) => {
     await dispatch(addPost(value))
-    if (addPostIsSuccess) {
       notification.success({
         message: addPostMessage
       })
-    }
     await dispatch(getAllPost())
     form.resetFields()
     dispatch(reset())

@@ -62,12 +62,8 @@ const Post = () => {
   };
 
   const postss = posts.map(pos => {
-    if (typeof (user?.user._id) == Object) {
-      return user?.user._id.toString()
-    }
     const isAlreadyLiked = pos.likes?.includes(user?.user._id)
     const isAlreadyFollowed = pos.userId?.followers?.includes(user?.user._id)
-
     return (
       <div key={pos._id} className='postCard'>
           <Card

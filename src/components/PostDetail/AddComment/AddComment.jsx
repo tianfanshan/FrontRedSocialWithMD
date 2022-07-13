@@ -32,7 +32,6 @@ const AddComment = () => {
     let postId = post._id
     let newObj = { postId, ...comment }
     await dispatch(createComment(newObj))
-    dispatch(getCurrentUser())
     dispatch(getAllComments())
     form.resetFields()
   };
