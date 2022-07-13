@@ -166,9 +166,9 @@ const Profile = () => {
           {currentUser?.followers?.length < 1 ?
             <div>
               <Divider orientation="left" plain>
-                Nadie te quiere.../(ㄒoㄒ)/~~
+                A conocer gente!
               </Divider>
-              <span>No es nada dificil postear tu foto en nuestra pagina 😍</span><br />
+              <span>Es un poco dificil postear tu foto en nuestra pagina..</span><br />
             </div>
             :
             <div>
