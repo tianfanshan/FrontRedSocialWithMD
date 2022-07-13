@@ -59,12 +59,11 @@ const AddComment = () => {
         form={form}
       >
         <Form.Item
-          label="Comentar!"
           name="comment"
           rules={[
             {
               required: true,
-              message: 'Escribe coment!!!',
+              message: 'write something',
             },
           ]}
         >

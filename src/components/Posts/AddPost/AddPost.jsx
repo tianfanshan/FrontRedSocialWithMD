@@ -68,7 +68,7 @@ const AddPost = () => {
             rules={[
               {
                 required: true,
-                message: 'Escribe algo!!!',
+                message: 'Write something',
               },
             ]}
           >
