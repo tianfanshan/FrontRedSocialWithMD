@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addPost } from '../../../features/posts/postsSlice';
 import './AddPost.scss'
 
-const { TextArea } = Input;
-
 const AddPost = () => {
 
 
@@ -73,7 +71,6 @@ const AddPost = () => {
                 message: 'Escribe algo!!!',
               },
             ]}
-
           >
             <textarea/>
           </Form.Item>
