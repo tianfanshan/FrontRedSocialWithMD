@@ -10,8 +10,8 @@ const Home = () => {
 
   const { Search } = Input;
 
-  const onSearch = async (value) => {
-    await dispatch(getPostByText(value))
+  const onSearch = (value) => {
+    dispatch(getPostByText(value))
   };
 
   return (
