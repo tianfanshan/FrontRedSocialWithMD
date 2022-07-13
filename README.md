@@ -6,64 +6,63 @@ El último proyecto individual del Bootcamp Full Stack en The Bridge, hecho con 
 
 ### Requisitos del ejercicio
 
-- Registro de usuarios.
-- Login de usuarios.
-- Que se pueda ver las publicaciones y crear nuevas.
-- Que se puedan editar y eliminar las publicaciones que hace el usuario logeado
-- Dar/quitar Like a post.
-- Buscador de perfiles de usuario o de posts
-- Que en tu perfil puedas ver tus datos y tus posts
-- Que puedas comentar en las publicaciones
-- Uso de ramas con git, cuando se termine el proyecto deberán quedar dos ramas la main y la develop.
-- Presentación de README
-- React Router
-- Utilizar Redux
-- Uso de SASS
-- Importante el diseño
-- Los componentes no podrán sobrepasar las 400 líneas de código.
-- Las funciones no deberán sobrepasar las 75 líneas de código.
+- [X]Registro de usuarios.
+- [X] Login de usuarios.
+- [X] Que se pueda ver las publicaciones y crear nuevas.
+- [X] Que se puedan editar y eliminar las publicaciones que hace el usuario logeado
+- [X] Dar/quitar Like a post.
+- [X] Buscador de perfiles de usuario o de posts
+- [X] Que en tu perfil puedas ver tus datos y tus posts
+- [X] Que puedas comentar en las publicaciones
+- [X] Uso de ramas con git, cuando se termine el proyecto deberán quedar dos ramas la main y la develop.
+- [X] Presentación de README
+- [X] React Router
+- [X] Utilizar Redux
+- [X] Uso de SASS
+- [X] Importante el diseño
+- [X] Los componentes no podrán sobrepasar las 400 líneas de código.
+- [X] Las funciones no deberán sobrepasar las 75 líneas de código.
 
 #### Extras
 
-- Frontend disponible en producción (ej:Heroku).
-- El usuario puede seguir a otros usuarios y tener seguidores
-- CRUD de los comentarios
-- Que solo puedas editar y eliminar los comentarios que tu creas.
-- El usuario puede subir fotos en los posts y cambiar su foto de perfil.
-- El usuario puede dar likes a los comentarios de los posts.
-- El usuario en su perfil puede ver el número de seguidores y número de a cuantos sigue
-- El usuario puede ver quien le sigue y a quién sigue
-- Implementación de guards
-- Que sea responsive
+- [X] Frontend disponible en producción (ej:Heroku).
+- [X] El usuario puede seguir a otros usuarios y tener seguidores
+- [X] CRUD de los comentarios
+- [X] Que solo puedas editar y eliminar los comentarios que tu creas.
+- [X] El usuario puede subir fotos en los posts y cambiar su foto de perfil.
+- [X] El usuario puede dar likes a los comentarios de los posts.
+- [X] El usuario en su perfil puede ver el número de seguidores y número de a cuantos sigue
+- [X] El usuario puede ver quien le sigue y a quién sigue
+- [X] Implementación de guards
+- [ ] Que sea responsive
 
 ## Tecnologías y lenguajes utilizados
 
 ### Frontend
 
-- [X] HTML / CSS / JavaScript / JSON
-- [X] NodeJS
-- [X] react
-- [X] antd
-- [X] axios
-- [X] react
-- [X] react-dom
-- [X] react-redux
-- [X] react-router-dom
-- [X] sass
-- [ ] responsive
+- HTML / CSS / JavaScript / JSON
+- NodeJS
+- react
+- antd
+- axios
+- react
+- react-dom
+- react-redux
+- react-router-dom
+- sass
 
 ### Backend
 
-- [X] JavaScript
-- [X] Nodejs
-- [X] express
-- [X] MongoDB
-- [X] Mongoose
-- [X] multer
-- [X] bcryptjs
-- [X] jsonwebtoken
-- [X] nodemailer
-- [X] Atlas
+- JavaScript
+- Nodejs
+- express
+- MongoDB
+- Mongoose
+- multer
+- bcryptjs
+- jsonwebtoken
+- nodemailer
+- Atlas
 
 ### Menú principal
 
