@@ -135,6 +135,7 @@ const Profile = () => {
             <Image
               width={200}
               src={currentUser.image}
+              className='userAvatar'
             />
             :
             null}
