@@ -63,6 +63,27 @@ const Post = () => {
 
   const postss = posts.map(pos => {
     const isAlreadyLiked = pos.likes?.includes(user?.user._id)
+
+    const like1 = async (_id) =>{
+      if(isAlreadyLiked){
+        await dispatch(likesDown(_id))
+      }else{
+        await dispatch(like(_id))
+      }
+      await dispatch(getAllPost())
+      dispatch(reset())
+    }
+
+    const like2 = async () =>{
+      if(isAlreadyLiked){
+        await dispatch(likesDown(pos._id))
+      }else{
+        await dispatch(like(pos._id))
+      }
+      await dispatch(getAllPost())
+      dispatch(reset())
+    }
+
     const isAlreadyFollowed = pos.userId?.followers?.includes(user?.user._id)
     return (
       <div key={pos._id} className='postCard'>
@@ -88,9 +109,9 @@ const Post = () => {
         {user ?
           <>
             {isAlreadyLiked ? (
-              <HeartFilled onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
+              <HeartFilled onClick={()=>like1(pos._id)} />
             ) : (
-              <HeartOutlined onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />
+              <HeartOutlined onClick={()=>like2(pos._id)}/>
             )}
             {isAlreadyFollowed ? (
               <UserDeleteOutlined onClick={() => followOuts(pos.userId._id)} />
