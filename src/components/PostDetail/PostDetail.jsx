@@ -39,7 +39,8 @@ const PostDetail = () => {
     const isAlreadyLiked = det.likes?.includes(user?.user._id)
     return (
       <div key={det._id}>
-        <h3>Comment: {det.comment}</h3>
+        <h3>User: {det.userId.name}</h3>
+        <h4>Comment: {det.comment}</h4>
         <span className="wish">Likes: {det.likes?.length}</span>
         {user ?
           <>
