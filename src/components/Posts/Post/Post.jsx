@@ -62,11 +62,6 @@ const Post = () => {
   };
 
   const postss = posts.map(pos => {
-    const img = pos.images.map((im, i) => {
-      return (
-        <img alt="post-img" src={"http://localhost:8080/posts-images/" + im} key={i} />
-      )
-    })
     if (typeof (user?.user._id) == Object) {
       return user?.user._id.toString()
     }
@@ -75,17 +70,6 @@ const Post = () => {
 
     return (
       <div key={pos._id} className='postCard'>
-        {pos.images.length > 0 ?
-          <Card
-            hoverable
-            style={{
-              width: 240,
-            }}
-            cover={img}
-          >
-            <Meta title={pos.userName} description={pos.body} />
-          </Card>
-          :
           <Card
             hoverable
             style={{
@@ -99,7 +83,6 @@ const Post = () => {
               </div>
             } />
           </Card>
-        }
         <>
           <Button type="primary" onClick={() => showModal(pos._id)}>
             Comentarios

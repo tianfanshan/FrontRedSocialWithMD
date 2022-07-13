@@ -1,19 +1,31 @@
 @import '../../../colors.scss';
 
-.postContainer1{
+.postContainer1 {
     background-color: $lightGrey;
-    .userInfo{
+    .userInfo {
         width: 100%;
         text-align: center;
         font-size: 1rem;
         color: $grey;
     }
-    .favoritePost{
-        background-color: red;
-        border: solid black;
+    .favoritePostContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        .favoritePost {
+            border-radius: 0.5rem;
+            border: solid white;
+            margin: 2rem 1rem;
+        }
     }
-    .usersPost{
-        background-color: black;
-        border: solid yellow;
+    .userPostContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        .usersPost {
+            border-radius: 0.5rem;
+            border: solid white;
+            margin: 2rem 1rem;
+        }
     }
 }

@@ -2,13 +2,13 @@
 
 .postContainer{
     display: flex;
-    border: solid;
+    flex-wrap: wrap;
+    border: solid white;
     justify-content: space-around;
     background-color: $lightGrey;
     .postCard{
-        border: solid red;
-        // width: auto;
-        // display: flex;
-        // justify-content: space-around;
+        border-radius: 0.5rem;
+        border: solid white;
+        margin: 2rem 1rem;
     }
 }   

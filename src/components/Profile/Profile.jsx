@@ -51,34 +51,17 @@ const Profile = () => {
   const post = currentUser?.postIds
 
   const postss = post?.map(pos => {
-    const img = pos.images.map((im, i) => {
-      return (
-        <img alt="post-img" src={"http://localhost:8080/posts-images/" + im} key={i} />
-      )
-    })
     const isAlreadyLiked = pos.likes?.includes(currentUser?._id)
     return (
       <div key={pos._id} className='usersPost'>
-        {pos.images.length > 0 ?
-          <Card
-            hoverable
-            style={{
-              width: 240,
-            }}
-            cover={img}
-          >
-            <Meta title={pos.userName} description={pos.body} />
-          </Card>
-          :
-          <Card
-            hoverable
-            style={{
-              width: 240,
-            }}
-          >
-            <Meta title={pos.userName} description={pos.body} />
-          </Card>
-        }
+        <Card
+          hoverable
+          style={{
+            width: 240,
+          }}
+        >
+          <Meta title={pos.userName} description={pos.body} />
+        </Card>
         <>
           <Button type="primary" onClick={() => showModal(pos._id)}>
             Comentarios
@@ -121,33 +104,16 @@ const Profile = () => {
   const favorite = currentUser?.favorites
 
   const favorites = favorite?.map((pos) => {
-    const img = pos.images.map((im, i) => {
-      return (
-        <img alt="post-img" src={"http://localhost:8080/posts-images/" + im} key={i} />
-      )
-    })
     return (
       <div key={pos._id} className="favoritePost">
-        {pos.images.length > 0 ?
-          <Card
-            hoverable
-            style={{
-              width: 240,
-            }}
-            cover={img}
-          >
-            <Meta title={pos.userName} description={pos.body} />
-          </Card>
-          :
-          <Card
-            hoverable
-            style={{
-              width: 240,
-            }}
-          >
-            <Meta title={pos.userName} description={pos.body} />
-          </Card>
-        }
+        <Card
+          hoverable
+          style={{
+            width: 240,
+          }}
+        >
+          <Meta title={pos.userName} description={pos.body} />
+        </Card>
         <>
           <Button type="primary" onClick={() => showModal(pos._id)}>
             Comentarios
@@ -230,12 +196,16 @@ const Profile = () => {
         <Divider orientation="left" plain>
           Los posts que te has gustado...no me lo puedo creer (⊙_⊙)？
         </Divider>
-        {favorites}
+        <div className='favoritePostContainer'>
+          {favorites}
+        </div>
         <br />
         <Divider orientation="left" plain>
           👮‍ Mira que has poseado,esta noche va ser larga...🌙
         </Divider>
-        {postss}
+        <div className='userPostContainer'>
+          {postss}
+        </div>
         <EditModal visible={isModalVisibleTwo} setVisible={setIsModalVisibleTwo} onCancel={handleCancelTwo} />
         <Modal title="Basic Modal" visible={isModalVisible} onCancel={handleCancel} footer={[]}>
           <PostDetail />
