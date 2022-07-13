@@ -40,29 +40,30 @@ El último proyecto individual del Bootcamp Full Stack en The Bridge, hecho con 
 
 ### Frontend
 
-- HTML / CSS / JavaScript / JSON
-- NodeJS
-- react
-- antd
-- axios
-- react
-- react-dom
-- react-redux
-- react-router-dom
-- sass
+- [X] HTML / CSS / JavaScript / JSON
+- [X] NodeJS
+- [X] react
+- [X] antd
+- [X] axios
+- [X] react
+- [X] react-dom
+- [X] react-redux
+- [X] react-router-dom
+- [X] sass
+- [ ] responsive
 
 ### Backend
 
-- JavaScript
-- Nodejs
-- express
-- MongoDB
-- Mongoose
-- multer
-- bcryptjs
-- jsonwebtoken
-- nodemailer
-- Atlas
+- [X] JavaScript
+- [X] Nodejs
+- [X] express
+- [X] MongoDB
+- [X] Mongoose
+- [X] multer
+- [X] bcryptjs
+- [X] jsonwebtoken
+- [X] nodemailer
+- [X] Atlas
 
 ### Menú principal
 
