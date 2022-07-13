@@ -5,7 +5,6 @@ import { commentLikeDown, deleteCommentById, getAllComments, getCommentById, lik
 import { useState } from "react"
 import EditModal from './EditComment/EditComment'
 import { notification } from "antd"
-import { like } from "../../features/posts/postsSlice"
 
 const PostDetail = () => {
 
@@ -33,8 +32,6 @@ const PostDetail = () => {
     })
     dispatch(getAllComments())
   }
-
-
 
   const commentOfPost = comments?.filter((c) => c.postId == post._id)
 
