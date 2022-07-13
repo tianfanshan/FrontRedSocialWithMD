@@ -33,7 +33,7 @@ const EditModal = ({ visible, setVisible, onCancel }) => {
           <Input placeholder="Post title" />
         </Form.Item>
         <Button type="primary" htmlType='submit'>
-          Ejecuta movida!!!
+          Edit your comment
         </Button>
       </Form>
     </Modal>

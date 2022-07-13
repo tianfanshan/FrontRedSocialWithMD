@@ -225,7 +225,7 @@ const Register = () => {
           }}
         >
           <Button type="submit" htmlType="submit">
-            Registear
+            Regist
           </Button>
         </Form.Item>
       </Form>

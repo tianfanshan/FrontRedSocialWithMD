@@ -90,7 +90,7 @@ const Login = () => {
                     }}
                 >
                     <Button type="primary" htmlType="submit" className='button'>
-                        Logeate
+                        Login
                     </Button>
                 </Form.Item>
             </div>

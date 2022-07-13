@@ -64,7 +64,7 @@ const Profile = () => {
         </Card>
         <>
           <Button type="primary" onClick={() => showModal(pos._id)}>
-            Comentarios
+            Comment
           </Button>
         </>
         <span className="wish">Likes: {pos.likes?.length}</span>
@@ -116,7 +116,7 @@ const Profile = () => {
         </Card>
         <>
           <Button type="primary" onClick={() => showModal(pos._id)}>
-            Comentarios
+            Comment
           </Button>
         </>
         <div className="card-bottom2">
@@ -181,7 +181,8 @@ const Profile = () => {
               <Divider orientation="left" plain>
                 El boton esta fallando, no puede dar follower al usuario (╯▔皿▔)╯
               </Divider>
-              <span>{followings}</span><br />
+              <span>{followings}</span>
+              <br />
             </div>
           }
           <Divider orientation="left" plain>

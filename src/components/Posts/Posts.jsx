@@ -21,7 +21,7 @@ const Posts = () => {
   }, [])
 
   if (isLoading) {
-    return <h1>Cargando posts...</h1>
+    return <h1>Loading post...</h1>
   }
 
   return (

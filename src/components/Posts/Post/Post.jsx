@@ -79,13 +79,13 @@ const Post = () => {
             <Meta title={pos.userName} description={
               <div>
                 <span>{pos.body}</span><br />
-                <span>Posteador: {pos.userId.name}</span>
+                <span>User: {pos.userId.name}</span>
               </div>
             } />
           </Card>
         <>
           <Button type="primary" onClick={() => showModal(pos._id)}>
-            Comentarios
+            Comment
           </Button>
         </>
         <span className="wish">Likes: {pos.likes?.length}</span>

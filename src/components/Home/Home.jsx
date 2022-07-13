@@ -66,7 +66,7 @@ const Home = () => {
           }
           <>
             <Button type="primary" onClick={() => showModal(pos._id)}>
-              Comentarios
+              Comments
             </Button>
           </>
           <span className="wish">Likes: {pos.likes?.length}</span>
