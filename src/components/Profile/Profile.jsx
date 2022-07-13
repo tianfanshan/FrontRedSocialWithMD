@@ -140,6 +140,10 @@ const Profile = () => {
             :
             null}
           <Divider orientation="left" plain>
+            👮‍ Enseñame tu 💳
+          </Divider>
+          <span>Mi nombre es: {currentUser?.name} (╯°□°）╯︵ ┻━┻</span><br />
+          <Divider orientation="left" plain>
             👮‍ Cuantos Años tienes 📋
           </Divider>
           <span>Tengo {currentUser?.age} años,me han hecho {currentUser?.age - 1} cumpleaños en el Bootcamp...👨‍🦳</span><br />
@@ -186,10 +190,6 @@ const Profile = () => {
               <br />
             </div>
           }
-          <Divider orientation="left" plain>
-            👮‍ Enseñame tu 💳
-          </Divider>
-          <span>Mi nombre es: {currentUser?.name} (╯°□°）╯︵ ┻━┻</span><br />
           <Divider orientation="left" plain>
             👮‍ Quieres una cafe,venir con nosotros 🚓
           </Divider>
