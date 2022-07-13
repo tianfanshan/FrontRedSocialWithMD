@@ -114,7 +114,7 @@ La aplicación esta desplegada para pruebas en Heroku.4Es posible acceder en est
 
 
 ## Agradecimientos
-* Gracias al equipo de profesores de The Bridge:Sofía[GitHub @Sofía](https://github.com/SofiaPinilla), Ger[GitHub @Ger](https://github.com/GeerDev) e Iván[GitHub @Iván](https://github.com/ivanpuebla10).
+* Gracias al equipo de profesores de The Bridge: Sofía [GitHub @Sofía](https://github.com/SofiaPinilla), Ger [GitHub @Ger](https://github.com/GeerDev) e Iván [GitHub @Iván](https://github.com/ivanpuebla10).
 
 ## Autor
 Tianfan Shan [GitHub @Tianfan-Shan](https://github.com/tianfanshan) [LinkedIn](https://www.linkedin.com/in/tianfan-shan-084218241/)
