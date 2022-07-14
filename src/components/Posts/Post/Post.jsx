@@ -85,7 +85,7 @@ const Post = () => {
           </Button>
         </>
         <span className="wish">Likes: {pos.likes?.length}</span>
-        {user ?
+        {user && !(pos.userId._id == user?.user._id) ?
           <>
             {isAlreadyLiked ? (
               <HeartFilled onClick={isAlreadyLiked ? () => dispatch(likesDown(pos._id)) : () => dispatch(like(pos._id))} />

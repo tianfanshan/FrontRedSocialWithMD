@@ -90,7 +90,7 @@ const Profile = () => {
   const followers = follow?.map((f) => {
     return (
       <div key={f._id}>
-        <span>Es {f.name}!...pero si solo es un {f.role} corriente..</span>
+        <span>* {f.name} </span>
       </div>
     )
   })
@@ -100,7 +100,7 @@ const Profile = () => {
   const followings = following?.map((f) => {
     return (
       <div key={f._id}>
-        <span>La persona que buscas se llama {f.name}...y no te gusta ∑( 口 ||</span>
+        <span>* {f.name}</span>
       </div>
     )
   })
@@ -175,7 +175,7 @@ const Profile = () => {
               <Divider orientation="left" plain>
                 ┗|｀O′|┛ Alquien te esta persiguiendo ε=ε=ε=(~￣▽￣)~
               </Divider>
-              <span>{followers}</span><br />
+              <span>Followers: {followers}</span><br />
             </div>
           }
           {currentUser?.followings?.length < 1 ?
@@ -190,7 +190,7 @@ const Profile = () => {
               <Divider orientation="left" plain>
                 El boton esta fallando, no puede dar follower al usuario (╯▔皿▔)╯
               </Divider>
-              <span>{followings}</span>
+              <span>Followings: {followings}</span>
               <br />
             </div>
           }
