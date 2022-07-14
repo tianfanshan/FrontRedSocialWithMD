@@ -58,7 +58,6 @@ const Post = () => {
 
   const handleCancel = () => {
     setIsModalVisible(false);
-    dispatch(resetComments())
   };
 
   const postss = posts.map(pos => {

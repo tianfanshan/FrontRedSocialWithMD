@@ -48,7 +48,6 @@ const Profile = () => {
 
   const handleCancel = () => {
     setIsModalVisible(false);
-    dispatch(resetComments())
   };
 
   const deletePost1 = (_id) => {
