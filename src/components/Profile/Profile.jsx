@@ -9,7 +9,7 @@ import { getAllPost, getPostById, reset, deletePost, like, likesDown } from '../
 
 import 'antd/dist/antd.css'
 import './Profile.scss'
-import { getAllComments, resetComments } from '../../features/comments/commentsSlice';
+import { getAllComments } from '../../features/comments/commentsSlice';
 
 const { Meta } = Card;
 

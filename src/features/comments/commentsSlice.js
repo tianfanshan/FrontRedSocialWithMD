@@ -90,11 +90,7 @@ export const deleteCommentById = createAsyncThunk(
 export const commentsSlice = createSlice({
   name: "comments",
   initialState,
-  reducers: {
-    resetComments: (state) => {
-      state.comments = [];
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(createComment.fulfilled, (state, action) => {
@@ -147,5 +143,4 @@ export const commentsSlice = createSlice({
   },
 });
 
-export const { resetComments } = commentsSlice.actions;
 export default commentsSlice.reducer;

@@ -5,7 +5,7 @@ import 'antd/dist/antd.css'
 import { HeartOutlined, HeartFilled, UserAddOutlined, UserDeleteOutlined } from '@ant-design/icons'
 import { Card, Button, Modal, notification } from 'antd';
 import PostDetail from "../../PostDetail/PostDetail"
-import { getAllComments, resetComments } from "../../../features/comments/commentsSlice"
+import { getAllComments } from "../../../features/comments/commentsSlice"
 import '../Post/Post.scss'
 import { follow, followOut, resetFollow1 } from "../../../features/auth/authSlice"
 import { useEffect } from "react"
