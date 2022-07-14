@@ -146,13 +146,13 @@ const Profile = () => {
           <Divider orientation="left" plain>
             👮‍ Enseñame tu 💳
           </Divider>
-          <span>Mi nombre es: {currentUser?.name} (╯°□°）╯︵ ┻━┻</span><br />
+          <span>Mi nombre es: {currentUser?.name}</span><br />
           <Divider orientation="left" plain>
             👮‍ Cuantos Años tienes 📋
           </Divider>
-          <span>Tengo {currentUser?.age} años,me han hecho {currentUser?.age - 1} cumpleaños en el Bootcamp...👨‍🦳</span><br />
+          <span>Tengo {currentUser?.age} años, me han hecho {currentUser?.age - 1} cumpleaños en el Bootcamp...</span><br />
           <Divider orientation="left" plain>
-            Las movidas que has hecho (⌐■_■)
+            Los comentarios que has hecho!
           </Divider>
           {currentUser?.commentId?.length < 1 ?
             <span>Necesitas un poco de contacto social (•_•)</span>
@@ -160,7 +160,7 @@ const Profile = () => {
             <div><span>Has hecho {currentUser?.commentId?.length} comentarios</span><br /></div>
           }
           <Divider orientation="left" plain>
-            Y les han gustado tus comentarios❗❓...O no...
+            Tus comentarios que le ha gustado la gente
           </Divider>
           <span>Tus {currentUser?.commentsLikes?.length} post les han gustado la gente ヾ(•ω•`)o </span><br />
           {currentUser?.followers?.length < 1 ?
@@ -188,7 +188,7 @@ const Profile = () => {
             :
             <div>
               <Divider orientation="left" plain>
-                El boton esta fallando, no puede dar follower al usuario (╯▔皿▔)╯
+                El boton esta fallando, no puede seguir al usuario...
               </Divider>
               <span>Followings: {followings}</span>
               <br />
@@ -200,14 +200,14 @@ const Profile = () => {
           <span>Soy {currentUser?.role}, tengo derecho a guardar silencio (◎﹏◎)</span><br />
         </div>
         <Divider orientation="left" plain>
-          Los posts que te has gustado...no me lo puedo creer (⊙_⊙)？
+          Los publicaciones que te has gustado...no me lo puedo creer (⊙_⊙)？
         </Divider>
         <div className='favoritePostContainer'>
           {favorites}
         </div>
         <br />
         <Divider orientation="left" plain>
-          👮‍ Mira que has poseado,esta noche va ser larga...🌙
+          👮‍ Tus publicaciones...🌙
         </Divider>
         <div className='userPostContainer'>
           {postss}
