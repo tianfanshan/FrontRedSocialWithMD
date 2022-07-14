@@ -152,12 +152,12 @@ const Profile = () => {
           </Divider>
           <span>Tengo {currentUser?.age} años, me han hecho {currentUser?.age - 1} cumpleaños en el Bootcamp...</span><br />
           <Divider orientation="left" plain>
-            Los comentarios que has hecho!
+            Los comentarios que habías hecho.
           </Divider>
           {currentUser?.commentId?.length < 1 ?
             <span>Necesitas un poco de contacto social (•_•)</span>
             :
-            <div><span>Has hecho {currentUser?.commentId?.length} comentarios</span><br /></div>
+            <div><span>Habías hecho {currentUser?.commentId?.length} comentarios</span><br /></div>
           }
           <Divider orientation="left" plain>
             Tus comentarios que le ha gustado la gente
