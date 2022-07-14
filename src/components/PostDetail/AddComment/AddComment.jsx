@@ -2,7 +2,6 @@ import { Input, Button, Form, notification } from 'antd';
 import { createComment, getAllComments } from '../../../features/comments/commentsSlice'
 import { useSelector, useDispatch } from 'react-redux/es/exports'
 import { useEffect } from 'react';
-import { getCurrentUser } from '../../../features/auth/authSlice';
 
 const AddComment = () => {
 
