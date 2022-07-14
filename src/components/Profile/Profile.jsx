@@ -9,6 +9,7 @@ import { getAllPost, getPostById, reset, deletePost, like, likesDown } from '../
 
 import 'antd/dist/antd.css'
 import './Profile.scss'
+import { getAllComments, resetComments } from '../../features/comments/commentsSlice';
 
 const { Meta } = Card;
 
@@ -41,11 +42,13 @@ const Profile = () => {
 
   const showModal = (_id) => {
     dispatch(getPostById(_id))
+    dispatch(getAllComments())
     setIsModalVisible(true);
   };
 
   const handleCancel = () => {
     setIsModalVisible(false);
+    dispatch(resetComments())
   };
 
   const deletePost1 = (_id) => {
