@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080";
+const API_URL = "https://redsocial-backend.herokuapp.com";
 
 const createComment = async (comment) => {
   const user = JSON.parse(localStorage.getItem("user"));
